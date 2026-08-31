@@ -1,0 +1,39 @@
+# Node / React dependencies & build outputs
+node_modules/
+myntra-growth-app/node_modules/
+myntra-growth-app/dist/
+myntra-growth-app/build/
+myntra-growth-app/.vercel/
+.vercel/
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+.pytest_cache/
+
+# Streamlit config secrets
+.streamlit/secrets.toml
+
+# Environment variables
+.env
+.env.local
+.env.production
+*.local
+
+# System & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Output logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
