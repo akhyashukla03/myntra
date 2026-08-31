@@ -137,8 +137,6 @@ tab_mvp, tab_nlp, tab_metrics, tab_figma = st.tabs([
 # Initialize session state for interactive bag cart
 if 'cart_count' not in st.session_state:
     st.session_state.cart_count = 1
-if 'toast_msg' not in st.session_state:
-    st.session_state.toast_msg = ''
 
 # TAB 1: WISHLIST STUDIO MVP SOLUTION
 with tab_mvp:
@@ -154,22 +152,34 @@ with tab_mvp:
     
     st.markdown("---")
 
-    # Product Dataset Definition
-    prod_a = {
-        "id": "p1", "name": "Heavy Streetwear Cargo Pants", "brand": "Roadster", "price": 1999, "mrp": 2499,
-        "gsm": "240 GSM Heavyweight Cotton Twill", "fit": "88% True to Size (Relaxed Fit)", "return": "12% Low Returns",
-        "img": "https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=400"
-    }
-    prod_b = {
-        "id": "p2", "name": "Poplin Relaxed Cargo Pants", "brand": "Wrong", "price": 1499, "mrp": 2999,
-        "gsm": "160 GSM Lightweight Poplin", "fit": "64% Runs Small (Tight Waist)", "return": "28% High Sizing Variance",
-        "img": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400"
-    }
+    # Dataset Definition (6 Products)
+    PRODUCTS_DATA = [
+        {
+            "id": "p1", "name": "Heavy Streetwear Cargo Pants", "brand": "Roadster", "price": 1999, "mrp": 2499,
+            "gsm": "240 GSM Heavyweight Cotton Twill", "fit": "88% True to Size (Relaxed Fit)", "return": "12% Low Returns",
+            "img": "https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=400", "cat": "Workwear"
+        },
+        {
+            "id": "p2", "name": "Poplin Relaxed Cargo Pants", "brand": "Wrong", "price": 1499, "mrp": 2999,
+            "gsm": "160 GSM Lightweight Poplin", "fit": "64% Runs Small (Tight Waist)", "return": "28% High Sizing Variance",
+            "img": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400", "cat": "Workwear"
+        },
+        {
+            "id": "p3", "name": "Structured Linen Blend Blazer", "brand": "Mango", "price": 3490, "mrp": 4990,
+            "gsm": "210 GSM Pure Italian Linen", "fit": "92% True to Size (Tailored Fit)", "return": "9% Low Returns",
+            "img": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400", "cat": "Party"
+        },
+        {
+            "id": "p4", "name": "Oversized Vintage Graphic Tee", "brand": "H&M", "price": 899, "mrp": 1299,
+            "gsm": "220 GSM Bio-Washed Combed Cotton", "fit": "84% True to Size (Oversized)", "return": "10% Low Returns",
+            "img": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400", "cat": "Streetwear"
+        }
+    ]
 
     # MOBILE APP VIEW MODE
     if "Mobile" in mvp_view_mode:
         st.markdown("<h3 style='text-align:center; color:#FF3F6C;'>📱 Native Myntra Mobile App Interface</h3>", unsafe_allow_html=True)
-        st.caption("Formated inside native 375pt × 812pt Smartphone Frame Architecture")
+        st.caption("Formatted inside native 375pt × 812pt Smartphone Frame Architecture")
         
         col_m1, col_m2, col_m3 = st.columns([0.4, 2.2, 0.4])
         with col_m2:
@@ -181,7 +191,7 @@ with tab_mvp:
                     <span style="font-size:0.75rem; color:#94A3B8;">🛍️ Bag ({st.session_state.cart_count})</span>
                 </div>
                 <div style="background-color:#1E293B; padding:0.45rem 0.75rem; border-radius:8px; font-size:0.78rem; font-weight:700; margin-bottom:0.75rem; display:flex; justify-content:space-between;">
-                    <span>Folder: Workwear</span>
+                    <span>Smart Folder: Workwear</span>
                     <span style="color:#FF3F6C;">Spec Matrix Active</span>
                 </div>
             </div>
@@ -195,27 +205,27 @@ with tab_mvp:
             st.markdown("#### 1. Side-by-Side Spec & GSM Matrix")
             m_col1, m_col2 = st.columns(2)
             with m_col1:
-                st.write(f"**{prod_a['name']}**")
-                st.image(prod_a['img'], use_container_width=True)
+                st.write(f"**{PRODUCTS_DATA[0]['name']}**")
+                st.image(PRODUCTS_DATA[0]['img'], use_container_width=True)
                 st.markdown("<span class='badge-purple'>240 GSM Heavy Cotton</span>", unsafe_allow_html=True)
-                st.caption(f"Fit: {prod_a['fit']}")
-                st.write(f"**Price:** ₹{prod_a['price']}")
+                st.caption(f"Fit: {PRODUCTS_DATA[0]['fit']}")
+                st.write(f"**Price:** ₹{PRODUCTS_DATA[0]['price']}")
                 if st.button("Move Option A to Bag", key="m_add_a"):
                     st.session_state.cart_count += 1
                     st.success("✓ Option A added to Bag!")
 
             with m_col2:
-                st.write(f"**{prod_b['name']}**")
-                st.image(prod_b['img'], use_container_width=True)
+                st.write(f"**{PRODUCTS_DATA[1]['name']}**")
+                st.image(PRODUCTS_DATA[1]['img'], use_container_width=True)
                 st.markdown("<span class='badge-pink'>160 GSM Light Poplin</span>", unsafe_allow_html=True)
-                st.caption(f"Fit: {prod_b['fit']}")
-                st.write(f"**Price:** ₹{prod_b['price']}")
+                st.caption(f"Fit: {PRODUCTS_DATA[1]['fit']}")
+                st.write(f"**Price:** ₹{PRODUCTS_DATA[1]['price']}")
                 if st.button("Move Option B to Bag", key="m_add_b"):
                     st.session_state.cart_count += 1
                     st.success("✓ Option B added to Bag!")
 
             st.markdown("---")
-            st.markdown("#### 2. AI Coordinated Look Builder (+₹450 AOV)")
+            st.markdown("#### 2. Mobile AI Look Builder (+₹450 AOV)")
             st.write("Pair selected Heavy Cargo (₹1,999) with curated Friday complement pieces:")
             st.write("• Oversized Boxy Tee (₹899)")
             st.write("• Vintage Canvas Sneakers (₹1,499)")
@@ -225,7 +235,7 @@ with tab_mvp:
                 st.success("✨ Complete 3-Piece Friday Look added to Bag! +₹450 AOV logged.")
 
             st.markdown("---")
-            st.markdown("#### 3. 1-Tap WhatsApp Voting Card")
+            st.markdown("#### 3. Mobile WhatsApp Voting Card")
             if st.button("📱 Share Poll to WhatsApp (Mobile)", key="m_wa_share"):
                 st.info("WhatsApp poll card sent to group!")
                 st.success("Instant Fallback Triggered: **78% Community Consensus** in 2 seconds.")
@@ -240,23 +250,23 @@ with tab_mvp:
         
         d_c1, d_c2 = st.columns(2)
         with d_c1:
-            st.subheader(f"Option A: {prod_a['name']}")
-            st.image(prod_a['img'], width=240)
+            st.subheader(f"Option A: {PRODUCTS_DATA[0]['name']}")
+            st.image(PRODUCTS_DATA[0]['img'], width=240)
             st.markdown("<span class='badge-purple'>240 GSM Heavyweight Cotton</span>", unsafe_allow_html=True)
-            st.write(f"**Verified Fit Consensus:** {prod_a['fit']}")
-            st.write(f"**Price:** ₹{prod_a['price']} (MRP: ₹{prod_a['mrp']})")
-            st.write(f"**Return Risk:** {prod_a['return']}")
+            st.write(f"**Verified Fit Consensus:** {PRODUCTS_DATA[0]['fit']}")
+            st.write(f"**Price:** ₹{PRODUCTS_DATA[0]['price']} (MRP: ₹{PRODUCTS_DATA[0]['mrp']})")
+            st.write(f"**Return Risk:** {PRODUCTS_DATA[0]['return']}")
             if st.button("🛍️ Move Option A to Bag", key="d_add_a"):
                 st.session_state.cart_count += 1
                 st.success("✓ Option A added to Bag!")
 
         with d_c2:
-            st.subheader(f"Option B: {prod_b['name']}")
-            st.image(prod_b['img'], width=240)
+            st.subheader(f"Option B: {PRODUCTS_DATA[1]['name']}")
+            st.image(PRODUCTS_DATA[1]['img'], width=240)
             st.markdown("<span class='badge-pink'>160 GSM Lightweight Poplin</span>", unsafe_allow_html=True)
-            st.write(f"**Verified Fit Consensus:** {prod_b['fit']}")
-            st.write(f"**Price:** ₹{prod_b['price']} (MRP: ₹{prod_b['mrp']})")
-            st.write(f"**Return Risk:** {prod_b['return']}")
+            st.write(f"**Verified Fit Consensus:** {PRODUCTS_DATA[1]['fit']}")
+            st.write(f"**Price:** ₹{PRODUCTS_DATA[1]['price']} (MRP: ₹{PRODUCTS_DATA[1]['mrp']})")
+            st.write(f"**Return Risk:** {PRODUCTS_DATA[1]['return']}")
             if st.button("🛍️ Move Option B to Bag", key="d_add_b"):
                 st.session_state.cart_count += 1
                 st.success("✓ Option B added to Bag!")
