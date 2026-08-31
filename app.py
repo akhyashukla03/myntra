@@ -4,198 +4,243 @@ import plotly.express as px
 import os
 import random
 
-# 1. Page Configuration (Streamlit Collapsed Sidebar)
+# 1. Page Configuration
 st.set_page_config(
-    page_title="Myntra Wishlist Studio MVP",
+    page_title="Myntra Wishlist Studio — Growth Engine",
     page_icon="🛍️",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# Custom Styling for Authentic Myntra Look & Feel
+# Custom Styling for Authentic, Premium Myntra Website Design System
 st.markdown("""
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800;900&display=swap');
   
   html, body, [class*="css"] {
-    font-family: 'Assistant', sans-serif;
+    font-family: 'Assistant', -apple-system, BlinkMacSystemFont, sans-serif;
   }
   
+  /* Clean Light / Off-White E-Commerce Theme */
   .stApp {
-    background-color: #0F1117;
-    color: #FFFFFF;
+    background-color: #F5F5F6;
+    color: #282C3F;
   }
   
-  /* Hide sidebar */
+  /* Hide Streamlit Sidebar */
   [data-testid="stSidebar"] {
     display: none !important;
   }
 
-  /* Authentic Myntra Top Header Bar */
-  .myntra-header-bar {
+  /* Authentic Top Header Navigation Bar (Myntra Web Header) */
+  .myntra-main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #181B26;
-    border-bottom: 2px solid #FF3F6C;
-    padding: 0.85rem 2rem;
-    border-radius: 12px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #EAEAEC;
+    padding: 0.75rem 2.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 0;
+    z-index: 999;
   }
   
-  .myntra-logo-box {
+  .myntra-brand-cluster {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1.25rem;
   }
   
-  .myntra-m-badge {
+  .myntra-logo-badge {
     background: linear-gradient(135deg, #FF3F6C 0%, #FF527B 100%);
     color: #FFFFFF;
     font-weight: 900;
-    font-size: 1.6rem;
-    width: 42px;
-    height: 42px;
+    font-size: 1.75rem;
+    width: 44px;
+    height: 44px;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(255, 63, 108, 0.4);
+    box-shadow: 0 4px 12px rgba(255, 63, 108, 0.35);
   }
   
-  .myntra-logo-text {
-    font-size: 1.8rem;
+  .myntra-brand-name {
+    font-size: 1.6rem;
     font-weight: 900;
     color: #FF3F6C;
     letter-spacing: -0.5px;
+    line-height: 1;
   }
 
-  .myntra-tagline-text {
-    font-size: 0.85rem;
-    color: #94A3B8;
-    font-weight: 700;
-  }
-  
-  .myntra-nav-right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .myntra-bag-btn {
-    background: #FF3F6C;
-    color: #FFFFFF;
+  .myntra-brand-sub {
+    font-size: 0.78rem;
     font-weight: 800;
-    padding: 0.45rem 1.15rem;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    border: none;
+    color: #535766;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
-  /* Native Mobile iPhone Device Wrapper */
-  .mobile-phone-frame {
-    max-width: 390px;
-    margin: 1rem auto;
-    background-color: #121520;
-    border: 12px solid #232838;
-    border-radius: 44px;
-    padding: 1.1rem;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
-    position: relative;
-  }
-
-  .mobile-notch {
-    width: 130px;
-    height: 18px;
-    background-color: #232838;
-    border-bottom-left-radius: 14px;
-    border-bottom-right-radius: 14px;
-    margin: -1.1rem auto 0.75rem auto;
-  }
-
-  .mobile-status-strip {
+  .myntra-nav-links {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.72rem;
+    gap: 1.5rem;
+    font-size: 0.88rem;
     font-weight: 800;
-    color: #94A3B8;
-    margin-bottom: 0.65rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding-bottom: 0.4rem;
-  }
-  
-  /* Authentic Myntra Product Card */
-  .myntra-prod-card {
-    background-color: #181B26;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  
-  .myntra-brand-title {
-    font-size: 0.75rem;
-    font-weight: 900;
-    color: #94A3B8;
+    color: #282C3F;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
   
-  .myntra-prod-name {
+  .myntra-nav-item {
+    color: #282C3F;
+    text-decoration: none;
+    padding-bottom: 0.2rem;
+  }
+  
+  .myntra-nav-item.active {
+    color: #FF3F6C;
+    border-bottom: 3px solid #FF3F6C;
+  }
+
+  /* Search Input Mockup */
+  .myntra-search-bar {
+    background-color: #F5F5F6;
+    border: 1px solid #F5F5F6;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    color: #696E79;
+    width: 320px;
+  }
+
+  /* User Header Action Icons */
+  .myntra-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .header-icon-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #282C3F;
+    cursor: pointer;
+  }
+
+  /* Product Card (White Card with Soft Shadow) */
+  .myntra-card-white {
+    background-color: #FFFFFF;
+    border: 1px solid #EAEAEC;
+    border-radius: 8px;
+    padding: 0.85rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    margin-bottom: 1.25rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .myntra-card-white:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .prod-brand-text {
     font-size: 0.88rem;
-    font-weight: 700;
-    color: #FFFFFF;
+    font-weight: 900;
+    color: #282C3F;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .prod-title-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #535766;
     margin: 0.15rem 0 0.4rem 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   
-  .myntra-price-row {
+  .price-row-box {
     display: flex;
     align-items: center;
     gap: 0.45rem;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
   }
   
-  .price-current {
+  .price-curr {
     font-size: 0.95rem;
     font-weight: 800;
-    color: #FFFFFF;
+    color: #282C3F;
   }
   
-  .price-mrp {
+  .price-orig {
     font-size: 0.78rem;
-    color: #64748B;
+    color: #7E818C;
     text-decoration: line-through;
   }
   
-  .price-discount {
-    font-size: 0.72rem;
+  .price-disc {
+    font-size: 0.75rem;
     font-weight: 800;
-    color: #FF527B;
+    color: #FF905A;
   }
 
-  .gsm-chip {
-    background-color: #2D0A4E;
-    color: #D8B4FE;
-    font-size: 0.68rem;
+  .spec-badge-gsm {
+    background-color: #F3E8FF;
+    color: #7E22CE;
+    font-size: 0.72rem;
     font-weight: 800;
-    padding: 0.2rem 0.5rem;
-    border-radius: 6px;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
     display: inline-block;
   }
   
-  .fit-chip {
-    background-color: rgba(3, 166, 133, 0.15);
+  .spec-badge-fit {
+    background-color: #E6F4F1;
     color: #03A685;
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     font-weight: 800;
-    padding: 0.2rem 0.5rem;
-    border-radius: 6px;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
     display: inline-block;
+  }
+
+  /* Native Mobile iPhone Device Frame Wrapper */
+  .mobile-device-shell {
+    max-width: 380px;
+    margin: 1rem auto;
+    background-color: #FFFFFF;
+    border: 12px solid #282C3F;
+    border-radius: 44px;
+    padding: 1rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    color: #282C3F;
+  }
+
+  .mobile-notch-strip {
+    width: 120px;
+    height: 18px;
+    background-color: #282C3F;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    margin: -1rem auto 0.75rem auto;
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #EAEAEC;
+    padding-top: 0.65rem;
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #535766;
   }
 </style>
 """, unsafe_allow_html=True)
@@ -203,33 +248,33 @@ st.markdown("""
 # Master Dataset (6 Authentic Myntra Wishlist Items)
 PRODUCTS = [
     {
-        "id": "p1", "name": "Heavy Streetwear Cargo Pants", "brand": "ROADSTER", "price": 1999, "mrp": 2499,
-        "gsm": "240 GSM Heavy Cotton Twill", "fit": "88% True to Size", "return": "12% Low Returns",
+        "id": "p1", "name": "Heavyweight Streetwear Cargo Pants", "brand": "ROADSTER", "price": 1999, "mrp": 2499,
+        "gsm": "240 GSM Heavyweight Cotton", "fit": "88% True to Size (Relaxed Fit)", "return": "12% Low Return Risk",
         "img": "https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=400", "cat": "Workwear"
     },
     {
-        "id": "p2", "name": "Poplin Relaxed Cargo Pants", "brand": "WROGN", "price": 1499, "mrp": 2999,
-        "gsm": "160 GSM Light Poplin", "fit": "64% Runs Small", "return": "28% High Sizing Variance",
+        "id": "p2", "name": "Poplin Relaxed Fit Cargo Pants", "brand": "WROGN", "price": 1499, "mrp": 2999,
+        "gsm": "160 GSM Lightweight Poplin", "fit": "64% Runs Small (Tight Waist)", "return": "28% High Sizing Variance",
         "img": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400", "cat": "Workwear"
     },
     {
-        "id": "p3", "name": "Structured Linen Blend Blazer", "brand": "MANGO", "price": 3490, "mrp": 4990,
-        "gsm": "210 GSM Pure Italian Linen", "fit": "92% True to Size", "return": "9% Low Returns",
+        "id": "p3", "name": "Structured Italian Linen Blazer", "brand": "MANGO", "price": 3490, "mrp": 4990,
+        "gsm": "210 GSM Pure Linen", "fit": "92% True to Size (Tailored Fit)", "return": "9% Low Return Risk",
         "img": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400", "cat": "Party"
     },
     {
-        "id": "p4", "name": "Oversized Graphic Cotton Tee", "brand": "H&M", "price": 899, "mrp": 1299,
-        "gsm": "220 GSM Bio-Washed Cotton", "fit": "84% True to Size", "return": "10% Low Returns",
+        "id": "p4", "name": "Oversized Bio-Washed Graphic Tee", "brand": "H&M", "price": 899, "mrp": 1299,
+        "gsm": "220 GSM Bio-Washed Cotton", "fit": "84% True to Size (Oversized)", "return": "10% Low Return Risk",
         "img": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400", "cat": "Streetwear"
     },
     {
-        "id": "p5", "name": "Classic Raw Denim Jacket", "brand": "LEVI'S", "price": 4299, "mrp": 5999,
-        "gsm": "320 GSM Rigid Denim", "fit": "90% True to Size", "return": "11% Low Returns",
+        "id": "p5", "name": "Classic Raw Denim Trucker Jacket", "brand": "LEVI'S", "price": 4299, "mrp": 5999,
+        "gsm": "320 GSM Heavy Denim", "fit": "90% True to Size (Regular Fit)", "return": "11% Low Return Risk",
         "img": "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=400", "cat": "Streetwear"
     },
     {
-        "id": "p6", "name": "Slim Fit Stretch Chinos", "brand": "JACK & JONES", "price": 2199, "mrp": 2999,
-        "gsm": "190 GSM Cotton Twill", "fit": "78% True to Size", "return": "15% Moderate Variance",
+        "id": "p6", "name": "Slim Fit Stretch Cotton Chinos", "brand": "JACK & JONES", "price": 2199, "mrp": 2999,
+        "gsm": "190 GSM Stretch Twill", "fit": "78% True to Size (Slim Fit)", "return": "15% Moderate Variance",
         "img": "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400", "cat": "Workwear"
     }
 ]
@@ -242,28 +287,36 @@ if 'compared_ids' not in st.session_state:
 if 'wa_poll_active' not in st.session_state:
     st.session_state.wa_poll_active = False
 
-# Authentic Myntra Header Banner
+# Authentic Myntra Top Header Navigation
 st.markdown("""
-<div class="myntra-header-bar">
-    <div class="myntra-logo-box">
-        <div class="myntra-m-badge">M</div>
+<div class="myntra-main-header">
+    <div class="myntra-brand-cluster">
+        <div class="myntra-logo-badge">M</div>
         <div>
-            <span class="myntra-logo-text">myntra</span>
-            <span style="font-weight:800; font-size:1.1rem; color:#FFF; margin-left:0.4rem;">Growth Lab</span>
-            <div class="myntra-tagline-text">Wishlist Conversion Engine • Target: 7.5% → 10.5% (+300bps) | +₹18.81 Cr/mo Profit</div>
+            <div class="myntra-brand-name">myntra</div>
+            <div class="myntra-brand-sub">Growth Lab • Wishlist Conversion Engine</div>
         </div>
     </div>
-    <div class="myntra-nav-right">
-        <div style="background:#2D0A4E; padding:0.4rem 0.85rem; border-radius:8px; font-weight:800; font-size:0.82rem; color:#D8B4FE;">
-            🛍️ Shopping Bag ({cart_count})
+    <div class="myntra-nav-links">
+        <span class="myntra-nav-item active">Wishlist Studio</span>
+        <span class="myntra-nav-item">Men</span>
+        <span class="myntra-nav-item">Women</span>
+        <span class="myntra-nav-item">Kids</span>
+        <span class="myntra-nav-item">Studio</span>
+    </div>
+    <div class="myntra-header-actions">
+        <div class="myntra-search-bar">🔍 Search for products, brands and specs</div>
+        <div class="header-icon-box">
+            <span style="font-size:1.2rem;">🛍️</span>
+            <span style="color:#FF3F6C; font-weight:900;">Bag ({cart_count})</span>
         </div>
     </div>
 </div>
 """.format(cart_count=len(st.session_state.cart_items)), unsafe_allow_html=True)
 
-# Top Navigation Tabs
+# Top Portal Tabs
 tab_mvp, tab_nlp, tab_metrics, tab_figma = st.tabs([
-    "🛍️ Wishlist Studio MVP (Mobile & Web Modes)",
+    "🛍️ Wishlist Studio MVP (Mobile vs Web Interfaces)",
     "🔬 AI Review NLP Discovery Engine (20,250 Corpus)",
     "📊 Financial & Metric Sensitivity Simulator",
     "🎨 Figma Mobile App Design System & Specs"
@@ -271,136 +324,74 @@ tab_mvp, tab_nlp, tab_metrics, tab_figma = st.tabs([
 
 # TAB 1: WISHLIST STUDIO MVP
 with tab_mvp:
-    st.title("🛍️ Myntra Wishlist Studio MVP Solution")
-    st.caption("Resolves Wishlist Stalls via Side-by-Side Spec Comparison, AI Outfits & 1-Tap WhatsApp Polling")
+    st.markdown("<h2 style='color:#FF3F6C; font-weight:900;'>Myntra Wishlist Studio MVP Solution</h2>", unsafe_allow_html=True)
+    st.caption("Targeting 30-Day Wishlist Conversion: 7.5% → 10.5% (+300bps) | Zero Discounts | +₹18.81 Cr/mo Profit Lift")
     
-    # Interface Display Toggle
+    # Interface Mode Radio
     view_mode = st.radio(
         "Select Experience Mode:",
-        ["📱 Mobile Smartphone App View (iOS / Android)", "💻 Desktop Web Workspace View"],
+        ["💻 Desktop Web Workspace View (Full Multi-Column Grid)", "📱 Mobile Smartphone App View (Native iOS/Android App)"],
         horizontal=True
     )
     
     st.markdown("---")
 
-    # ==================== MOBILE SMARTPHONE APP VIEW MODE ====================
-    if "Mobile" in view_mode:
-        st.markdown("<h3 style='text-align:center; color:#FF3F6C;'>📱 Native Myntra Mobile App Simulator</h3>", unsafe_allow_html=True)
-        st.caption("Interactive 375pt × 812pt Smartphone Frame — Click any button inside the phone frame below to test live!")
-        
-        # Phone Container
-        st.markdown("""
-        <div class="mobile-phone-frame">
-            <div class="mobile-notch"></div>
-            <div class="mobile-status-strip">
-                <span>9:41 📶 5G</span>
-                <span style="color:#FF3F6C; font-size:0.95rem; font-weight:900;">myntra</span>
-                <span>🛍️ Bag ({cart_count})</span>
-            </div>
-            <div style="background:#181B26; padding:0.4rem 0.65rem; border-radius:8px; font-size:0.75rem; font-weight:800; display:flex; justify-content:space-between; margin-bottom:0.75rem; border:1px solid rgba(255,255,255,0.08);">
-                <span>📁 Smart Folder: Workwear</span>
-                <span style="color:#FF3F6C;">Spec Matrix Active</span>
-            </div>
-        </div>
-        """.format(cart_count=len(st.session_state.cart_items)), unsafe_allow_html=True)
-        
-        # Interactive Mobile Controls
-        m_col1, m_col2 = st.columns(2)
-        with m_col1:
-            st.markdown("#### 1. Mobile Item Selection")
-            m_sel_a = st.selectbox("Option A Product:", PRODUCTS, format_func=lambda x: f"{x['brand']} - {x['name']}")
-            st.image(m_sel_a["img"], use_container_width=True)
-            st.markdown(f"<span class='gsm-chip'>{m_sel_a['gsm']}</span>", unsafe_allow_html=True)
-            st.markdown(f"<span class='fit-chip'>Fit: {m_sel_a['fit']}</span>", unsafe_allow_html=True)
-            st.write(f"**Price:** ₹{m_sel_a['price']:,}")
-            if st.button(f"Add Option A to Bag", key="m_bag_a"):
-                st.session_state.cart_items.append(m_sel_a)
-                st.success(f"✓ {m_sel_a['brand']} added to Bag!")
-
-        with m_col2:
-            st.markdown("#### 2. Alternative Item")
-            m_sel_b = st.selectbox("Option B Product:", [p for p in PRODUCTS if p["id"] != m_sel_a["id"]], format_func=lambda x: f"{x['brand']} - {x['name']}")
-            st.image(m_sel_b["img"], use_container_width=True)
-            st.markdown(f"<span class='gsm-chip'>{m_sel_b['gsm']}</span>", unsafe_allow_html=True)
-            st.markdown(f"<span class='fit-chip'>Fit: {m_sel_b['fit']}</span>", unsafe_allow_html=True)
-            st.write(f"**Price:** ₹{m_sel_b['price']:,}")
-            if st.button(f"Add Option B to Bag", key="m_bag_b"):
-                st.session_state.cart_items.append(m_sel_b)
-                st.success(f"✓ {m_sel_b['brand']} added to Bag!")
-
-        st.markdown("---")
-        
-        # Mobile AI Look Builder
-        st.markdown("#### 3. Mobile AI Outfit Coordinator (+₹450 AOV Lift)")
-        st.write(f"Pair **{m_sel_a['name']}** (₹{m_sel_a['price']:,}) with curated Friday complement pieces:")
-        st.write("• Oversized Graphic Tee (₹899)")
-        st.write("• Vintage Canvas Sneakers (₹1,499)")
-        look_total = m_sel_a['price'] + 899 + 1499
-        st.markdown(f"**Complete Look Bundle Total:** ₹{look_total:,} *(0% Discount)*")
-        if st.button("🛍️ Add Complete 3-Piece Look to Mobile Bag", key="m_add_look"):
-            st.session_state.cart_items.extend([m_sel_a, PRODUCTS[3]])
-            st.success("✨ Complete 3-Piece Look added to Bag! +₹450 AOV logged.")
-
-        st.markdown("---")
-        
-        # Mobile WhatsApp Voting Card
-        st.markdown("#### 4. Mobile 1-Tap WhatsApp Friend Polling")
-        if st.button("📱 Share Voting Card to WhatsApp", key="m_wa_poll"):
-            st.session_state.wa_poll_active = True
-            
-        if st.session_state.wa_poll_active:
-            st.info("💬 WhatsApp poll card generated for group!")
-            st.success("⚡ Instant Fallback Active: **78% Community Choice** Choice verified in 2 seconds.")
-
     # ==================== DESKTOP WEB WORKSPACE VIEW MODE ====================
-    else:
-        st.markdown("<h3 style='color:#FF3F6C;'>💻 Myntra Wishlist Studio — Desktop Web Workspace</h3>", unsafe_allow_html=True)
+    if "Desktop" in view_mode:
+        st.markdown("### 💻 Myntra Desktop Web Workspace")
+        st.caption("Multi-column high-intent comparison matrix, AI outfit builder, and zero-discount checkout")
         
-        # Smart Folder Filter
-        f_cat = st.selectbox("Occasion Smart Folder:", ["All Occasions (6 items)", "Workwear (3 items)", "Streetwear (2 items)", "Party (1 item)"])
+        # Occasion Smart Folder Selector
+        smart_folder = st.selectbox(
+            "Filter Wishlist Items by Smart Occasion Folder:",
+            ["All Occasions (6 items)", "Workwear (3 items)", "Streetwear (2 items)", "Party (1 item)"]
+        )
         
-        # Filter products
         disp_prods = PRODUCTS
-        if "Workwear" in f_cat:
+        if "Workwear" in smart_folder:
             disp_prods = [p for p in PRODUCTS if p["cat"] == "Workwear"]
-        elif "Streetwear" in f_cat:
+        elif "Streetwear" in smart_folder:
             disp_prods = [p for p in PRODUCTS if p["cat"] == "Streetwear"]
-        elif "Party" in f_cat:
+        elif "Party" in smart_folder:
             disp_prods = [p for p in PRODUCTS if p["cat"] == "Party"]
 
-        st.markdown("### 1. Wishlist Product Cards & Comparison Selector")
+        st.markdown("#### 1. Wishlist Items Grid & Comparison Checkbox Selector")
         d_cols = st.columns(3)
         for idx, p in enumerate(disp_prods):
             with d_cols[idx % 3]:
-                st.image(p["img"], use_container_width=True)
-                st.markdown(f"<div class='myntra-brand-title'>{p['brand']}</div>", unsafe_allow_html=True)
-                st.markdown(f"<div class='myntra-prod-name'>{p['name']}</div>", unsafe_allow_html=True)
                 st.markdown(f"""
-                <div class="myntra-price-row">
-                    <span class="price-current">₹{p['price']:,}</span>
-                    <span class="price-mrp">₹{p['mrp']:,}</span>
-                    <span class="price-discount">{round(((p['mrp']-p['price'])/p['mrp'])*100)}% OFF</span>
+                <div class="myntra-card-white">
+                    <img src="{p['img']}" style="width:100%; height:210px; object-fit:cover; border-radius:6px; margin-bottom:0.5rem;" />
+                    <div class="prod-brand-text">{p['brand']}</div>
+                    <div class="prod-title-text">{p['name']}</div>
+                    <div class="price-row-box">
+                        <span class="price-curr">Rs. {p['price']:,}</span>
+                        <span class="price-orig">Rs. {p['mrp']:,}</span>
+                        <span class="price-disc">({round(((p['mrp']-p['price'])/p['mrp'])*100)}% OFF)</span>
+                    </div>
+                    <div style="display:flex; gap:0.4rem; margin-bottom:0.5rem;">
+                        <span class="spec-badge-gsm">{p['gsm']}</span>
+                        <span class="spec-badge-fit">{p['fit']}</span>
+                    </div>
                 </div>
                 """, unsafe_allow_html=True)
-                st.markdown(f"<span class='gsm-chip'>{p['gsm']}</span>", unsafe_allow_html=True)
-                st.markdown(f"<span class='fit-chip'>{p['fit']}</span>", unsafe_allow_html=True)
                 
                 is_chk = p["id"] in st.session_state.compared_ids
-                if st.checkbox(f"Compare Item", value=is_chk, key=f"d_chk_{p['id']}"):
+                if st.checkbox(f"Select for Side-by-Side Spec Comparison", value=is_chk, key=f"d_chk_{p['id']}"):
                     if p["id"] not in st.session_state.compared_ids:
                         st.session_state.compared_ids.append(p["id"])
                 else:
                     if p["id"] in st.session_state.compared_ids:
                         st.session_state.compared_ids.remove(p["id"])
                         
-                if st.button(f"Move to Bag", key=f"d_bag_{p['id']}"):
+                if st.button(f"Move '{p['brand']}' to Bag", key=f"d_btn_{p['id']}"):
                     st.session_state.cart_items.append(p)
                     st.success(f"✓ '{p['name']}' added to Bag!")
 
         st.markdown("---")
 
         # Side-by-Side Comparison Matrix
-        st.markdown("### 2. Live Side-by-Side Spec & GSM Comparison Matrix")
+        st.markdown("#### 2. Side-by-Side Spec & GSM Comparison Matrix")
         selected_comps = [p for p in PRODUCTS if p["id"] in st.session_state.compared_ids]
         
         if len(selected_comps) >= 2:
@@ -409,72 +400,145 @@ with tab_mvp:
                 with matrix_cols[idx]:
                     st.image(p["img"], use_container_width=True)
                     st.markdown(f"**{p['brand']} — {p['name']}**")
-                    st.info(f"**Fabric Weight:** {p['gsm']}")
+                    st.info(f"**Fabric Weight Spec:** {p['gsm']}")
                     st.success(f"**Fit Consensus:** {p['fit']}")
-                    st.write(f"**Price:** ₹{p['price']:,}")
+                    st.write(f"**Price:** Rs. {p['price']:,} (0% Discount)")
                     st.warning(f"**Return Risk:** {p['return']}")
-                    if st.button(f"🛍️ Select & Move to Bag", key=f"d_comp_add_{p['id']}"):
+                    if st.button(f"🛍️ Select & Add to Bag", key=f"comp_add_{p['id']}"):
                         st.session_state.cart_items.append(p)
                         st.success(f"✓ '{p['name']}' added to Bag!")
         else:
-            st.info("💡 Select at least 2 items above to generate side-by-side spec matrix.")
+            st.info("💡 Select at least 2 items above to generate side-by-side comparison matrix.")
 
         st.markdown("---")
 
         # AI Coordinated Outfits
-        st.markdown("### 3. AI Coordinated Look Builder (+₹450 AOV Lift)")
-        d_seed = st.selectbox("Select Seed Wishlist Item:", PRODUCTS, format_func=lambda x: f"{x['brand']} - {x['name']}")
+        st.markdown("#### 3. AI Coordinated Outfit Matcher (+₹450 AOV Expansion)")
+        d_seed = st.selectbox("Select Base Wishlist Item:", PRODUCTS, format_func=lambda x: f"{x['brand']} - {x['name']}")
         
         c_look1, c_look2 = st.columns(2)
         with c_look1:
-            st.markdown("**Look 1: Casual Friday Look**")
-            st.write(f"• Seed Piece: {d_seed['name']} (₹{d_seed['price']:,})")
-            st.write("• Oversized Graphic Tee (₹899)")
-            st.write("• Vintage Canvas Sneakers (₹1,499)")
+            st.markdown("**Look 1: Casual Friday Ensemble**")
+            st.write(f"• Base Item: {d_seed['name']} (Rs. {d_seed['price']:,})")
+            st.write("• Oversized Bio-Washed Graphic Tee (Rs. 899)")
+            st.write("• Vintage Canvas Sneakers (Rs. 1,499)")
             l1_tot = d_seed['price'] + 899 + 1499
-            st.markdown(f"**Total Bundle:** ₹{l1_tot:,} *(0% Discount)*")
+            st.markdown(f"**Total Look Bundle:** Rs. {l1_tot:,} *(0% Margin Dilution)*")
             if st.button("🛍️ Move Complete Look 1 to Bag", key=f"d_look1_{d_seed['id']}"):
                 st.session_state.cart_items.extend([d_seed, PRODUCTS[3]])
-                st.success("✨ Complete Look 1 added to Bag!")
+                st.success("✨ Complete Look 1 added to Bag! +₹450 AOV logged.")
 
         with c_look2:
-            st.markdown("**Look 2: Smart Evening Outfit**")
-            st.write(f"• Seed Piece: {d_seed['name']} (₹{d_seed['price']:,})")
-            st.write("• Linen Blend Blazer (₹3,490)")
-            st.write("• Leather Loafers (₹2,299)")
+            st.markdown("**Look 2: Evening Smart Outfit**")
+            st.write(f"• Base Item: {d_seed['name']} (Rs. {d_seed['price']:,})")
+            st.write("• Structured Linen Blazer (Rs. 3,490)")
+            st.write("• Leather Loafers (Rs. 2,299)")
             l2_tot = d_seed['price'] + 3490 + 2299
-            st.markdown(f"**Total Bundle:** ₹{l2_tot:,} *(0% Discount)*")
+            st.markdown(f"**Total Look Bundle:** Rs. {l2_tot:,} *(0% Margin Dilution)*")
             if st.button("🛍️ Move Complete Look 2 to Bag", key=f"d_look2_{d_seed['id']}"):
                 st.session_state.cart_items.extend([d_seed, PRODUCTS[2]])
-                st.success("✨ Complete Look 2 added to Bag!")
+                st.success("✨ Complete Look 2 added to Bag! +₹450 AOV logged.")
 
         st.markdown("---")
 
         # 1-Tap WhatsApp Voting Card
-        st.markdown("### 4. 1-Tap WhatsApp Social Voting Card")
-        if st.button("📱 Share Polling Micro-Card to WhatsApp", key="d_wa_share"):
-            st.info("WhatsApp micro-card generated for group polling!")
-            st.success("⚡ Instant Fallback Triggered: **78% Community Consensus** Choice verified in 2 seconds.")
+        st.markdown("#### 4. 1-Tap WhatsApp Friend Polling Micro-Card")
+        if st.button("📱 Share Polling Micro-Card to WhatsApp Group", key="d_wa_share"):
+            st.info("WhatsApp voting micro-card generated!")
+            st.success("⚡ Instant Fallback Active: **78% Community Consensus** verified in 2 seconds.")
+
+    # ==================== MOBILE SMARTPHONE APP VIEW MODE ====================
+    else:
+        st.markdown("### 📱 Native Myntra Mobile Smartphone App Interface")
+        st.caption("Interactive 375pt × 812pt Mobile Screen Architecture — Test native mobile app user flows below!")
+        
+        # Phone Device Shell
+        st.markdown("""
+        <div class="mobile-device-shell">
+            <div class="mobile-notch-strip"></div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; font-weight:800; color:#535766; border-bottom:1px solid #EAEAEC; padding-bottom:0.4rem; margin-bottom:0.75rem;">
+                <span>9:41 📶 5G</span>
+                <span style="color:#FF3F6C; font-weight:900; font-size:0.95rem;">myntra</span>
+                <span>🛍️ Bag ({cart_count})</span>
+            </div>
+            <div style="background:#E6F4F1; color:#03A685; padding:0.45rem 0.75rem; border-radius:6px; font-size:0.75rem; font-weight:800; display:flex; justify-content:space-between; margin-bottom:0.75rem;">
+                <span>Folder: Workwear</span>
+                <span>Spec Matrix Active</span>
+            </div>
+            <div class="mobile-bottom-nav">
+                <span>🏠 Home</span>
+                <span style="color:#FF3F6C; border-top:2px solid #FF3F6C;">✨ Studio</span>
+                <span>💖 Wishlist</span>
+                <span>🛍️ Bag ({cart_count})</span>
+                <span>👤 Profile</span>
+            </div>
+        </div>
+        """.format(cart_count=len(st.session_state.cart_items)), unsafe_allow_html=True)
+        
+        st.markdown("#### 1. Native Mobile Side-by-Side Spec Comparison")
+        m_c1, m_c2 = st.columns(2)
+        with m_c1:
+            st.markdown("**Option A: Roadster Heavy Cargo**")
+            st.image(PRODUCTS[0]["img"], use_container_width=True)
+            st.markdown("<span class='spec-badge-gsm'>240 GSM Heavy Cotton</span>", unsafe_allow_html=True)
+            st.markdown("<span class='spec-badge-fit'>Fit: 88% True to Size</span>", unsafe_allow_html=True)
+            st.write(f"**Price:** Rs. {PRODUCTS[0]['price']:,}")
+            if st.button("Add Option A to Bag", key="m_add_a"):
+                st.session_state.cart_items.append(PRODUCTS[0])
+                st.success("✓ Roadster added to Bag!")
+
+        with m_c2:
+            st.markdown("**Option B: Wrogn Poplin Cargo**")
+            st.image(PRODUCTS[1]["img"], use_container_width=True)
+            st.markdown("<span class='spec-badge-gsm'>160 GSM Light Poplin</span>", unsafe_allow_html=True)
+            st.markdown("<span class='spec-badge-fit'>Fit: 64% Runs Small</span>", unsafe_allow_html=True)
+            st.write(f"**Price:** Rs. {PRODUCTS[1]['price']:,}")
+            if st.button("Add Option B to Bag", key="m_add_b"):
+                st.session_state.cart_items.append(PRODUCTS[1])
+                st.success("✓ Wrogn added to Bag!")
+
+        st.markdown("---")
+        
+        # Mobile AI Look Builder
+        st.markdown("#### 2. Native Mobile AI Look Coordinator")
+        st.write("Pair **Roadster Cargo** (Rs. 1,999) with curated Friday complement pieces:")
+        st.write("• Oversized Graphic Tee (Rs. 899)")
+        st.write("• Vintage Canvas Sneakers (Rs. 1,499)")
+        st.markdown("**Complete Look Total:** Rs. 4,397 *(0% Discount)*")
+        if st.button("🛍️ Move 3-Piece Look to Mobile Bag", key="m_add_look"):
+            st.session_state.cart_items.extend([PRODUCTS[0], PRODUCTS[3]])
+            st.success("✨ Complete 3-Piece Look added to Bag!")
+
+        st.markdown("---")
+        
+        # Mobile WhatsApp Voting
+        st.markdown("#### 3. Native Mobile WhatsApp Voting Micro-Card")
+        if st.button("📱 Share Voting Card to WhatsApp", key="m_wa_share"):
+            st.session_state.wa_poll_active = True
+            
+        if st.session_state.wa_poll_active:
+            st.info("💬 WhatsApp voting card generated!")
+            st.success("⚡ Instant Fallback Active: **78% Community Consensus** Choice verified in 2 seconds.")
 
     st.markdown("---")
 
     # Shopping Bag Drawer Summary
-    st.subheader("🛍️ Shopping Bag & Zero-Discount Checkout Summary")
+    st.subheader("🛍️ Shopping Bag & Zero-Discount Order Summary")
     st.write(f"Items currently in Shopping Bag: **{len(st.session_state.cart_items)} Items**")
     
     df_bag = pd.DataFrame([
-        {"Brand": item["brand"], "Item Name": item["name"], "Fabric Spec": item["gsm"], "Price": f"₹{item['price']:,}"}
+        {"Brand": item["brand"], "Item Name": item["name"], "Fabric Spec": item["gsm"], "Price": f"Rs. {item['price']:,}"}
         for item in st.session_state.cart_items
     ])
     st.table(df_bag)
     
     tot_val = sum(item["price"] for item in st.session_state.cart_items)
-    st.markdown(f"### Total Order Value: **₹{tot_val:,}** *(0% Discount Subsidy)*")
+    st.markdown(f"### Total Order Value: **Rs. {tot_val:,}** *(0% Discount Subsidies)*")
     
     if st.button("💳 Proceed to 1-Tap Order Confirmation"):
         order_num = f"MYN-2026-{random.randint(10000, 99999)}"
         st.balloons()
-        st.success(f"🎉 Order {order_num} Confirmed! Total Paid: ₹{tot_val:,}. Zero discount subsidies used!")
+        st.success(f"🎉 Order {order_num} Confirmed! Total Paid: Rs. {tot_val:,}. Zero discount subsidies used!")
 
 # TAB 2: AI REVIEW NLP DISCOVERY ENGINE
 with tab_nlp:
@@ -527,16 +591,16 @@ with tab_metrics:
     st.markdown("### Simulated Financial Impact")
     m1, m2, m3, m4 = st.columns(4)
     m1.metric("Target Conversion Rate", f"{target_conv:.2f}%", f"+{target_lift_bps} bps")
-    m2.metric("Monthly Incremental GMV", f"₹{incremental_gmv:.2f} Cr", f"+₹{incremental_gmv*12:.1f} Cr / yr")
-    m3.metric("Monthly Gross Profit Unlock", f"₹{monthly_gross_profit:.2f} Cr", f"At {margin}% Margin")
+    m2.metric("Monthly Incremental GMV", f"Rs. {incremental_gmv:.2f} Cr", f"+Rs. {incremental_gmv*12:.1f} Cr / yr")
+    m3.metric("Monthly Gross Profit Unlock", f"Rs. {monthly_gross_profit:.2f} Cr", f"At {margin}% Margin")
     m4.metric("Feature ROI", f"{roi:.0f}x ROI", f"Payback < {payback_days:.1f} Days")
 
     st.markdown("---")
     st.markdown("### Financial Sensitivity Matrix")
     df_sens_table = pd.DataFrame([
-        {"Scenario": "Base Case (100% Target Lift)", "Lift (bps)": "+300 bps", "Monthly Profit": f"₹{monthly_gross_profit:.2f} Cr", "Annual Value": f"₹{annual_gross_profit:.1f} Cr", "Feature ROI": f"{roi:.0f}x", "Payback": f"{payback_days:.1f} Days"},
-        {"Scenario": "Conservative Case (75% Lift)", "Lift (bps)": f"+{int(target_lift_bps*0.75)} bps", "Monthly Profit": f"₹{monthly_gross_profit*0.75:.2f} Cr", "Annual Value": f"₹{annual_gross_profit*0.75:.1f} Cr", "Feature ROI": f"{roi*0.75:.0f}x", "Payback": f"{payback_days/0.75:.1f} Days"},
-        {"Scenario": "Stress-Test Case (50% Lift)", "Lift (bps)": f"+{int(target_lift_bps*0.50)} bps", "Monthly Profit": f"₹{monthly_gross_profit*0.50:.2f} Cr", "Annual Value": f"₹{annual_gross_profit*0.50:.1f} Cr", "Feature ROI": f"{roi*0.50:.0f}x", "Payback": f"{payback_days/0.50:.1f} Days"},
+        {"Scenario": "Base Case (100% Target Lift)", "Lift (bps)": "+300 bps", "Monthly Profit": f"Rs. {monthly_gross_profit:.2f} Cr", "Annual Value": f"Rs. {annual_gross_profit:.1f} Cr", "Feature ROI": f"{roi:.0f}x", "Payback": f"{payback_days:.1f} Days"},
+        {"Scenario": "Conservative Case (75% Lift)", "Lift (bps)": f"+{int(target_lift_bps*0.75)} bps", "Monthly Profit": f"Rs. {monthly_gross_profit*0.75:.2f} Cr", "Annual Value": f"Rs. {annual_gross_profit*0.75:.1f} Cr", "Feature ROI": f"{roi*0.75:.0f}x", "Payback": f"{payback_days/0.75:.1f} Days"},
+        {"Scenario": "Stress-Test Case (50% Lift)", "Lift (bps)": f"+{int(target_lift_bps*0.50)} bps", "Monthly Profit": f"Rs. {monthly_gross_profit*0.50:.2f} Cr", "Annual Value": f"Rs. {annual_gross_profit*0.50:.1f} Cr", "Feature ROI": f"{roi*0.50:.0f}x", "Payback": f"{payback_days/0.50:.1f} Days"},
     ])
     st.table(df_sens_table)
 
