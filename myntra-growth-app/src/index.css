@@ -1566,6 +1566,37 @@ body {
   padding-bottom: 0.5rem;
 }
 
+.questions.mobile-phone-wrapper-frame {
+  max-width: 430px;
+  margin: 1.5rem auto;
+  border: 12px solid #1E293B;
+  border-radius: 36px;
+  padding: 1.25rem 0.85rem;
+  background-color: #0A0D14;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.mobile-phone-wrapper-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 18px;
+  background-color: #1E293B;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  z-index: 100;
+}
+
+.app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .questions-list {
   display: flex;
   flex-direction: column;

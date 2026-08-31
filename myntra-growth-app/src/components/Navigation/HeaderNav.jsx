@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingBag, Users, TrendingUp, Presentation } from 'lucide-react';
+import { ShoppingBag, Users, TrendingUp } from 'lucide-react';
 
 export default function HeaderNav({ activeModule, setActiveModule }) {
   return (
@@ -38,15 +38,6 @@ export default function HeaderNav({ activeModule, setActiveModule }) {
         >
           <TrendingUp size={16} />
           <span>Growth Strategy & Metrics</span>
-        </button>
-
-        {/* 4. 10-Slide Pitch Deck */}
-        <button
-          className={`nav-link ${activeModule === 'DECK' ? 'active' : ''}`}
-          onClick={() => setActiveModule('DECK')}
-        >
-          <Presentation size={16} />
-          <span>📝 10-Slide Deck</span>
         </button>
       </nav>
     </header>
