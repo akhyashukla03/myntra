@@ -1,17 +1,17 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
+import os
 
-# 1. Page Configuration & Title
+# 1. Page Configuration & Title (Collapsed Sidebar by default)
 st.set_page_config(
     page_title="Myntra Growth Lab | Wishlist Conversion Engine",
     page_icon="🛍️",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
-# Custom CSS styling for Streamlit
+# Custom CSS styling (Hides Sidebar completely & Styles Top Navigation Bar)
 st.markdown("""
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap');
@@ -23,15 +23,45 @@ st.markdown("""
     color: #F8FAFC;
   }
   
+  /* HIDE STREAMLIT SIDEBAR COMPLETELY */
+  [data-testid="stSidebar"] {
+    display: none !important;
+  }
+  
+  /* Top Brand Header Bar */
+  .top-brand-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #121826;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.85rem 1.75rem;
+    border-radius: 16px;
+    margin-bottom: 1.25rem;
+  }
+  
+  .brand-logo-text {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #FF3F6C;
+    letter-spacing: -0.5px;
+  }
+  
+  .brand-tagline {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #94A3B8;
+  }
+
   /* Mobile Smartphone Frame Simulation */
   .mobile-phone-container {
-    max-width: 410px;
-    margin: 0 auto;
+    max-width: 420px;
+    margin: 0 auto 1.5rem auto;
     background-color: #0A0D14;
     border: 12px solid #1E293B;
     border-radius: 36px;
-    padding: 1rem;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    padding: 1.25rem;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
     color: #FFFFFF;
   }
   
@@ -50,70 +80,75 @@ st.markdown("""
     color: #FF3F6C;
   }
   
-  .spec-comparison-card {
-    background-color: #FFFFFF;
-    color: #0F172A;
-    border-radius: 14px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-  }
-  
   .badge-purple {
     background-color: #2D0A4E;
     color: #FFFFFF;
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     font-weight: 800;
-    padding: 0.2rem 0.6rem;
+    padding: 0.25rem 0.65rem;
     border-radius: 6px;
   }
   
   .badge-pink {
-    background-color: rgba(255, 63, 108, 0.12);
+    background-color: rgba(255, 63, 108, 0.15);
     color: #FF3F6C;
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     font-weight: 800;
-    padding: 0.2rem 0.6rem;
+    padding: 0.25rem 0.65rem;
     border-radius: 6px;
-  }
-  
-  /* Brand Badge */
-  .myntra-brand-badge {
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: #FF3F6C;
-    letter-spacing: -1.2px;
-    text-align: right;
   }
 </style>
 """, unsafe_allow_html=True)
 
-# Sidebar Navigation
-st.sidebar.markdown("<h2 style='color:#FF3F6C;'>Myntra Growth Lab</h2>", unsafe_allow_html=True)
-st.sidebar.markdown("### Wishlist Conversion Engine")
+# Top Brand Header Banner
+st.markdown("""
+<div class="top-brand-bar">
+    <div>
+        <span class="brand-logo-text">myntra</span>
+        <span style="font-size:1.1rem; font-weight:800; color:#FFFFFF; margin-left:0.5rem;">Growth Lab</span>
+    </div>
+    <div class="brand-tagline">
+        Target: 30-Day Conversion 7.5% → 10.5% (+300bps) | Zero Discounts | +₹18.81 Cr/mo Profit
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
-app_mode = st.sidebar.radio(
+# Top Navigation Tabs (Horizontal Radio Bar at top)
+app_mode = st.radio(
     "Select Navigation Portal:",
     [
         "🛍️ Wishlist Studio MVP (Mobile & Web Options)",
         "🔬 AI Review NLP Discovery Engine (20,250 Corpus)",
         "📊 Financial & Metric Sensitivity Simulator",
         "🎨 Figma Mobile App Design System & Wireframes"
-    ]
+    ],
+    horizontal=True,
+    label_visibility="collapsed"
 )
 
-st.sidebar.markdown("---")
-st.sidebar.info("💡 **Capstone Growth Target:**\n30-Day Conversion 7.5% → 10.5% (+300bps) | Zero Discounts | +₹18.81 Cr/mo Profit")
-st.sidebar.caption("📄 PowerPoint Deck uploaded separately as .pptx submission.")
+st.markdown("---")
+
+# Helper function to reliably resolve image paths
+def get_image_path(filename):
+    paths_to_check = [
+        filename,
+        os.path.join("myntra-growth-app", "public", filename),
+        os.path.join("public", filename)
+    ]
+    for p in paths_to_check:
+        if os.path.exists(p):
+            return p
+    return None
 
 # PORTAL 1: Wishlist Studio MVP Prototype (Mobile & Web Options)
 if app_mode == "🛍️ Wishlist Studio MVP (Mobile & Web Options)":
     st.title("🛍️ Wishlist Studio MVP Prototype")
     st.caption("Live Interactive Prototype • High-Intent Shortlist Workspace")
     
-    # Device Display Mode Switcher
+    # Top View Mode Switcher
     view_option = st.radio(
-        "📱 Select View Mode Option:",
-        ["📱 Mobile Smartphone App View (iOS / Android Myntra App)", "💻 Desktop Web App View"],
+        "Select MVP View Option:",
+        ["📱 Mobile Smartphone App View (iOS / Android)", "💻 Desktop Web Workspace View"],
         horizontal=True
     )
     
@@ -122,10 +157,9 @@ if app_mode == "🛍️ Wishlist Studio MVP (Mobile & Web Options)":
     # MOBILE APP VIEW MODE
     if "Mobile" in view_option:
         st.markdown("<h3 style='text-align:center; color:#FF3F6C;'>📱 Myntra Wishlist Studio — Smartphone App View</h3>", unsafe_allow_html=True)
-        st.caption("Simulating the native Myntra Mobile App wishlist evaluation workflow")
+        st.caption("Simulating native Myntra Mobile App wishlist evaluation workflow")
         
-        # Phone Container Frame
-        m_col1, m_col2, m_col3 = st.columns([0.5, 2.0, 0.5])
+        m_col1, m_col2, m_col3 = st.columns([0.4, 2.2, 0.4])
         with m_col2:
             st.markdown("""
             <div class="mobile-phone-container">
@@ -134,20 +168,23 @@ if app_mode == "🛍️ Wishlist Studio MVP (Mobile & Web Options)":
                     <span class="mobile-brand-title">myntra</span>
                     <span style="font-size:0.75rem; color:#94A3B8;">🛍️ Wishlist (38)</span>
                 </div>
-                <div style="background-color:#1E293B; padding:0.4rem 0.75rem; border-radius:8px; font-size:0.75rem; font-weight:700; margin-bottom:0.75rem; display:flex; justify-content:space-between;">
+                <div style="background-color:#1E293B; padding:0.45rem 0.75rem; border-radius:8px; font-size:0.78rem; font-weight:700; margin-bottom:0.75rem; display:flex; justify-content:space-between;">
                     <span>Smart Folder: Workwear</span>
                     <span style="color:#FF3F6C;">Spec Matrix Active</span>
                 </div>
             </div>
             """, unsafe_allow_html=True)
             
-            st.markdown("#### 1. Side-by-Side Spec & GSM Matrix (Mobile)")
+            # Show high-resolution generated mobile mockup image if available
+            img_path = get_image_path("myntra_mobile_spec_matrix.jpg")
+            if img_path:
+                st.image(img_path, caption="Mobile Spec Comparison Matrix (240 GSM vs 160 GSM)", use_container_width=True)
             
-            # Mobile Product Comparison Columns
+            st.markdown("#### 1. Side-by-Side Spec & GSM Matrix (Mobile)")
             mp1, mp2 = st.columns(2)
             with mp1:
                 st.markdown("**Option A: Heavy Cargo**")
-                st.image("https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=300", use_column_width=True)
+                st.image("https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=300", use_container_width=True)
                 st.markdown("<span class='badge-purple'>240 GSM Heavy Cotton</span>", unsafe_allow_html=True)
                 st.write("**Fit:** 88% True to Size")
                 st.write("**Price:** ₹1,999 (0% Disc)")
@@ -157,7 +194,7 @@ if app_mode == "🛍️ Wishlist Studio MVP (Mobile & Web Options)":
                     
             with mp2:
                 st.markdown("**Option B: Poplin Cargo**")
-                st.image("https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=300", use_column_width=True)
+                st.image("https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=300", use_container_width=True)
                 st.markdown("<span class='badge-pink'>160 GSM Light Poplin</span>", unsafe_allow_html=True)
                 st.write("**Fit:** 64% Runs Small")
                 st.write("**Price:** ₹1,499 (0% Disc)")
@@ -191,7 +228,7 @@ if app_mode == "🛍️ Wishlist Studio MVP (Mobile & Web Options)":
         c1, c2 = st.columns(2)
         with c1:
             st.subheader("Item 1: Heavy Streetwear Cargo")
-            st.image("https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=400", width=220)
+            st.image("https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=400", width=240)
             st.write("**Fabric Weight:** 240 GSM Heavyweight Cotton")
             st.write("**Fit Consensus:** 88% True to Size")
             st.write("**Price:** ₹1,999 (Zero Discount)")
@@ -200,12 +237,12 @@ if app_mode == "🛍️ Wishlist Studio MVP (Mobile & Web Options)":
             
         with c2:
             st.subheader("Item 2: Poplin Relaxed Cargo")
-            st.image("https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400", width=220)
+            st.image("https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400", width=240)
             st.write("**Fabric Weight:** 160 GSM Lightweight Poplin")
             st.write("**Fit Consensus:** 64% Runs Small")
             st.write("**Price:** ₹1,499 (Zero Discount)")
             st.write("**Return Rate:** 28% High Sizing Variance")
-            st.button("Compare Specs vs Item 1", key="w_btn2")
+            st.button("Compare Specs vs Item 1", key="w_btn1_2")
 
         st.markdown("---")
         st.markdown("### 2. AI Coordinated Look Builder (+₹450 AOV Lift)")
@@ -297,11 +334,11 @@ else:
     
     st.markdown("### 1. Mobile App UI Design Mockup (Side-by-Side Spec Matrix)")
     
-    # Try displaying local generated image
-    try:
-        st.image("myntra-growth-app/public/myntra_mobile_spec_matrix.jpg", caption="Figma Mobile UI Screen: Wishlist Side-by-Side Spec Matrix (240 GSM vs 160 GSM)", width=380)
-    except:
-        st.info("Mobile Spec Matrix UI Mockup generated.")
+    img_path = get_image_path("myntra_mobile_spec_matrix.jpg")
+    if img_path:
+        st.image(img_path, caption="Figma Mobile UI Screen: Wishlist Side-by-Side Spec Matrix (240 GSM vs 160 GSM)", width=420)
+    else:
+        st.info("Mobile Spec Matrix UI Mockup ready.")
 
     st.markdown("---")
     st.markdown("### 2. Design System Color Tokens")
