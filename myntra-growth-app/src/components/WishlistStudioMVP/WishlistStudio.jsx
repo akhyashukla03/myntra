@@ -8,10 +8,17 @@ import CartDrawer from './CartDrawer';
 import CheckoutModal from './CheckoutModal';
 import { Star, ShoppingBag, Plus, Check, Columns3, Wand2, Share2, Heart, Smartphone, Monitor } from 'lucide-react';
 
+import MobileAppView from './MobileAppView';
+
 export default function WishlistStudio() {
   const [activeCollection, setActiveCollection] = useState('ALL');
   const [activeView, setActiveView] = useState('GRID'); // 'GRID', 'COMPARE', 'OUTFITS'
-  const [deviceMode, setDeviceMode] = useState('DESKTOP'); // 'DESKTOP' or 'MOBILE'
+  const [deviceMode, setDeviceMode] = useState(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      return 'MOBILE';
+    }
+    return 'DESKTOP';
+  });
   const [selectedForCompare, setSelectedForCompare] = useState(['prod-01', 'prod-02', 'prod-03']);
   const [selectedForOutfit, setSelectedForOutfit] = useState(WISHLIST_PRODUCTS[0]);
   const [isSocialModalOpen, setIsSocialModalOpen] = useState(false);
@@ -106,64 +113,14 @@ export default function WishlistStudio() {
 
       {/* RENDER MOBILE SMARTPHONE FRAME VIEW IF SELECTED */}
       {deviceMode === 'MOBILE' ? (
-        <div style={{ maxWidth: '420px', margin: '0 auto', background: '#0A0D14', border: '12px solid #1E293B', borderRadius: '36px', padding: '1.25rem', boxShadow: '0 25px 60px rgba(0,0,0,0.6)', color: '#FFF' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem', marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>9:41 📶 5G</span>
-            <span style={{ fontSize: '1.1rem', fontWeight: '900', color: '#FF3F6C' }}>myntra</span>
-            <button onClick={() => setIsCartOpen(true)} style={{ background: '#2D0A4E', color: '#FFF', border: 'none', padding: '0.2rem 0.6rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '800', cursor: 'pointer' }}>
-              🛍️ Bag ({cartItems.length})
-            </button>
-          </div>
-
-          <div style={{ background: '#1E293B', padding: '0.45rem 0.75rem', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700', marginBottom: '0.85rem', display: 'flex', justifyContent: 'space-between' }}>
-            <span>Smart Folder: Workwear</span>
-            <span style={{ color: '#FF3F6C' }}>Spec Matrix Active</span>
-          </div>
-
-          {/* Interactive Mobile Comparison Showcase */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <h4 style={{ fontSize: '0.85rem', fontWeight: '800', color: '#FF3F6C', margin: 0 }}>Side-by-Side Spec & GSM Matrix</h4>
-            
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.65rem' }}>
-              {WISHLIST_PRODUCTS.slice(0, 2).map((p) => (
-                <div key={p.id} style={{ background: '#121826', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '0.65rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                  <img src={p.image} alt={p.name} style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '6px' }} />
-                  <span style={{ fontSize: '0.72rem', fontWeight: '800', color: '#F8FAFC' }}>{p.name}</span>
-                  <span style={{ background: p.id === 'prod-01' ? '#2D0A4E' : 'rgba(255,63,108,0.2)', color: p.id === 'prod-01' ? '#FFF' : '#FF3F6C', fontSize: '0.65rem', fontWeight: '800', padding: '0.15rem 0.4rem', borderRadius: '4px', alignSelf: 'flex-start' }}>
-                    {p.fabric.split('(')[0]}
-                  </span>
-                  <span style={{ fontSize: '0.68rem', color: '#CBD5E1' }}>Fit: {p.fitScore.split('(')[0]}</span>
-                  <span style={{ fontSize: '0.78rem', fontWeight: '900', color: '#FF3F6C' }}>₹{p.price.toLocaleString()}</span>
-                  <button
-                    onClick={() => handleMoveToBag(p)}
-                    style={{ background: '#FF3F6C', color: '#FFF', border: 'none', padding: '0.35rem', borderRadius: '6px', fontSize: '0.72rem', fontWeight: '800', cursor: 'pointer', marginTop: '0.25rem' }}
-                  >
-                    Add to Bag
-                  </button>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ background: '#121826', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '0.75rem', marginTop: '0.5rem' }}>
-              <h4 style={{ fontSize: '0.82rem', fontWeight: '800', color: '#4F46E5', margin: '0 0 0.35rem 0' }}>✨ AI Coordinated Look (+₹450 AOV)</h4>
-              <p style={{ fontSize: '0.72rem', color: '#CBD5E1', margin: '0 0 0.5rem 0' }}>Heavy Cargo (₹1,999) + Oversized Tee (₹899) + Canvas Sneakers (₹1,499) = ₹4,397</p>
-              <button
-                onClick={() => handleAddLookToBag(WISHLIST_PRODUCTS[0])}
-                style={{ background: 'linear-gradient(135deg, #4F46E5, #818CF8)', color: '#FFF', border: 'none', width: '100%', padding: '0.45rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '800', cursor: 'pointer' }}
-              >
-                Move 3-Piece Look to Bag
-              </button>
-            </div>
-
-            <button
-              onClick={() => setIsSocialModalOpen(true)}
-              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: '#FFF', padding: '0.5rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}
-            >
-              <Share2 size={14} />
-              <span>Ask Friends on WhatsApp</span>
-            </button>
-          </div>
-        </div>
+        <MobileAppView
+          products={WISHLIST_PRODUCTS}
+          cartItems={cartItems}
+          onMoveToBag={handleMoveToBag}
+          onAddLookToBag={handleAddLookToBag}
+          onOpenSocialModal={() => setIsSocialModalOpen(true)}
+          onOpenCart={() => setIsCartOpen(true)}
+        />
       ) : (
         /* RENDER DESKTOP WEB WORKSPACE VIEW */
         <>

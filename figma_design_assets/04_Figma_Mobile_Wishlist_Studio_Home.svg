@@ -1,0 +1,50 @@
+<svg width="375" height="812" viewBox="0 0 375 812" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="homeGrad" x1="0" y1="0" x2="375" y2="812" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A0D14"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="375" height="812" rx="40" fill="url(#homeGrad)"/>
+
+  <!-- Status Bar -->
+  <text x="24" y="32" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="600">9:41</text>
+
+  <!-- Header -->
+  <rect x="0" y="44" width="375" height="56" fill="#0A0D14"/>
+  <text x="20" y="78" fill="#FF3F6C" font-family="sans-serif" font-size="20" font-weight="900">myntra</text>
+  <text x="120" y="77" fill="#FFFFFF" font-family="sans-serif" font-size="15" font-weight="700">Wishlist Studio</text>
+  <rect x="290" y="60" width="70" height="28" rx="14" fill="#2D0A4E"/>
+  <text x="302" y="78" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="800">Bag (3)</text>
+
+  <!-- Occasion Pills Scroll Horizontal -->
+  <text x="16" y="125" fill="#94A3B8" font-family="sans-serif" font-size="12" font-weight="700">SMART OCCASION COLLECTIONS</text>
+  <rect x="16" y="135" width="110" height="32" rx="16" fill="#FF3F6C"/>
+  <text x="28" y="156" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="800">Workwear (5)</text>
+
+  <rect x="134" y="135" width="110" height="32" rx="16" fill="#1E293B"/>
+  <text x="146" y="156" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="700">Streetwear (4)</text>
+
+  <rect x="252" y="135" width="110" height="32" rx="16" fill="#1E293B"/>
+  <text x="264" y="156" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="700">Party Night (3)</text>
+
+  <!-- Saved Items Grid -->
+  <rect x="16" y="185" width="168" height="240" rx="12" fill="#121826" stroke="#334155" stroke-width="1"/>
+  <rect x="24" y="193" width="152" height="140" rx="8" fill="#1E293B"/>
+  <text x="32" y="350" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700">Roadster Cargo</text>
+  <text x="32" y="368" fill="#FF3F6C" font-family="sans-serif" font-size="13" font-weight="800">₹1,999</text>
+  <rect x="32" y="380" width="136" height="32" rx="6" fill="#FF3F6C"/>
+  <text x="55" y="401" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="800">Move to Bag</text>
+
+  <rect x="191" y="185" width="168" height="240" rx="12" fill="#121826" stroke="#334155" stroke-width="1"/>
+  <rect x="199" y="193" width="152" height="140" rx="8" fill="#1E293B"/>
+  <text x="207" y="350" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700">HIGHLANDER Shirt</text>
+  <text x="207" y="368" fill="#FF3F6C" font-family="sans-serif" font-size="13" font-weight="800">₹1,499</text>
+  <rect x="207" y="380" width="136" height="32" rx="6" fill="#FF3F6C"/>
+  <text x="230" y="401" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="800">Move to Bag</text>
+
+  <!-- Bottom Nav -->
+  <rect x="0" y="738" width="375" height="74" fill="#0A0D14" stroke="#1E293B" stroke-width="1"/>
+  <text x="175" y="775" fill="#FF3F6C" font-family="sans-serif" font-size="12" font-weight="bold">Studio</text>
+</svg>

@@ -4267,3 +4267,59 @@ body {
   from { transform: translateY(100%); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+
+/* Mobile App Native Viewport Overrides */
+@media (max-width: 600px) {
+  .mobile-app-container {
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0.75rem 0.5rem !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+  }
+
+  .app-header {
+    padding: 0.65rem 0.75rem !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.5rem !important;
+  }
+
+  .main-nav {
+    justify-content: space-between !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+  }
+
+  .nav-link {
+    padding: 0.35rem 0.6rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  .module-container {
+    padding: 0.5rem !important;
+  }
+
+  .grid-helper-bar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+  }
+
+  .grid-helper-bar > div {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+}
+
+/* Custom Sleek Scrollbar for Phone Frame Internal Screen */
+.mobile-scrollable-body::-webkit-scrollbar {
+  width: 4px;
+}
+.mobile-scrollable-body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+.mobile-scrollable-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 63, 108, 0.5);
+  border-radius: 4px;
+}

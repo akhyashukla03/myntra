@@ -1,0 +1,115 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="webGrad" x1="0" y1="0" x2="1440" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A0D14"/>
+      <stop offset="100%" stop-color="#121826"/>
+    </linearGradient>
+    <linearGradient id="pinkGrad" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF3F6C"/>
+      <stop offset="100%" stop-color="#FF6B8B"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1440" height="900" fill="url(#webGrad)"/>
+
+  <!-- Top Navigation Header Bar -->
+  <rect x="0" y="0" width="1440" height="70" fill="#121826" stroke="#1E293B" stroke-width="1"/>
+  <text x="40" y="44" fill="#FF3F6C" font-family="sans-serif" font-size="24" font-weight="900" letter-spacing="-1">myntra</text>
+  <text x="145" y="42" fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="800">Growth Lab — Wishlist Studio</text>
+
+  <rect x="420" y="18" width="500" height="36" rx="18" fill="#1E293B"/>
+  <text x="440" y="41" fill="#64748B" font-family="sans-serif" font-size="13">Search products, categories or comparison specs...</text>
+
+  <rect x="1240" y="16" width="160" height="38" rx="8" fill="url(#pinkGrad)"/>
+  <text x="1265" y="40" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="800">🛍️ Shopping Bag (3)</text>
+
+  <!-- Left Sidebar Navigation -->
+  <rect x="0" y="70" width="240" height="830" fill="#0A0D14" stroke="#1E293B" stroke-width="1"/>
+  <rect x="20" y="95" width="200" height="40" rx="8" fill="#2D0A4E"/>
+  <text x="50" y="120" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="800">🛍️ Wishlist Studio MVP</text>
+
+  <rect x="20" y="150" width="200" height="40" rx="8" fill="transparent"/>
+  <text x="50" y="175" fill="#94A3B8" font-family="sans-serif" font-size="13" font-weight="600">📊 User Research & NLP</text>
+
+  <rect x="20" y="205" width="200" height="40" rx="8" fill="transparent"/>
+  <text x="50" y="230" fill="#94A3B8" font-family="sans-serif" font-size="13" font-weight="600">📈 Strategy & Metrics</text>
+
+  <!-- Financial KPI Metrics Widget in Sidebar -->
+  <rect x="20" y="680" width="200" height="190" rx="10" fill="#1E293B"/>
+  <text x="32" y="705" fill="#FF3F6C" font-family="sans-serif" font-size="11" font-weight="800">TARGET LIFT IMPACT</text>
+  <text x="32" y="730" fill="#FFFFFF" font-family="sans-serif" font-size="20" font-weight="900">+300 bps</text>
+  <text x="32" y="748" fill="#94A3B8" font-family="sans-serif" font-size="11">Conv: 7.5% → 10.5%</text>
+
+  <text x="32" y="778" fill="#10B981" font-family="sans-serif" font-size="16" font-weight="800">+₹49.5 Cr / mo</text>
+  <text x="32" y="794" fill="#94A3B8" font-family="sans-serif" font-size="11">Incremental GMV Lift</text>
+
+  <text x="32" y="824" fill="#818CF8" font-family="sans-serif" font-size="14" font-weight="800">221x Feature ROI</text>
+  <text x="32" y="840" fill="#94A3B8" font-family="sans-serif" font-size="11">Payback Period &lt; 4 Days</text>
+
+  <!-- Main Content Area: Side-by-Side Comparison Grid Workspace -->
+  <rect x="270" y="95" width="1130" height="775" rx="16" fill="#121826" stroke="#1E293B" stroke-width="1"/>
+
+  <!-- Module Header Bar -->
+  <text x="300" y="135" fill="#FFFFFF" font-family="sans-serif" font-size="20" font-weight="800">Side-by-Side Spec &amp; Fabric GSM Comparison Studio</text>
+  <text x="300" y="156" fill="#94A3B8" font-family="sans-serif" font-size="13">Inline evaluation studio eliminating choice overload without price discounts</text>
+
+  <!-- Spec Comparison Table Header -->
+  <rect x="300" y="180" width="1070" height="40" rx="8" fill="#1E293B"/>
+  <text x="320" y="205" fill="#94A3B8" font-family="sans-serif" font-size="12" font-weight="700">SPECIFICATION DIMENSION</text>
+  <text x="560" y="205" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="800">PRODUCT #1: Heavy Duty Cargo</text>
+  <text x="840" y="205" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="800">PRODUCT #2: Slim Stretch Cargo</text>
+  <text x="1120" y="205" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="800">PRODUCT #3: Oversized Utility</text>
+
+  <!-- Row 1: Fabric GSM Weight -->
+  <rect x="300" y="230" width="1070" height="55" fill="#0A0D14" stroke="#1E293B" stroke-width="1"/>
+  <text x="320" y="262" fill="#E2E8F0" font-family="sans-serif" font-size="13" font-weight="700">Fabric GSM Weight</text>
+
+  <rect x="560" y="242" width="120" height="30" rx="6" fill="#2D0A4E"/>
+  <text x="575" y="262" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="800">240 GSM (Heavy)</text>
+
+  <rect x="840" y="242" width="120" height="30" rx="6" fill="#334155"/>
+  <text x="855" y="262" fill="#CBD5E1" font-family="sans-serif" font-size="12" font-weight="600">160 GSM (Light)</text>
+
+  <rect x="1120" y="242" width="120" height="30" rx="6" fill="#2D0A4E"/>
+  <text x="1135" y="262" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="800">220 GSM (Heavy)</text>
+
+  <!-- Row 2: Fit Score & Consensus -->
+  <rect x="300" y="285" width="1070" height="55" fill="#121826" stroke="#1E293B" stroke-width="1"/>
+  <text x="320" y="317" fill="#E2E8F0" font-family="sans-serif" font-size="13" font-weight="700">Fit Rating Consensus</text>
+  <text x="560" y="317" fill="#10B981" font-family="sans-serif" font-size="13" font-weight="800">✓ 88% True to Size</text>
+  <text x="840" y="317" fill="#F59E0B" font-family="sans-serif" font-size="13" font-weight="800">⚠️ 62% Slim Variance</text>
+  <text x="1120" y="317" fill="#10B981" font-family="sans-serif" font-size="13" font-weight="800">✓ 91% True to Size</text>
+
+  <!-- Row 3: Price & Action -->
+  <rect x="300" y="340" width="1070" height="70" fill="#0A0D14" stroke="#1E293B" stroke-width="1"/>
+  <text x="320" y="380" fill="#E2E8F0" font-family="sans-serif" font-size="13" font-weight="700">Price &amp; Action</text>
+
+  <text x="560" y="368" fill="#FF3F6C" font-family="sans-serif" font-size="16" font-weight="900">₹1,999</text>
+  <rect x="560" y="378" width="130" height="26" rx="6" fill="#FF3F6C"/>
+  <text x="580" y="395" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="800">Choose This One</text>
+
+  <text x="840" y="368" fill="#FF3F6C" font-family="sans-serif" font-size="16" font-weight="900">₹1,499</text>
+  <rect x="840" y="378" width="130" height="26" rx="6" fill="#334155"/>
+  <text x="860" y="395" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="800">Choose This One</text>
+
+  <text x="1120" y="368" fill="#FF3F6C" font-family="sans-serif" font-size="16" font-weight="900">₹2,299</text>
+  <rect x="1120" y="378" width="130" height="26" rx="6" fill="#334155"/>
+  <text x="1140" y="395" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="800">Choose This One</text>
+
+  <!-- Bottom Workspace Widgets: AI Outfit Matcher Preview & Social WhatsApp Link -->
+  <rect x="300" y="440" width="520" height="390" rx="12" fill="#1E293B"/>
+  <text x="320" y="475" fill="#4F46E5" font-family="sans-serif" font-size="16" font-weight="800">✨ AI Outfit Matcher &amp; Visualizer (+₹450 AOV Lift)</text>
+  <text x="320" y="495" fill="#94A3B8" font-family="sans-serif" font-size="12">Coordinates selected Wishlist item with complementary catalog pieces</text>
+  <rect x="320" y="515" width="480" height="220" rx="8" fill="#121826"/>
+  <text x="340" y="550" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="800">Curated Outfit: Weekend Streetwear Look</text>
+  <rect x="320" y="750" width="480" height="44" rx="8" fill="url(#pinkGrad)"/>
+  <text x="460" y="777" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="800">🛍️ MOVE ENTIRE LOOK TO BAG</text>
+
+  <rect x="850" y="440" width="520" height="390" rx="12" fill="#054740"/>
+  <text x="870" y="475" fill="#25D366" font-family="sans-serif" font-size="16" font-weight="800">💬 1-Tap WhatsApp Social Voting Link</text>
+  <text x="870" y="495" fill="#E2E8F0" font-family="sans-serif" font-size="12">Generates shareable peer voting micro-card with 2s AI fallback</text>
+  <rect x="870" y="515" width="480" height="220" rx="8" fill="#111B21"/>
+  <text x="890" y="550" fill="#E9EDEF" font-family="sans-serif" font-size="13" font-weight="700">Live Vote Tally: Option A (75%) vs Option B (25%)</text>
+  <rect x="870" y="750" width="480" height="44" rx="8" fill="#25D366"/>
+  <text x="1000" y="777" fill="#FFFFFF" font-family="sans-serif" font-size="13" font-weight="800">🚀 Share Micro-Poll to WhatsApp</text>
+</svg>
