@@ -98,10 +98,10 @@ export default function SocialShareModal({ products, isOpen, onClose }) {
           <div className="wa-comments-stream">
             <span className="stream-label">Live Friend Feed:</span>
             <div className="comment-bubble">
-              <strong>Pooja K.:</strong> "Definitely Option A! The twill fabric is way more structured."
+              <strong>Friend 1:</strong> "Definitely Option A! The twill fabric is way more structured."
             </div>
             <div className="comment-bubble">
-              <strong>Rahul M.:</strong> "Option A matches your white sneakers."
+              <strong>Friend 2:</strong> "Option A matches your white sneakers."
             </div>
           </div>
         </div>

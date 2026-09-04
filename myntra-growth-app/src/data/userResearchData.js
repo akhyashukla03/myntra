@@ -286,7 +286,7 @@ export const USER_INTERVIEWS = [
   },
   {
     id: "U3",
-    name: "Pooja Kulkarni",
+    name: "Anonymous Shopper U3 (Millennial Cohort)",
     age: 27,
     city: "Mumbai",
     occupation: "Brand Marketing Manager",
@@ -299,7 +299,7 @@ export const USER_INTERVIEWS = [
   },
   {
     id: "U4",
-    name: "Vikram Roy",
+    name: "Anonymous Shopper U4 (Gen-Z Cohort)",
     age: 25,
     city: "Pune",
     occupation: "UI/UX Designer",
@@ -312,7 +312,7 @@ export const USER_INTERVIEWS = [
   },
   {
     id: "U5",
-    name: "Sneha Das",
+    name: "Anonymous Shopper U5 (Gen-Z Cohort)",
     age: 22,
     city: "Hyderabad",
     occupation: "Post-Graduate Student",
@@ -325,7 +325,7 @@ export const USER_INTERVIEWS = [
   },
   {
     id: "U6",
-    name: "Tanvi Bhatia",
+    name: "Anonymous Shopper U6 (Millennial Cohort)",
     age: 26,
     city: "Gurgaon",
     occupation: "Corporate Lawyer",

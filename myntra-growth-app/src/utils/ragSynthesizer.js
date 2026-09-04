@@ -85,7 +85,7 @@ export function synthesizePMQueryOffline(userQuery = '') {
       {
         quote: "My wishlist has 60+ items dating back 6 months. It's a dumping ground. I can't evaluate what I liked among dozens of saved items without a comparison tool.",
         source: "Google Forms Survey Response #3",
-        author: "Pooja Kulkarni",
+        author: "Anonymous Shopper U3 (Survey Cohort)",
         sentiment: "Negative"
       }
     ];
