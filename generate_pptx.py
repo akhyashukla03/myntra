@@ -46,6 +46,15 @@ def add_card_shape(slide, left, top, width, height, bg_rgb, border_rgb=None):
         shape.line.fill.background()
     return shape
 
+def set_bullet_indent(p, left_margin_pt=18, hanging_indent_pt=14):
+    """
+    Sets true OpenXML paragraph left margin (marL) and negative first-line indent (indent)
+    so that multi-line wrapped bullet text aligns cleanly under the text block.
+    """
+    pPr = p._p.get_or_add_pPr()
+    pPr.set('marL', str(int(Pt(left_margin_pt))))
+    pPr.set('indent', str(int(-Pt(hanging_indent_pt))))
+
 # Import slide data from python logic
 from data_pptx import SLIDES_DATA
 
@@ -131,6 +140,11 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(0.82), card_top + Inches(0.1), Inches(4.26), card_height - Inches(1.1))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.08)
+        tf.margin_right = Inches(0.08)
+        tf.margin_top = Inches(0.06)
+        tf.margin_bottom = Inches(0.06)
+        
         p = tf.paragraphs[0]
         p.text = data["leftCard"]["title"]
         p.font.size = Pt(11)
@@ -143,7 +157,7 @@ for data in SLIDES_DATA:
             p.line_spacing = 1.15
             p.space_before = Pt(2)
             p.space_after = Pt(4)
-            p.margin_left = Pt(14)
+            set_bullet_indent(p, left_margin_pt=16, hanging_indent_pt=12)
             r0 = p.add_run(); r0.text = "• "; r0.font.color.rgb = COLOR_MYNTRA_PINK; r0.font.bold = True
             r1 = p.add_run(); r1.text = bold_text + " "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
             r2 = p.add_run(); r2.text = reg_text; r2.font.color.rgb = COLOR_TEXT_PRIMARY
@@ -153,6 +167,11 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(5.47), card_top + Inches(0.1), Inches(4.26), card_height - Inches(1.1))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.08)
+        tf.margin_right = Inches(0.08)
+        tf.margin_top = Inches(0.06)
+        tf.margin_bottom = Inches(0.06)
+        
         p = tf.paragraphs[0]
         p.text = data["midCard"]["title"]
         p.font.size = Pt(11)
@@ -165,7 +184,7 @@ for data in SLIDES_DATA:
             p.line_spacing = 1.15
             p.space_before = Pt(2)
             p.space_after = Pt(4)
-            p.margin_left = Pt(14)
+            set_bullet_indent(p, left_margin_pt=16, hanging_indent_pt=12)
             r0 = p.add_run(); r0.text = "• "; r0.font.color.rgb = COLOR_MYNTRA_PINK; r0.font.bold = True
             r1 = p.add_run(); r1.text = bold_text + " "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
             r2 = p.add_run(); r2.text = reg_text; r2.font.color.rgb = COLOR_TEXT_PRIMARY
@@ -210,6 +229,7 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(0.82), card_top + Inches(0.08), Inches(6.26), Inches(1.14))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
         p = tf.paragraphs[0]
         p.text = "💡 THE CORE HYPOTHESIS"
         p.font.size = Pt(10.5)
@@ -228,6 +248,7 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(0.82), flow_top + Inches(0.08), Inches(6.26), card_height - Inches(1.58))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
         p = tf.paragraphs[0]
         p.text = "🔄 CURRENT DISCOVERY FLOW (THE GRAVEYARD LOOP)"
         p.font.size = Pt(10.5)
@@ -240,7 +261,7 @@ for data in SLIDES_DATA:
             p.line_spacing = 1.15
             p.space_before = Pt(2)
             p.space_after = Pt(4)
-            p.margin_left = Pt(14)
+            set_bullet_indent(p, left_margin_pt=16, hanging_indent_pt=12)
             r0 = p.add_run(); r0.text = "► "; r0.font.color.rgb = COLOR_MYNTRA_PINK; r0.font.bold = True
             r1 = p.add_run(); r1.text = step_title + ": "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
             r2 = p.add_run(); r2.text = step_desc; r2.font.color.rgb = COLOR_TEXT_PRIMARY
@@ -254,6 +275,7 @@ for data in SLIDES_DATA:
             f_box = slide.shapes.add_textbox(Inches(7.55), f_top + Inches(0.08), f_card_w - Inches(0.24), f_card_h - Inches(0.16))
             tf_f = f_box.text_frame
             tf_f.word_wrap = True
+            tf_f.margin_left = Inches(0.08); tf_f.margin_right = Inches(0.08)
             p_ft = tf_f.paragraphs[0]
             p_ft.text = "⚠️ " + f_title
             p_ft.font.size = Pt(10.5)
@@ -275,6 +297,7 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(0.82), card_top + Inches(0.1), Inches(6.56), card_height - Inches(0.2))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
         p = tf.paragraphs[0]
         p.text = "💬 AI INSIGHTS VIA NATURAL LANGUAGE QUERYING"
         p.font.size = Pt(11)
@@ -292,7 +315,7 @@ for data in SLIDES_DATA:
             p2.line_spacing = 1.15
             p2.space_before = Pt(0)
             p2.space_after = Pt(5)
-            p2.margin_left = Pt(12)
+            set_bullet_indent(p2, left_margin_pt=14, hanging_indent_pt=0)
             r2 = p2.add_run(); r2.text = ans_txt; r2.font.color.rgb = COLOR_TEXT_PRIMARY
 
         # Right Top Card: Corpus Funnel & Workflow
@@ -300,6 +323,7 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(7.82), card_top + Inches(0.08), Inches(4.69), Inches(1.74))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
         p = tf.paragraphs[0]
         p.text = "🔬 CORPUS FUNNEL & NLP PIPELINE"
         p.font.size = Pt(10.5)
@@ -312,7 +336,7 @@ for data in SLIDES_DATA:
             p.line_spacing = 1.15
             p.space_before = Pt(2)
             p.space_after = Pt(3)
-            p.margin_left = Pt(12)
+            set_bullet_indent(p, left_margin_pt=14, hanging_indent_pt=10)
             r1 = p.add_run(); r1.text = "• " + c_step + ": "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
             r2 = p.add_run(); r2.text = c_detail; r2.font.color.rgb = COLOR_TEXT_PRIMARY
 
@@ -322,6 +346,7 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(7.82), t_top + Inches(0.08), Inches(4.69), card_height - Inches(2.21))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
         p = tf.paragraphs[0]
         p.text = "✅ FINAL RESEARCH TAKEAWAYS"
         p.font.size = Pt(10.5)
@@ -334,7 +359,7 @@ for data in SLIDES_DATA:
             p.line_spacing = 1.15
             p.space_before = Pt(3)
             p.space_after = Pt(4)
-            p.margin_left = Pt(14)
+            set_bullet_indent(p, left_margin_pt=16, hanging_indent_pt=12)
             r0 = p.add_run(); r0.text = "✓ "; r0.font.color.rgb = COLOR_MYNTRA_GREEN; r0.font.bold = True
             r1 = p.add_run(); r1.text = t_item; r1.font.color.rgb = COLOR_TEXT_PRIMARY
 
@@ -356,6 +381,7 @@ for data in SLIDES_DATA:
             box = slide.shapes.add_textbox(q_left + Inches(0.12), q_top + Inches(0.08), quad_w - Inches(0.24), quad_h - Inches(0.16))
             tf = box.text_frame
             tf.word_wrap = True
+            tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
             p = tf.paragraphs[0]
             p.text = f"{q_data['icon']} {q_data['title']}"
             p.font.size = Pt(10.5)
@@ -368,7 +394,7 @@ for data in SLIDES_DATA:
                 p.line_spacing = 1.15
                 p.space_before = Pt(1)
                 p.space_after = Pt(3)
-                p.margin_left = Pt(12)
+                set_bullet_indent(p, left_margin_pt=14, hanging_indent_pt=10)
                 r1 = p.add_run(); r1.text = "• " + b_lbl + " "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
                 r2 = p.add_run(); r2.text = b_txt; r2.font.color.rgb = COLOR_TEXT_PRIMARY
 
@@ -385,6 +411,7 @@ for data in SLIDES_DATA:
             box = slide.shapes.add_textbox(s_left + Inches(0.08), card_top + Inches(0.06), syn_w - Inches(0.16), Inches(0.98))
             tf = box.text_frame
             tf.word_wrap = True
+            tf.margin_left = Inches(0.06); tf.margin_right = Inches(0.06)
             p = tf.paragraphs[0]
             p.text = "📌 " + s_title
             p.font.size = Pt(10)
@@ -403,6 +430,7 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(0.82), table_top + Inches(0.06), Inches(11.69), card_height - Inches(1.34))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
         p = tf.paragraphs[0]
         p.text = "📋 QUALITATIVE USER INTERVIEWS (N=6 ANONYMOUS PARTICIPANTS)"
         p.font.size = Pt(10)
@@ -415,7 +443,7 @@ for data in SLIDES_DATA:
             p.line_spacing = 1.15
             p.space_before = Pt(1)
             p.space_after = Pt(3)
-            p.margin_left = Pt(12)
+            set_bullet_indent(p, left_margin_pt=14, hanging_indent_pt=10)
             r0 = p.add_run(); r0.text = "• "; r0.font.bold = True; r0.font.color.rgb = COLOR_MYNTRA_PINK
             r1 = p.add_run(); r1.text = u_name + " (" + u_demo + "): "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
             r2 = p.add_run(); r2.text = "Habit: " + u_habit + " | Barrier: " + u_barrier + " | Trigger: " + u_trigger; r2.font.color.rgb = COLOR_TEXT_PRIMARY
@@ -435,6 +463,7 @@ for data in SLIDES_DATA:
             box = slide.shapes.add_textbox(q_left + Inches(0.08), card_top + Inches(0.06), row1_w - Inches(0.16), row1_h - Inches(0.12))
             tf = box.text_frame
             tf.word_wrap = True
+            tf.margin_left = Inches(0.06); tf.margin_right = Inches(0.06)
             p = tf.paragraphs[0]
             p.text = f"❓ {q_data['q']}"
             p.font.size = Pt(10)
@@ -459,6 +488,7 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(0.78), row2_top + Inches(0.06), row2_w - Inches(0.16), row2_h - Inches(0.12))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.06); tf.margin_right = Inches(0.06)
         p = tf.paragraphs[0]
         p.text = f"💰 {q4_data['q']}"
         p.font.size = Pt(10)
@@ -470,11 +500,13 @@ for data in SLIDES_DATA:
         p_c.font.size = Pt(8.5)
         p_c.line_spacing = 1.12
         p_c.font.color.rgb = COLOR_TEXT_PRIMARY
+        set_bullet_indent(p_c, left_margin_pt=12, hanging_indent_pt=8)
         p_b = tf.add_paragraph()
         p_b.text = "• " + q4_data["businessValue"]
         p_b.font.size = Pt(8.5)
         p_b.line_spacing = 1.12
         p_b.font.color.rgb = COLOR_TEXT_PRIMARY
+        set_bullet_indent(p_b, left_margin_pt=12, hanging_indent_pt=8)
 
         # Q5 Card
         q5_data = data["pmQuestions"][4]
@@ -482,6 +514,7 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(6.83), row2_top + Inches(0.06), row2_w - Inches(0.16), row2_h - Inches(0.12))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.06); tf.margin_right = Inches(0.06)
         p = tf.paragraphs[0]
         p.text = f"⏰ {q5_data['q']}"
         p.font.size = Pt(10)
@@ -503,6 +536,7 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(0.82), card_top + Inches(0.06), Inches(11.69), Inches(1.23))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
         p = tf.paragraphs[0]
         p.text = "⭐ CORE PRINCIPLES OF THE FRAMEWORK"
         p.font.size = Pt(10.5)
@@ -515,7 +549,7 @@ for data in SLIDES_DATA:
             p.line_spacing = 1.15
             p.space_before = Pt(1)
             p.space_after = Pt(2)
-            p.margin_left = Pt(12)
+            set_bullet_indent(p, left_margin_pt=14, hanging_indent_pt=10)
             r1 = p.add_run(); r1.text = "• " + pr_title + ": "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
             r2 = p.add_run(); r2.text = pr_desc; r2.font.color.rgb = COLOR_TEXT_PRIMARY
 
@@ -525,6 +559,7 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(0.82), r_top + Inches(0.08), Inches(11.69), card_height - Inches(1.64))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
         p = tf.paragraphs[0]
         p.text = "📊 SOLUTION PRIORITIZATION (RICE FRAMEWORK MATRIX)"
         p.font.size = Pt(10.5)
@@ -537,7 +572,7 @@ for data in SLIDES_DATA:
             p.line_spacing = 1.15
             p.space_before = Pt(2)
             p.space_after = Pt(4)
-            p.margin_left = Pt(12)
+            set_bullet_indent(p, left_margin_pt=14, hanging_indent_pt=10)
             r0 = p.add_run(); r0.text = "► "; r0.font.bold = True; r0.font.color.rgb = COLOR_MYNTRA_PINK
             r1 = p.add_run(); r1.text = sol_name + " — "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
             r2 = p.add_run(); r2.text = f"R: {r_val}/10 | I: {i_val}/5 | C: {c_val} | E: {e_val}/5 | Score: {score_val} | Verdict: "; r2.font.color.rgb = COLOR_TEXT_MUTED
@@ -552,6 +587,7 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(0.82), card_top + Inches(0.06), Inches(11.69), Inches(1.08))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
         p = tf.paragraphs[0]
         p.text = "⚙️ DECISION STUDIO ARCHITECTURE PIPELINE"
         p.font.size = Pt(10.5)
@@ -564,7 +600,7 @@ for data in SLIDES_DATA:
             p.line_spacing = 1.12
             p.space_before = Pt(1)
             p.space_after = Pt(1)
-            p.margin_left = Pt(12)
+            set_bullet_indent(p, left_margin_pt=14, hanging_indent_pt=10)
             r1 = p.add_run(); r1.text = "• " + p_step + ": "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
             r2 = p.add_run(); r2.text = p_desc; r2.font.color.rgb = COLOR_TEXT_PRIMARY
 
@@ -596,6 +632,7 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(0.82), card_top + Inches(0.08), Inches(11.69), Inches(2.04))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
         p = tf.paragraphs[0]
         p.text = "⭐ SUCCESS METRICS HIERARCHY & OPERATIONAL GUARDRAILS"
         p.font.size = Pt(10.5)
@@ -608,7 +645,7 @@ for data in SLIDES_DATA:
             p.line_spacing = 1.15
             p.space_before = Pt(2)
             p.space_after = Pt(3)
-            p.margin_left = Pt(12)
+            set_bullet_indent(p, left_margin_pt=14, hanging_indent_pt=10)
             r0 = p.add_run(); r0.text = "► "; r0.font.bold = True; r0.font.color.rgb = COLOR_MYNTRA_PINK
             r1 = p.add_run(); r1.text = m_type + ": "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
             r2 = p.add_run(); r2.text = m_kpi + " [" + m_target + "] — " + m_goal; r2.font.color.rgb = COLOR_TEXT_PRIMARY
@@ -619,6 +656,7 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(0.82), exp_top + Inches(0.08), Inches(11.69), card_height - Inches(2.48))
         tf = box.text_frame
         tf.word_wrap = True
+        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
         p = tf.paragraphs[0]
         p.text = "🔬 200,000-USER RANDOMIZED CONTROLLED TRIAL (RCT) & SAFEGUARDS"
         p.font.size = Pt(10)
@@ -631,7 +669,7 @@ for data in SLIDES_DATA:
             p.line_spacing = 1.15
             p.space_before = Pt(1)
             p.space_after = Pt(2)
-            p.margin_left = Pt(12)
+            set_bullet_indent(p, left_margin_pt=14, hanging_indent_pt=10)
             r1 = p.add_run(); r1.text = "• " + exp_lbl + " "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
             r2 = p.add_run(); r2.text = exp_txt; r2.font.color.rgb = COLOR_TEXT_PRIMARY
 
@@ -648,6 +686,7 @@ for data in SLIDES_DATA:
             box = slide.shapes.add_textbox(p_left + Inches(0.08), card_top + Inches(0.06), pit_w - Inches(0.16), Inches(1.48))
             tf = box.text_frame
             tf.word_wrap = True
+            tf.margin_left = Inches(0.06); tf.margin_right = Inches(0.06)
             p = tf.paragraphs[0]
             p.text = "⚠️ " + pit["title"]
             p.font.size = Pt(10)
@@ -656,10 +695,12 @@ for data in SLIDES_DATA:
             p.space_after = Pt(2)
             p_pit = tf.add_paragraph()
             p_pit.font.size = Pt(8.5); p_pit.line_spacing = 1.12; p_pit.space_after = Pt(2)
+            set_bullet_indent(p_pit, left_margin_pt=10, hanging_indent_pt=0)
             r1 = p_pit.add_run(); r1.text = "Pitfall: "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
             r2 = p_pit.add_run(); r2.text = pit["pitfall"]; r2.font.color.rgb = COLOR_TEXT_PRIMARY
             p_mit = tf.add_paragraph()
             p_mit.font.size = Pt(8.5); p_mit.line_spacing = 1.12; p_mit.space_after = Pt(0)
+            set_bullet_indent(p_mit, left_margin_pt=10, hanging_indent_pt=0)
             r3 = p_mit.add_run(); r3.text = "Mitigation: "; r3.font.bold = True; r3.font.color.rgb = COLOR_MYNTRA_GREEN
             r4 = p_mit.add_run(); r4.text = pit["mitigation"]; r4.font.color.rgb = COLOR_TEXT_PRIMARY
 
@@ -674,6 +715,7 @@ for data in SLIDES_DATA:
             box = slide.shapes.add_textbox(r_left + Inches(0.08), r_top + Inches(0.06), r_card_w - Inches(0.16), r_card_h - Inches(0.12))
             tf = box.text_frame
             tf.word_wrap = True
+            tf.margin_left = Inches(0.06); tf.margin_right = Inches(0.06)
             p = tf.paragraphs[0]
             p.text = "🚀 " + phase["phase"]
             p.font.size = Pt(10)
@@ -683,16 +725,19 @@ for data in SLIDES_DATA:
             
             p_tgt = tf.add_paragraph()
             p_tgt.font.size = Pt(8.5); p_tgt.line_spacing = 1.12; p_tgt.space_after = Pt(2)
+            set_bullet_indent(p_tgt, left_margin_pt=10, hanging_indent_pt=0)
             r1 = p_tgt.add_run(); r1.text = "Target: "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
             r2 = p_tgt.add_run(); r2.text = phase["target"]; r2.font.color.rgb = COLOR_TEXT_PRIMARY
             
             p_scp = tf.add_paragraph()
             p_scp.font.size = Pt(8.5); p_scp.line_spacing = 1.12; p_scp.space_after = Pt(2)
+            set_bullet_indent(p_scp, left_margin_pt=10, hanging_indent_pt=0)
             r3 = p_scp.add_run(); r3.text = "Scope: "; r3.font.bold = True; r3.font.color.rgb = COLOR_TEXT_PRIMARY
             r4 = p_scp.add_run(); r4.text = phase["scope"]; r4.font.color.rgb = COLOR_TEXT_PRIMARY
             
             p_gate = tf.add_paragraph()
             p_gate.font.size = Pt(8.5); p_gate.line_spacing = 1.12; p_gate.space_after = Pt(0)
+            set_bullet_indent(p_gate, left_margin_pt=10, hanging_indent_pt=0)
             r5 = p_gate.add_run(); r5.text = "Gate: "; r5.font.bold = True; r5.font.color.rgb = COLOR_MYNTRA_GREEN
             r6 = p_gate.add_run(); r6.text = phase["gate"]; r6.font.color.rgb = COLOR_TEXT_PRIMARY
 
