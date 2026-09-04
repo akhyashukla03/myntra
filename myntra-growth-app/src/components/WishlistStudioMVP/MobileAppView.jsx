@@ -7,9 +7,11 @@ export default function MobileAppView({
   onMoveToBag,
   onAddLookToBag,
   onOpenSocialModal,
-  onOpenCart
+  onOpenCart,
+  onRemoveFromCart,
+  onProceedToCheckout
 }) {
-  const [mobileTab, setMobileTab] = useState('MATRIX'); // 'HOME', 'MATRIX', 'OUTFITS', 'POLL'
+  const [mobileTab, setMobileTab] = useState('MATRIX'); // 'HOME', 'MATRIX', 'OUTFITS', 'POLL', 'BAG'
   const [selectedFolder, setSelectedFolder] = useState('ALL');
   const [buyerPhotoActive, setBuyerPhotoActive] = useState(false);
 
@@ -67,7 +69,7 @@ export default function MobileAppView({
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.4rem', borderBottom: '1px solid rgba(255,255,255,0.08)', marginBottom: '0.65rem', width: '100%' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#F8FAFC' }}>9:41 📶 5G</span>
           <span style={{ fontSize: '1.15rem', fontWeight: '900', color: '#FF3F6C', letterSpacing: '-0.5px' }}>myntra</span>
-          <button onClick={onOpenCart} style={{ background: '#2D0A4E', color: '#FFF', border: '1px solid rgba(255,63,108,0.4)', padding: '0.2rem 0.5rem', borderRadius: '12px', fontSize: '0.7rem', fontWeight: '800', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', whiteSpace: 'nowrap' }}>
+          <button onClick={() => setMobileTab('BAG')} style={{ background: mobileTab === 'BAG' ? '#FF3F6C' : '#2D0A4E', color: '#FFF', border: '1px solid rgba(255,63,108,0.4)', padding: '0.2rem 0.5rem', borderRadius: '12px', fontSize: '0.7rem', fontWeight: '800', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', whiteSpace: 'nowrap' }}>
             <ShoppingBag size={12} />
             <span>Bag ({cartItems.length})</span>
           </button>
@@ -338,28 +340,97 @@ export default function MobileAppView({
           </div>
         )}
 
-        {/* D. HOME & WISHLIST GRID MOBILE VIEW (FULL CATALOG) */}
-        {mobileTab === 'HOME' && (
+        {/* E. SHOPPING BAG MOBILE VIEW (IN-APP SCREEN) */}
+        {mobileTab === 'BAG' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-              <h4 style={{ fontSize: '0.78rem', fontWeight: '800', color: '#FFF', margin: 0 }}>Saved Wishlist Items ({filteredProducts.length})</h4>
+              <h4 style={{ fontSize: '0.82rem', fontWeight: '800', color: '#FF3F6C', margin: 0, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                <ShoppingBag size={15} />
+                <span>My Shopping Bag ({cartItems.length})</span>
+              </h4>
+              {cartItems.length > 0 && (
+                <span style={{ fontSize: '0.62rem', color: '#10B981', fontWeight: '800', background: 'rgba(16,185,129,0.12)', padding: '0.15rem 0.4rem', borderRadius: '4px' }}>
+                  ⚡ Free Express Delivery
+                </span>
+              )}
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.5rem', width: '100%' }}>
-              {filteredProducts.map((p) => (
-                <div key={p.id} style={{ background: '#121826', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '0.45rem', display: 'flex', flexDirection: 'column', gap: '0.3rem', minWidth: 0, overflow: 'hidden', boxSizing: 'border-box' }}>
-                  <img src={p.image} alt={p.name} style={{ width: '100%', height: '105px', objectFit: 'cover', borderRadius: '6px' }} />
-                  <span style={{ fontSize: '0.7rem', fontWeight: '800', color: '#FFF', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' }}>{p.name}</span>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '900', color: '#FF3F6C' }}>₹{p.price.toLocaleString()}</span>
-                  <button
-                    onClick={() => onMoveToBag(p)}
-                    style={{ background: '#FF3F6C', color: '#FFF', border: 'none', padding: '0.3rem', borderRadius: '6px', fontSize: '0.65rem', fontWeight: '800', cursor: 'pointer', marginTop: '0.15rem', width: '100%' }}
-                  >
-                    Move to Bag
-                  </button>
+            {cartItems.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '2.5rem 1rem', background: '#121826', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
+                <ShoppingBag size={36} style={{ color: '#64748B', marginBottom: '0.5rem', opacity: 0.5 }} />
+                <div style={{ fontSize: '0.85rem', fontWeight: '800', color: '#F8FAFC', marginBottom: '0.25rem' }}>Your Bag is empty</div>
+                <div style={{ fontSize: '0.7rem', color: '#94A3B8' }}>Add items from Spec Matrix or AI Looks to see complete order breakdown</div>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', width: '100%' }}>
+                {/* Cart Items List */}
+                {cartItems.map((item, idx) => (
+                  <div key={idx} style={{ background: '#121826', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '0.5rem', display: 'flex', gap: '0.6rem', alignItems: 'center' }}>
+                    <img src={item.image || (item.items && item.items[0]?.image) || 'https://images.unsplash.com/photo-1542272604-780c96856592?w=200'} alt={item.name || item.lookName} style={{ width: '48px', height: '60px', objectFit: 'cover', borderRadius: '6px', flexShrink: 0 }} />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      {item.isBundle && (
+                        <span style={{ fontSize: '0.58rem', fontWeight: '800', color: '#C084FC', background: 'rgba(139, 92, 246, 0.2)', padding: '0.1rem 0.3rem', borderRadius: '3px', display: 'inline-block', marginBottom: '0.15rem' }}>
+                          ✨ AI 4-PIECE LOOK
+                        </span>
+                      )}
+                      <div style={{ fontSize: '0.72rem', fontWeight: '800', color: '#F8FAFC', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {item.name || item.lookName}
+                      </div>
+                      <div style={{ fontSize: '0.62rem', color: '#94A3B8' }}>
+                        Qty: 1 • Size: M
+                      </div>
+                      <div style={{ fontSize: '0.82rem', fontWeight: '900', color: '#FF3F6C', marginTop: '0.15rem' }}>
+                        ₹{(item.price || item.lookTotal || 0).toLocaleString()}
+                      </div>
+                    </div>
+                    {onRemoveFromCart && (
+                      <button
+                        onClick={() => onRemoveFromCart(idx)}
+                        style={{ background: 'rgba(239,68,68,0.15)', border: 'none', color: '#F87171', borderRadius: '6px', padding: '0.35rem', cursor: 'pointer', flexShrink: 0, fontSize: '0.7rem' }}
+                        title="Remove item"
+                      >
+                        🗑️
+                      </button>
+                    )}
+                  </div>
+                ))}
+
+                {/* Price Summary Card */}
+                <div style={{ background: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '0.6rem', fontSize: '0.68rem', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94A3B8' }}>
+                    <span>Total MRP:</span>
+                    <span style={{ textDecoration: 'line-through' }}>₹{(cartItems.reduce((acc, item) => acc + (item.originalPrice || (item.price ? Math.round(item.price * 1.4) : Math.round(item.lookTotal * 1.3))), 0)).toLocaleString()}</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', color: '#10B981' }}>
+                    <span>Direct Brand Discount:</span>
+                    <span>-₹{(cartItems.reduce((acc, item) => acc + ((item.originalPrice || (item.price ? Math.round(item.price * 1.4) : Math.round(item.lookTotal * 1.3))) - (item.price || item.lookTotal || 0)), 0)).toLocaleString()}</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94A3B8' }}>
+                    <span>Convenience & Delivery:</span>
+                    <span style={{ color: '#10B981', fontWeight: '700' }}>FREE</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', fontWeight: '900', color: '#FFF', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '0.35rem', marginTop: '0.15rem' }}>
+                    <span>Total Payable:</span>
+                    <span style={{ color: '#FF3F6C' }}>₹{(cartItems.reduce((acc, item) => acc + (item.price || item.lookTotal || 0), 0)).toLocaleString()}</span>
+                  </div>
                 </div>
-              ))}
-            </div>
+
+                {/* Zero-Risk Guarantee */}
+                <div style={{ background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.25)', borderRadius: '8px', padding: '0.45rem', fontSize: '0.62rem', color: '#E2E8F0', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <span style={{ fontSize: '0.85rem' }}>🛡️</span>
+                  <span><strong>Zero-Risk Guarantee:</strong> 14-day exchange backed by fit consensus.</span>
+                </div>
+
+                {/* 1-Tap Checkout Button */}
+                <button
+                  onClick={() => onProceedToCheckout && onProceedToCheckout()}
+                  style={{ background: '#FF3F6C', color: '#FFF', border: 'none', padding: '0.55rem', borderRadius: '8px', fontSize: '0.75rem', fontWeight: '800', cursor: 'pointer', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem', boxShadow: '0 4px 12px rgba(255,63,108,0.35)' }}
+                >
+                  <span>Proceed to 1-Tap Checkout</span>
+                  <span>➔</span>
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -378,7 +449,7 @@ export default function MobileAppView({
         <div onClick={() => setMobileTab('POLL')} style={{ cursor: 'pointer', color: mobileTab === 'POLL' ? '#FF3F6C' : '#94A3B8', fontWeight: mobileTab === 'POLL' ? '800' : 'normal', minWidth: 0, overflow: 'hidden', whiteSpace: 'nowrap' }}>
           💬 Poll
         </div>
-        <div onClick={onOpenCart} style={{ cursor: 'pointer', color: '#94A3B8', minWidth: 0, overflow: 'hidden', whiteSpace: 'nowrap' }}>
+        <div onClick={() => setMobileTab('BAG')} style={{ cursor: 'pointer', color: mobileTab === 'BAG' ? '#FF3F6C' : '#94A3B8', fontWeight: mobileTab === 'BAG' ? '800' : 'normal', minWidth: 0, overflow: 'hidden', whiteSpace: 'nowrap' }}>
           🛍️ Bag ({cartItems.length})
         </div>
       </div>

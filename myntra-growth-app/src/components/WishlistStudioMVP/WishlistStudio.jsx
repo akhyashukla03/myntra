@@ -120,6 +120,8 @@ export default function WishlistStudio() {
           onAddLookToBag={handleAddLookToBag}
           onOpenSocialModal={() => setIsSocialModalOpen(true)}
           onOpenCart={() => setIsCartOpen(true)}
+          onRemoveFromCart={handleRemoveFromCart}
+          onProceedToCheckout={() => setIsCheckoutOpen(true)}
         />
       ) : (
         /* RENDER DESKTOP WEB WORKSPACE VIEW */
