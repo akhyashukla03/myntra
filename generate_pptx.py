@@ -140,10 +140,8 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(0.82), card_top + Inches(0.1), Inches(4.26), card_height - Inches(1.1))
         tf = box.text_frame
         tf.word_wrap = True
-        tf.margin_left = Inches(0.08)
-        tf.margin_right = Inches(0.08)
-        tf.margin_top = Inches(0.06)
-        tf.margin_bottom = Inches(0.06)
+        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
+        tf.margin_top = Inches(0.06); tf.margin_bottom = Inches(0.06)
         
         p = tf.paragraphs[0]
         p.text = data["leftCard"]["title"]
@@ -167,10 +165,8 @@ for data in SLIDES_DATA:
         box = slide.shapes.add_textbox(Inches(5.47), card_top + Inches(0.1), Inches(4.26), card_height - Inches(1.1))
         tf = box.text_frame
         tf.word_wrap = True
-        tf.margin_left = Inches(0.08)
-        tf.margin_right = Inches(0.08)
-        tf.margin_top = Inches(0.06)
-        tf.margin_bottom = Inches(0.06)
+        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
+        tf.margin_top = Inches(0.06); tf.margin_bottom = Inches(0.06)
         
         p = tf.paragraphs[0]
         p.text = data["midCard"]["title"]
@@ -221,7 +217,7 @@ for data in SLIDES_DATA:
             p_lbl.font.color.rgb = COLOR_TEXT_MUTED
 
     # ==========================================
-    # SLIDE 2: CORE HYPOTHESIS & DISCOVERY WORKFLOW
+    # SLIDE 2: CORE HYPOTHESIS & VISUAL DISCOVERY FLOW
     # ==========================================
     elif s_num == 2:
         # Top Hypothesis Card
@@ -242,29 +238,29 @@ for data in SLIDES_DATA:
         p_body.line_spacing = 1.15
         p_body.font.color.rgb = COLOR_TEXT_PRIMARY
 
-        # Bottom Left: Current Discovery Flow (The Graveyard Loop)
+        # Bottom Left: Current Discovery Flow (4 Visual Step Process Flowchart)
         flow_top = card_top + Inches(1.42)
         add_card_shape(slide, Inches(0.7), flow_top, Inches(6.5), card_height - Inches(1.42), COLOR_WHITE, COLOR_BORDER)
-        box = slide.shapes.add_textbox(Inches(0.82), flow_top + Inches(0.08), Inches(6.26), card_height - Inches(1.58))
-        tf = box.text_frame
-        tf.word_wrap = True
-        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
-        p = tf.paragraphs[0]
-        p.text = "🔄 CURRENT DISCOVERY FLOW (THE GRAVEYARD LOOP)"
-        p.font.size = Pt(10.5)
-        p.font.bold = True
-        p.font.color.rgb = COLOR_PURPLE_PILL
-        p.space_after = Pt(6)
-        for step_title, step_desc in data["discoveryFunnel"]:
-            p = tf.add_paragraph()
-            p.font.size = Pt(9.5)
-            p.line_spacing = 1.15
-            p.space_before = Pt(2)
-            p.space_after = Pt(4)
-            set_bullet_indent(p, left_margin_pt=16, hanging_indent_pt=12)
-            r0 = p.add_run(); r0.text = "► "; r0.font.color.rgb = COLOR_MYNTRA_PINK; r0.font.bold = True
-            r1 = p.add_run(); r1.text = step_title + ": "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
-            r2 = p.add_run(); r2.text = step_desc; r2.font.color.rgb = COLOR_TEXT_PRIMARY
+        box_hdr = slide.shapes.add_textbox(Inches(0.82), flow_top + Inches(0.06), Inches(6.26), Inches(0.35))
+        tf_h = box_hdr.text_frame; tf_h.word_wrap = True
+        p_h = tf_h.paragraphs[0]
+        p_h.text = "🔄 CURRENT DISCOVERY FLOW (THE GRAVEYARD LOOP)"
+        p_h.font.size = Pt(10.5); p_h.font.bold = True; p_h.font.color.rgb = COLOR_PURPLE_PILL
+
+        step_w = Inches(1.48)
+        step_gap = Inches(0.12)
+        for s_idx, (step_title, step_desc) in enumerate(data["discoveryFunnel"]):
+            s_left = Inches(0.82) + s_idx * (step_w + step_gap)
+            add_card_shape(slide, s_left, flow_top + Inches(0.42), step_w, card_height - Inches(1.95), COLOR_SYNTHESIS_BG, COLOR_SYNTHESIS_BORDER)
+            s_box = slide.shapes.add_textbox(s_left + Inches(0.04), flow_top + Inches(0.46), step_w - Inches(0.08), card_height - Inches(2.05))
+            tf_s = s_box.text_frame; tf_s.word_wrap = True
+            tf_s.margin_left = Inches(0.02); tf_s.margin_right = Inches(0.02)
+            p_st = tf_s.paragraphs[0]
+            p_st.text = step_title
+            p_st.font.size = Pt(8.5); p_st.font.bold = True; p_st.font.color.rgb = COLOR_MYNTRA_PINK; p_st.space_after = Pt(2)
+            p_sd = tf_s.add_paragraph()
+            p_sd.text = step_desc
+            p_sd.font.size = Pt(7.5); p_sd.line_spacing = 1.1; p_sd.font.color.rgb = COLOR_TEXT_PRIMARY
 
         # Right: 3 Friction Cards
         f_card_w = Inches(5.2)
@@ -318,32 +314,33 @@ for data in SLIDES_DATA:
             set_bullet_indent(p2, left_margin_pt=14, hanging_indent_pt=0)
             r2 = p2.add_run(); r2.text = ans_txt; r2.font.color.rgb = COLOR_TEXT_PRIMARY
 
-        # Right Top Card: Corpus Funnel & Workflow
-        add_card_shape(slide, Inches(7.7), card_top, Inches(4.933), Inches(1.9), COLOR_SYNTHESIS_BG, COLOR_SYNTHESIS_BORDER)
-        box = slide.shapes.add_textbox(Inches(7.82), card_top + Inches(0.08), Inches(4.69), Inches(1.74))
-        tf = box.text_frame
-        tf.word_wrap = True
-        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
-        p = tf.paragraphs[0]
-        p.text = "🔬 CORPUS FUNNEL & NLP PIPELINE"
-        p.font.size = Pt(10.5)
-        p.font.bold = True
-        p.font.color.rgb = COLOR_SUBTITLE
-        p.space_after = Pt(4)
-        for c_step, c_detail in data["corpusFunnel"]:
-            p = tf.add_paragraph()
-            p.font.size = Pt(9.5)
-            p.line_spacing = 1.15
-            p.space_before = Pt(2)
-            p.space_after = Pt(3)
-            set_bullet_indent(p, left_margin_pt=14, hanging_indent_pt=10)
-            r1 = p.add_run(); r1.text = "• " + c_step + ": "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
-            r2 = p.add_run(); r2.text = c_detail; r2.font.color.rgb = COLOR_TEXT_PRIMARY
+        # Right Top Card: Corpus Funnel & 3 Flowchart Process Boxes
+        add_card_shape(slide, Inches(7.7), card_top, Inches(4.933), Inches(2.0), COLOR_SYNTHESIS_BG, COLOR_SYNTHESIS_BORDER)
+        box_hdr = slide.shapes.add_textbox(Inches(7.82), card_top + Inches(0.06), Inches(4.69), Inches(0.35))
+        tf_ch = box_hdr.text_frame; tf_ch.word_wrap = True
+        p_ch = tf_ch.paragraphs[0]
+        p_ch.text = "🔬 CORPUS FUNNEL & NLP PIPELINE"
+        p_ch.font.size = Pt(10.5); p_ch.font.bold = True; p_ch.font.color.rgb = COLOR_SUBTITLE
+
+        c_w = Inches(1.46)
+        c_gap = Inches(0.12)
+        for c_idx, (c_step, c_detail) in enumerate(data["corpusFunnel"]):
+            c_left = Inches(7.82) + c_idx * (c_w + c_gap)
+            add_card_shape(slide, c_left, card_top + Inches(0.42), c_w, Inches(1.45), COLOR_WHITE, COLOR_BORDER)
+            c_box = slide.shapes.add_textbox(c_left + Inches(0.04), card_top + Inches(0.46), c_w - Inches(0.08), Inches(1.35))
+            tf_c = c_box.text_frame; tf_c.word_wrap = True
+            tf_c.margin_left = Inches(0.02); tf_c.margin_right = Inches(0.02)
+            p_ct = tf_c.paragraphs[0]
+            p_ct.text = c_step
+            p_ct.font.size = Pt(8.5); p_ct.font.bold = True; p_ct.font.color.rgb = COLOR_MYNTRA_PINK; p_ct.space_after = Pt(2)
+            p_cd = tf_c.add_paragraph()
+            p_cd.text = c_detail
+            p_cd.font.size = Pt(7.5); p_cd.line_spacing = 1.1; p_cd.font.color.rgb = COLOR_TEXT_PRIMARY
 
         # Right Bottom Card: Final Key Takeaways
-        t_top = card_top + Inches(2.05)
-        add_card_shape(slide, Inches(7.7), t_top, Inches(4.933), card_height - Inches(2.05), COLOR_BG_CARD, COLOR_BORDER)
-        box = slide.shapes.add_textbox(Inches(7.82), t_top + Inches(0.08), Inches(4.69), card_height - Inches(2.21))
+        t_top = card_top + Inches(2.15)
+        add_card_shape(slide, Inches(7.7), t_top, Inches(4.933), card_height - Inches(2.15), COLOR_BG_CARD, COLOR_BORDER)
+        box = slide.shapes.add_textbox(Inches(7.82), t_top + Inches(0.08), Inches(4.69), card_height - Inches(2.31))
         tf = box.text_frame
         tf.word_wrap = True
         tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
@@ -579,39 +576,40 @@ for data in SLIDES_DATA:
             r3 = p.add_run(); r3.text = verdict_txt; r3.font.bold = True; r3.font.color.rgb = COLOR_MYNTRA_GREEN if "Winner" in verdict_txt else COLOR_MYNTRA_PINK
 
     # ==========================================
-    # SLIDE 8: MVP ARCHITECTURE & FEATURE SHOWCASE
+    # SLIDE 8: MVP ARCHITECTURE & FEATURE SHOWCASE (VISUAL FLOWCHART)
     # ==========================================
     elif s_num == 8:
-        # Top Pipeline Card
-        add_card_shape(slide, Inches(0.7), card_top, Inches(11.933), Inches(1.2), COLOR_BG_CARD, COLOR_BORDER)
-        box = slide.shapes.add_textbox(Inches(0.82), card_top + Inches(0.06), Inches(11.69), Inches(1.08))
-        tf = box.text_frame
-        tf.word_wrap = True
-        tf.margin_left = Inches(0.08); tf.margin_right = Inches(0.08)
-        p = tf.paragraphs[0]
-        p.text = "⚙️ DECISION STUDIO ARCHITECTURE PIPELINE"
-        p.font.size = Pt(10.5)
-        p.font.bold = True
-        p.font.color.rgb = COLOR_PURPLE_PILL
-        p.space_after = Pt(2)
-        for p_step, p_desc in data["pipeline"]:
-            p = tf.add_paragraph()
-            p.font.size = Pt(8.5)
-            p.line_spacing = 1.12
-            p.space_before = Pt(1)
-            p.space_after = Pt(1)
-            set_bullet_indent(p, left_margin_pt=14, hanging_indent_pt=10)
-            r1 = p.add_run(); r1.text = "• " + p_step + ": "; r1.font.bold = True; r1.font.color.rgb = COLOR_TEXT_PRIMARY
-            r2 = p.add_run(); r2.text = p_desc; r2.font.color.rgb = COLOR_TEXT_PRIMARY
+        # Top Architecture Pipeline: 4 Visual Flowchart Process Boxes
+        box_hdr = slide.shapes.add_textbox(Inches(0.7), card_top - Inches(0.04), Inches(11.933), Inches(0.32))
+        tf_h = box_hdr.text_frame; tf_h.word_wrap = True
+        p_h = tf_h.paragraphs[0]
+        p_h.text = "⚙️ DECISION STUDIO ARCHITECTURE PIPELINE (4-STEP ML FLOW)"
+        p_h.font.size = Pt(10.5); p_h.font.bold = True; p_h.font.color.rgb = COLOR_PURPLE_PILL
+
+        pipe_w = Inches(2.82)
+        pipe_gap = Inches(0.21)
+        pipe_h = Inches(1.18)
+        for p_idx, (p_step, p_desc) in enumerate(data["pipeline"]):
+            p_left = Inches(0.7) + p_idx * (pipe_w + pipe_gap)
+            add_card_shape(slide, p_left, card_top + Inches(0.32), pipe_w, pipe_h, COLOR_WHITE, COLOR_BORDER)
+            p_box = slide.shapes.add_textbox(p_left + Inches(0.06), card_top + Inches(0.36), pipe_w - Inches(0.12), pipe_h - Inches(0.08))
+            tf_p = p_box.text_frame; tf_p.word_wrap = True
+            tf_p.margin_left = Inches(0.02); tf_p.margin_right = Inches(0.02)
+            p_pt = tf_p.paragraphs[0]
+            p_pt.text = p_step
+            p_pt.font.size = Pt(9); p_pt.font.bold = True; p_pt.font.color.rgb = COLOR_MYNTRA_PINK; p_pt.space_after = Pt(2)
+            p_pd = tf_p.add_paragraph()
+            p_pd.text = p_desc
+            p_pd.font.size = Pt(7.5); p_pd.line_spacing = 1.1; p_pd.font.color.rgb = COLOR_TEXT_PRIMARY
 
         # Bottom: 3 MVP Feature Wireframe Cards with Figma Embeds
-        w_top = card_top + Inches(1.32)
+        w_top = card_top + Inches(1.6)
         w_card_w = Inches(3.8)
         w_card_gap = Inches(0.26)
         for m_idx, feat in enumerate(data["mvpFeatures"]):
             c_left = Inches(0.7) + m_idx * (w_card_w + w_card_gap)
-            add_card_shape(slide, c_left, w_top, w_card_w, card_height - Inches(1.32), COLOR_BG_CARD, COLOR_BORDER)
-            box = slide.shapes.add_textbox(c_left + Inches(0.08), w_top + Inches(0.04), w_card_w - Inches(0.16), Inches(0.4))
+            add_card_shape(slide, c_left, w_top, w_card_w, card_height - Inches(1.6), COLOR_BG_CARD, COLOR_BORDER)
+            box = slide.shapes.add_textbox(c_left + Inches(0.08), w_top + Inches(0.04), w_card_w - Inches(0.16), Inches(0.38))
             tf = box.text_frame
             tf.word_wrap = True
             p = tf.paragraphs[0]
@@ -621,7 +619,7 @@ for data in SLIDES_DATA:
             p.font.color.rgb = COLOR_PURPLE_PILL
             img_path = feat.get("figmaImage")
             if img_path and os.path.exists(img_path):
-                slide.shapes.add_picture(img_path, c_left + Inches(0.12), w_top + Inches(0.42), w_card_w - Inches(0.24), Inches(2.45))
+                slide.shapes.add_picture(img_path, c_left + Inches(0.12), w_top + Inches(0.4), w_card_w - Inches(0.24), Inches(2.2))
 
     # ==========================================
     # SLIDE 9: SUCCESS METRICS & EXPERIMENTATION HIERARCHY
