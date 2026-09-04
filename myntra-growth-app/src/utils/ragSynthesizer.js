@@ -49,7 +49,7 @@ export function synthesizePMQueryOffline(userQuery = '') {
       {
         quote: "I saved a pastel lilac blazer 5 weeks ago. I love the cut, but I'm unsure if it matches my beige trousers or if I need dark pants. If the app showed me 2 coordinated outfits, I would have bought it immediately.",
         source: "In-Depth User Interview #1",
-        author: "Ananya Sharma (Tech Consultant)",
+        author: "Anonymous Shopper U1 (Survey Cohort)",
         sentiment: "Hesitant"
       },
       {

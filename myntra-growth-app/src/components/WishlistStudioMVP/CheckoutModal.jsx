@@ -65,7 +65,7 @@ export default function CheckoutModal({ isOpen, onClose, cartItems, onOrderCompl
                   <MapPin size={18} style={{ color: selectedAddress === 'home' ? '#FF3F6C' : '#94A3B8' }} />
                   <div>
                     <div style={{ fontSize: '0.88rem', fontWeight: 800, color: '#FFF' }}>
-                      Home (Default) • Ananya Sharma
+                      Home (Default) • Valued Shopper
                     </div>
                     <div style={{ fontSize: '0.78rem', color: '#94A3B8' }}>
                       #402, Skyline Residency, 12th Main, Indiranagar, Bengaluru - 560038

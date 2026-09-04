@@ -260,10 +260,10 @@ export const GOOGLE_FORMS_SURVEY_SCHEMA = {
 export const USER_INTERVIEWS = [
   {
     id: "U1",
-    name: "Ananya Sharma",
+    name: "Anonymous Shopper U1 (Gen-Z Cohort)",
     age: 23,
     city: "Bengaluru",
-    occupation: "Associate Tech Consultant",
+    occupation: "Tech Consultant",
     wishlistSize: 64,
     primaryCategory: "Workwear & Semi-formals",
     verbatimQuote: "I have had a lavender linen blazer in my wishlist for 5 weeks. I love it, but I keep hesitating because I don't know if my beige chinos match it or if I need dark trousers. If the app showed me 2 full outfits with trousers and loafers, I would have checked out in 30 seconds.",
@@ -273,7 +273,7 @@ export const USER_INTERVIEWS = [
   },
   {
     id: "U2",
-    name: "Rahul Mehta",
+    name: "Anonymous Shopper U2 (Gen-Z Cohort)",
     age: 21,
     city: "New Delhi",
     occupation: "Final Year B.Com Student",

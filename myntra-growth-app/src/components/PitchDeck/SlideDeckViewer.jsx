@@ -149,11 +149,17 @@ export default function SlideDeckViewer() {
       return (
         <div className="slide-varied-layout mvp-showcase-layout">
           <div className="showcase-header-tag">
-            <span>🚀 LIVE DEPLOYED PRODUCT SHOWCASE & INTERACTIVE MVP MODULES</span>
-            <a href="https://myntra-growth-lab.vercel.app" target="_blank" rel="noreferrer" className="mvp-live-btn">
-              <ExternalLink size={13} />
-              <span>Launch Live Prototype (https://myntra-growth-lab.vercel.app)</span>
-            </a>
+            <span>🚀 LIVE DEPLOYED PRODUCT SHOWCASE & FIGMA CANVAS</span>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <a href="https://myntra-growth-lab.vercel.app" target="_blank" rel="noreferrer" className="mvp-live-btn">
+                <ExternalLink size={13} />
+                <span>Live Prototype</span>
+              </a>
+              <a href="https://www.figma.com/design/EtSP7uuOBjzS2b5uA8qaml/Myntra-MVP-NL?node-id=1-2&t=ljtykPy7ulKHE6Kr-1" target="_blank" rel="noreferrer" className="mvp-live-btn figma-live-btn">
+                <ExternalLink size={13} />
+                <span>Open Figma Canvas</span>
+              </a>
+            </div>
           </div>
 
           <div className="mvp-wireframes-grid">
@@ -465,6 +471,18 @@ export default function SlideDeckViewer() {
               <Printer size={15} />
               <span>Print / Save PDF</span>
             </button>
+
+            {/* Live Figma Canvas Link */}
+            <a
+              href="https://www.figma.com/design/EtSP7uuOBjzS2b5uA8qaml/Myntra-MVP-NL?node-id=1-2&t=ljtykPy7ulKHE6Kr-1"
+              target="_blank"
+              rel="noreferrer"
+              className="deck-nav-btn figma-btn"
+              title="Open Official Live Figma Canvas"
+            >
+              <ExternalLink size={14} />
+              <span>Figma Canvas</span>
+            </a>
 
             {viewMode === 'single' && (
               <>

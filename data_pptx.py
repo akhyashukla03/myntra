@@ -38,7 +38,7 @@ SLIDES_DATA = [
         "figmaImage": "figma_design_assets/04_Figma_Mobile_Wishlist_Studio_Home.png",
         "bottomBanner": {
             "title": "PORTAL DIRECTORY & VERIFIED HYPERLINKS",
-            "text": "Live Deployed MVP: https://myntra-growth-lab.vercel.app | System Architecture & Strategy Plans: 01_ to 08_ specifications"
+            "text": "Live Deployed MVP: https://myntra-growth-lab.vercel.app | Live Figma Canvas: https://www.figma.com/design/EtSP7uuOBjzS2b5uA8qaml/Myntra-MVP-NL?node-id=1-2"
         }
     },
     {
@@ -251,8 +251,8 @@ SLIDES_DATA = [
             }
         ],
         "bottomBanner": {
-            "title": "🚀 PUBLICLY ACCESSIBLE MVP DEPLOYMENT LINK",
-            "text": "Interactive Prototype Deployed Live at https://myntra-growth-lab.vercel.app | Built with React 18, Vite, Lucide Icons, and Custom Design System."
+            "title": "🚀 PUBLICLY ACCESSIBLE MVP DEPLOYMENT & FIGMA CANVAS LINKS",
+            "text": "Live Prototype: https://myntra-growth-lab.vercel.app | Figma Canvas: https://www.figma.com/design/EtSP7uuOBjzS2b5uA8qaml/Myntra-MVP-NL?node-id=1-2"
         }
     },
     {
