@@ -28,6 +28,7 @@ env/
 # System & IDE files
 .DS_Store
 Thumbs.db
+~$*.pptx
 .vscode/
 .idea/
 *.swp

@@ -144,9 +144,6 @@ export default function SlideDeckViewer() {
             </div>
           </div>
         </div>
-      );
-    }
-
     // SLIDE 7: MVP Showcase (Wireframe Cards & Deployed Product Visuals)
     if (s.slideNumber === 7) {
       return (
@@ -166,13 +163,26 @@ export default function SlideDeckViewer() {
                   <span className="wf-feature-title">{wf.feature}</span>
                   <span className="wf-badge">{wf.badge}</span>
                 </div>
-                <div className="wireframe-mock-ui">
-                  <div className="ui-header-strip">{wf.uiBox.header}</div>
-                  <div className="ui-columns">
-                    <div className="ui-col col-primary">{wf.uiBox.col1}</div>
-                    <div className="ui-col col-secondary">{wf.uiBox.col2}</div>
-                  </div>
+                
+                {/* Embedded High-Fidelity Figma SVG Screen */}
+                <div className="wireframe-mock-ui figma-embed-container">
+                  {wf.figmaSvg ? (
+                    <img 
+                      src={wf.figmaSvg} 
+                      alt={wf.feature} 
+                      className="figma-showcase-svg-img" 
+                    />
+                  ) : (
+                    <>
+                      <div className="ui-header-strip">{wf.uiBox.header}</div>
+                      <div className="ui-columns">
+                        <div className="ui-col col-primary">{wf.uiBox.col1}</div>
+                        <div className="ui-col col-secondary">{wf.uiBox.col2}</div>
+                      </div>
+                    </>
+                  )}
                 </div>
+
                 <div className="wf-impact-value">
                   <Zap size={14} className="text-pink" />
                   <span>{wf.value}</span>
@@ -203,17 +213,28 @@ export default function SlideDeckViewer() {
             </div>
           </div>
 
-          {/* 4-Layer System Stack Table */}
+          {/* 4-Layer System Stack Table & Desktop Workspace */}
           <div className="system-stack-wrapper">
-            <h3 className="section-subtitle-pill">⚙️ 4-LAYER TECHNICAL SYSTEM STACK & LATENCY SLAS</h3>
-            <div className="system-stack-grid">
-              {s.systemArchitectureLayers.map((layer, lIdx) => (
-                <div key={lIdx} className="stack-layer-card">
-                  <div className="layer-name">{layer.layer}</div>
-                  <div className="layer-tech">{layer.tech}</div>
-                  <div className="layer-sla">{layer.latency}</div>
+            <h3 className="section-subtitle-pill">⚙️ 4-LAYER TECHNICAL SYSTEM STACK & DESKTOP WORKSPACE</h3>
+            <div className="system-arch-visual-split">
+              <div className="system-stack-grid">
+                {s.systemArchitectureLayers.map((layer, lIdx) => (
+                  <div key={lIdx} className="stack-layer-card">
+                    <div className="layer-name">{layer.layer}</div>
+                    <div className="layer-tech">{layer.tech}</div>
+                    <div className="layer-sla">{layer.latency}</div>
+                  </div>
+                ))}
+              </div>
+              {s.figmaSvg && (
+                <div className="desktop-figma-preview-box">
+                  <img 
+                    src={s.figmaSvg} 
+                    alt="Desktop Web Workspace" 
+                    className="figma-desktop-workspace-img"
+                  />
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </div>
@@ -299,7 +320,7 @@ export default function SlideDeckViewer() {
           </div>
         </div>
 
-        {/* Card 3: Right Smartphone Device Mockup */}
+        {/* Card 3: Right Smartphone Device Mockup with Figma Embed */}
         <div className="slide-phone-mockup-wrapper">
           <div className="smartphone-device-frame">
             <div className="smartphone-notch">
@@ -307,33 +328,36 @@ export default function SlideDeckViewer() {
               <div className="camera-dot"></div>
             </div>
 
-            <div className="smartphone-screen">
-              <div className="phone-screen-header">
-                <div className="phone-status-left">⚡ Wishlist Studio</div>
-                <div className="phone-status-badge">{s.phoneMockup.badge}</div>
-              </div>
+            <div className="smartphone-screen figma-screen-view">
+              {s.figmaSvg ? (
+                <img 
+                  src={s.figmaSvg} 
+                  alt={s.phoneMockup.screenName} 
+                  className="figma-phone-screen-svg" 
+                />
+              ) : (
+                <div className="phone-screen-content">
+                  <div className="screen-title-banner">
+                    <Smartphone size={12} className="screen-icon" />
+                    <span>{s.phoneMockup.screenName}</span>
+                  </div>
 
-              <div className="phone-screen-content">
-                <div className="screen-title-banner">
-                  <Smartphone size={12} className="screen-icon" />
-                  <span>{s.phoneMockup.screenName}</span>
-                </div>
+                  <div className="phone-metrics-list">
+                    {s.phoneMockup.items.map((item, mIdx) => (
+                      <div key={mIdx} className="phone-metric-row">
+                        <span className="phone-metric-label">{item.label}</span>
+                        <span className="phone-metric-val">{item.val}</span>
+                      </div>
+                    ))}
+                  </div>
 
-                <div className="phone-metrics-list">
-                  {s.phoneMockup.items.map((item, mIdx) => (
-                    <div key={mIdx} className="phone-metric-row">
-                      <span className="phone-metric-label">{item.label}</span>
-                      <span className="phone-metric-val">{item.val}</span>
-                    </div>
-                  ))}
+                  <div className="phone-action-box">
+                    <button className="phone-cta-btn">
+                      <span>{s.phoneMockup.ctaText}</span>
+                    </button>
+                  </div>
                 </div>
-
-                <div className="phone-action-box">
-                  <button className="phone-cta-btn">
-                    <span>{s.phoneMockup.ctaText}</span>
-                  </button>
-                </div>
-              </div>
+              )}
 
               <div className="smartphone-bottom-indicator"></div>
             </div>

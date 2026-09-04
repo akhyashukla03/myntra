@@ -56,6 +56,7 @@ export const SLIDE_DECK_DATA = [
       ],
       ctaText: "Explore Decision Studio"
     },
+    figmaSvg: "/figma_design_assets/04_Figma_Mobile_Wishlist_Studio_Home.svg",
     bottomBanner: {
       title: "PORTAL DIRECTORY & VERIFIED HYPERLINKS",
       text: "Live Deployed MVP: https://myntra-growth-lab.vercel.app | System Architecture & Strategy Plans: plans/01_ to 08_"
@@ -95,6 +96,7 @@ export const SLIDE_DECK_DATA = [
       ],
       ctaText: "Launch Spec Matrix"
     },
+    figmaSvg: "/figma_design_assets/01_Figma_Mobile_Spec_Comparison_Matrix.svg",
     bottomBanner: {
       title: "★ CORE THESIS TESTED & VALIDATED",
       text: "Wishlist inertia occurs because users lack evaluation clarity, not money. Fix: Side-by-Side GSM Matrix + AI Wardrobe Matching + 1-Tap WhatsApp Voting closes the loop."
@@ -139,7 +141,7 @@ export const SLIDE_DECK_DATA = [
       ]
     },
     midCard: {
-      title: "👤 PERSONA: ANANYA & RAHUL — 23, BANGALORE",
+      title: "👤 PERSONA: ANONYMOUS SHOPPER COHORT (GEN-Z & MILLENNIALS, N=9)",
       bullets: [
         { bold: "Jobs to be Done:", text: "'When I save 3 black cargo pants, I want to compare their real fabric GSM and fit on one screen so I can buy immediately.'" },
         { bold: "Emotional Job:", text: "Avoid the regret, repackaging hassle, and return anxiety of receiving flimsy see-through fabric." },
@@ -158,6 +160,7 @@ export const SLIDE_DECK_DATA = [
       ],
       ctaText: "View Persona Journey"
     },
+    figmaSvg: "/figma_design_assets/04_Figma_Mobile_Wishlist_Studio_Home.svg",
     bottomBanner: {
       title: "🎯 IMPACT IF SOLVED FOR THE CAUTIOUS SHORTLISTER",
       text: "Eliminates cognitive fatigue. Makes multi-item comparison effortless. Boosts customer 30-day LTV up to 2.8x via bundle additions and reduces return friction."
@@ -221,6 +224,7 @@ export const SLIDE_DECK_DATA = [
       ],
       ctaText: "View RICE Matrix"
     },
+    figmaSvg: "/figma_design_assets/02_Figma_Mobile_AI_Outfit_Coordinator.svg",
     bottomBanner: {
       title: "🛡️ WHY HORIZON 1 WINS FIRST",
       text: "Horizon 1 wins first: Zero margin erosion, attacks comparison paralysis directly, and embeds in existing wishlist behavior. H2/H3 leverage the structured data H1 generates."
@@ -236,6 +240,7 @@ export const SLIDE_DECK_DATA = [
       {
         feature: "Feature 1: Side-by-Side Spec Matrix",
         badge: "RICE: 3,780 (#1)",
+        figmaSvg: "/figma_design_assets/01_Figma_Mobile_Spec_Comparison_Matrix.svg",
         uiBox: {
           header: "Inline Spec & GSM Comparison",
           col1: "Heavy Street Cargo\n240 GSM Heavy Cotton\n88% True to Size\nReal Customer Photos",
@@ -246,6 +251,7 @@ export const SLIDE_DECK_DATA = [
       {
         feature: "Feature 2: AI Coordinated Look Builder",
         badge: "RICE: 2,740 (#3)",
+        figmaSvg: "/figma_design_assets/02_Figma_Mobile_AI_Outfit_Coordinator.svg",
         uiBox: {
           header: "3 Curated Outfits per Item",
           col1: "Selected: Heavy Cargo (₹1,999)\n+ Oversized Tee (₹899)\n+ Canvas Sneakers (₹1,499)",
@@ -256,6 +262,7 @@ export const SLIDE_DECK_DATA = [
       {
         feature: "Feature 3: 1-Tap WhatsApp Voting Card",
         badge: "RICE: 2,975 (#2)",
+        figmaSvg: "/figma_design_assets/03_Figma_Mobile_WhatsApp_Voting_Card.svg",
         uiBox: {
           header: "Friend Polling + Instant AI Fallback",
           col1: "WhatsApp Poll Card Sent\nLive Option A vs B Votes",
@@ -287,6 +294,7 @@ export const SLIDE_DECK_DATA = [
       { layer: "Layer 3: Catalog & Ops CDN", tech: "Vendor Spec Metadata CDN + Verified Customer Photo Storage", latency: "7-Day TTL Cache" },
       { layer: "Layer 4: Social & Analytics", tech: "WhatsApp Webhook Service + Amplitude Telemetry Streaming", latency: "Real-Time Sync" }
     ],
+    figmaSvg: "/figma_design_assets/05_Figma_Desktop_Web_Wishlist_Studio.svg",
     bottomBanner: {
       title: "⚙️ TECHNICAL ARCHITECTURE MOAT & FEASIBILITY",
       text: "Zero hardware Capex. Pre-indexed vector cache keeps styling queries sub-180ms. Review embeddings cached with 7-day TTL lifecycle rules."
@@ -312,6 +320,7 @@ export const SLIDE_DECK_DATA = [
       { param: "Control (Variant A)", val: "Standard Passive Wishlist Scroll (No Specs)" },
       { param: "Treatment (Variant B)", val: "Wishlist Studio MVP (Spec Matrix + Looks + Voting)" }
     ],
+    figmaSvg: "/figma_design_assets/01_Figma_Mobile_Spec_Comparison_Matrix.svg",
     bottomBanner: {
       title: "📊 METRIC COMPOUNDING & INTEGRITY",
       text: "Metrics tracked via real-time Amplitude event streams (spec_comparison_viewed, bundle_moved_to_bag, social_poll_card_generated). Zero proxies. Holdout ensures strict causality."
@@ -352,6 +361,7 @@ export const SLIDE_DECK_DATA = [
       ],
       ctaText: "View Risk Matrix"
     },
+    figmaSvg: "/figma_design_assets/03_Figma_Mobile_WhatsApp_Voting_Card.svg",
     bottomBanner: {
       title: "🔒 PRIVACY & MARGIN GUARDRAIL DIRECTORY",
       text: "Privacy principle: Myntra respects user style autonomy. We never spam discount flash sales or share personal shopping boards without opt-in consent."

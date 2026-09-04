@@ -13,20 +13,21 @@ prs.slide_height = Inches(7.5)
 
 blank_slide_layout = prs.slide_layouts[6]
 
-# Color Palette Definitions
+# Authentic Myntra Corporate Brand Palette Definitions
 COLOR_WHITE = RGBColor(255, 255, 255)
-COLOR_OFFWHITE = RGBColor(248, 250, 252)
-COLOR_BG_CARD = RGBColor(248, 250, 252)
-COLOR_BORDER = RGBColor(226, 232, 240)
-COLOR_TEXT_PRIMARY = RGBColor(15, 23, 42)
-COLOR_TEXT_MUTED = RGBColor(100, 116, 139)
-COLOR_MYNTRA_PINK = RGBColor(255, 63, 108)
-COLOR_PURPLE_PILL = RGBColor(45, 10, 78)
-COLOR_SUBTITLE = RGBColor(79, 70, 229)
-COLOR_SYNTHESIS_BG = RGBColor(238, 242, 255)
-COLOR_SYNTHESIS_BORDER = RGBColor(199, 210, 254)
-COLOR_SYNTHESIS_TEXT = RGBColor(30, 41, 59)
-COLOR_PHONE_BG = RGBColor(16, 22, 35)
+COLOR_OFFWHITE = RGBColor(245, 245, 246)          # Official Myntra App Background #F5F5F6
+COLOR_BG_CARD = RGBColor(255, 255, 255)           # Pure White Card #FFFFFF
+COLOR_BORDER = RGBColor(234, 234, 236)            # Official Myntra Card Border #EAEAEC
+COLOR_TEXT_PRIMARY = RGBColor(40, 44, 63)         # Official Myntra Deep Charcoal #282C3F
+COLOR_TEXT_MUTED = RGBColor(83, 87, 102)          # Official Myntra Subtext Slate #535766
+COLOR_MYNTRA_PINK = RGBColor(255, 63, 108)        # Signature Myntra Pink #FF3F6C
+COLOR_PURPLE_PILL = RGBColor(255, 63, 108)        # Myntra Pink Primary Header Pill
+COLOR_SUBTITLE = RGBColor(255, 63, 108)           # Myntra Pink Subtitle Accent
+COLOR_SYNTHESIS_BG = RGBColor(255, 240, 244)      # Myntra Soft Pink Glow #FFF0F4
+COLOR_SYNTHESIS_BORDER = RGBColor(255, 194, 209)  # Myntra Soft Pink Border #FFC2D1
+COLOR_SYNTHESIS_TEXT = RGBColor(40, 44, 63)       # Myntra Deep Charcoal #282C3F
+COLOR_PHONE_BG = RGBColor(40, 44, 63)             # Myntra Deep Charcoal #282C3F
+COLOR_MYNTRA_GREEN = RGBColor(3, 166, 133)        # Myntra Verified Trust Green #03A685
 
 SLIDE_TRACKS = [
     "Context", "Market", "Research", "Insights", "Canvas", 
@@ -196,7 +197,7 @@ for data in SLIDES_DATA:
             r2.text = f"Lift: {sens['convLift']} | Profit: {sens['monthlyProfit']}/mo | ROI: {sens['featureRoi']} | Payback: {sens['payback']}"
             r2.font.color.rgb = COLOR_TEXT_PRIMARY
 
-    # SPECIAL LAYOUT: SLIDE 7 (MVP Wireframe Cards Showcase)
+    # SPECIAL LAYOUT: SLIDE 7 (MVP Wireframe Cards Showcase with Figma Assets)
     elif data["slideNumber"] == 7:
         card_w = Inches(3.8)
         gap_w = Inches(0.26)
@@ -204,38 +205,35 @@ for data in SLIDES_DATA:
             cleft = Inches(0.7) + mIdx * (card_w + gap_w)
             add_card_shape(slide, cleft, card_top, card_w, card_height, COLOR_BG_CARD, COLOR_BORDER)
             
-            box = slide.shapes.add_textbox(cleft + Inches(0.15), card_top + Inches(0.15), card_w - Inches(0.3), card_height - Inches(0.3))
+            box = slide.shapes.add_textbox(cleft + Inches(0.1), card_top + Inches(0.05), card_w - Inches(0.2), Inches(0.45))
             tf = box.text_frame
             tf.word_wrap = True
             
             p = tf.paragraphs[0]
             p.text = wf["feature"]
-            p.font.size = Pt(10.5)
+            p.font.size = Pt(9.5)
             p.font.bold = True
             p.font.color.rgb = COLOR_PURPLE_PILL
             
-            p_badge = tf.add_paragraph()
-            p_badge.text = "[" + wf["badge"] + "]"
-            p_badge.font.size = Pt(9)
-            p_badge.font.bold = True
-            p_badge.font.color.rgb = COLOR_MYNTRA_PINK
-            
-            p_hdr = tf.add_paragraph()
-            p_hdr.text = "\nUI Component Header:\n" + wf["uiBox"]["header"]
-            p_hdr.font.size = Pt(9.5)
-            p_hdr.font.bold = True
-            p_hdr.font.color.rgb = COLOR_TEXT_PRIMARY
-            
-            p_c1 = tf.add_paragraph()
-            p_c1.text = "Primary Details:\n" + wf["uiBox"]["col1"]
-            p_c1.font.size = Pt(9)
-            p_c1.font.color.rgb = COLOR_TEXT_MUTED
-            
-            p_val = tf.add_paragraph()
-            p_val.text = "\nImpact Value:\n" + wf["value"]
-            p_val.font.size = Pt(9.5)
-            p_val.font.bold = True
-            p_val.font.color.rgb = COLOR_SUBTITLE
+            # Embed Figma Design PNG if present
+            img_path = wf.get("figmaImage")
+            if img_path and os.path.exists(img_path):
+                slide.shapes.add_picture(img_path, cleft + Inches(0.15), card_top + Inches(0.45), card_w - Inches(0.3), Inches(3.2))
+            else:
+                p_hdr = tf.add_paragraph()
+                p_hdr.text = wf["uiBox"]["header"]
+                p_hdr.font.size = Pt(9)
+                p_hdr.font.bold = True
+                p_hdr.font.color.rgb = COLOR_TEXT_PRIMARY
+
+            p_val_box = slide.shapes.add_textbox(cleft + Inches(0.1), card_top + Inches(3.7), card_w - Inches(0.2), Inches(0.4))
+            tf_v = p_val_box.text_frame
+            tf_v.word_wrap = True
+            p_v = tf_v.paragraphs[0]
+            p_v.text = "⚡ " + wf["value"]
+            p_v.font.size = Pt(8.5)
+            p_v.font.bold = True
+            p_v.font.color.rgb = COLOR_MYNTRA_PINK
 
     # STANDARD 3-COLUMN LAYOUT (SLIDES 1, 2, 4, 6, 8, 9, 10)
     else:
@@ -297,47 +295,52 @@ for data in SLIDES_DATA:
             run_reg.text = reg_text
             run_reg.font.color.rgb = COLOR_TEXT_PRIMARY
 
-        # Phone Mockup (Right Column)
+        # Phone Mockup (Right Column) with Real Figma Screen Embed
         phone_left = Inches(10.0)
         phone_width = Inches(2.63)
         add_card_shape(slide, phone_left, card_top, phone_width, card_height, COLOR_PHONE_BG, RGBColor(15, 23, 42))
         
-        phone_box = slide.shapes.add_textbox(phone_left + Inches(0.15), card_top + Inches(0.2), phone_width - Inches(0.3), card_height - Inches(0.4))
-        tf = phone_box.text_frame
-        tf.word_wrap = True
-        
-        p = tf.paragraphs[0]
-        p.text = data["phoneMockup"]["screenName"]
-        p.font.size = Pt(10.5)
-        p.font.bold = True
-        p.font.color.rgb = COLOR_WHITE
-        
-        p_badge = tf.add_paragraph()
-        p_badge.text = "[" + data["phoneMockup"]["badge"] + "]"
-        p_badge.font.size = Pt(9)
-        p_badge.font.bold = True
-        p_badge.font.color.rgb = COLOR_MYNTRA_PINK
-        
-        for label, val in data["phoneMockup"]["items"]:
-            p_item = tf.add_paragraph()
-            p_item.font.size = Pt(9)
+        # Embedded Figma Image if available
+        figma_img = data.get("figmaImage")
+        if figma_img and os.path.exists(figma_img):
+            slide.shapes.add_picture(figma_img, phone_left + Inches(0.08), card_top + Inches(0.08), phone_width - Inches(0.16), card_height - Inches(0.16))
+        else:
+            phone_box = slide.shapes.add_textbox(phone_left + Inches(0.15), card_top + Inches(0.2), phone_width - Inches(0.3), card_height - Inches(0.4))
+            tf = phone_box.text_frame
+            tf.word_wrap = True
             
-            r_lbl = p_item.add_run()
-            r_lbl.text = label + "\n"
-            r_lbl.font.color.rgb = COLOR_TEXT_MUTED
+            p = tf.paragraphs[0]
+            p.text = data["phoneMockup"]["screenName"]
+            p.font.size = Pt(10.5)
+            p.font.bold = True
+            p.font.color.rgb = COLOR_WHITE
             
-            r_val = p_item.add_run()
-            r_val.text = val
-            r_val.font.bold = True
-            r_val.font.color.rgb = COLOR_WHITE
+            p_badge = tf.add_paragraph()
+            p_badge.text = "[" + data["phoneMockup"]["badge"] + "]"
+            p_badge.font.size = Pt(9)
+            p_badge.font.bold = True
+            p_badge.font.color.rgb = COLOR_MYNTRA_PINK
+            
+            for label, val in data["phoneMockup"]["items"]:
+                p_item = tf.add_paragraph()
+                p_item.font.size = Pt(9)
+                
+                r_lbl = p_item.add_run()
+                r_lbl.text = label + "\n"
+                r_lbl.font.color.rgb = COLOR_TEXT_MUTED
+                
+                r_val = p_item.add_run()
+                r_val.text = val
+                r_val.font.bold = True
+                r_val.font.color.rgb = COLOR_WHITE
 
-        p_cta = tf.add_paragraph()
-        p_cta.alignment = PP_ALIGN.CENTER
-        r_cta = p_cta.add_run()
-        r_cta.text = "▶ " + data["phoneMockup"]["ctaText"]
-        r_cta.font.size = Pt(9.5)
-        r_cta.font.bold = True
-        r_cta.font.color.rgb = COLOR_MYNTRA_PINK
+            p_cta = tf.add_paragraph()
+            p_cta.alignment = PP_ALIGN.CENTER
+            r_cta = p_cta.add_run()
+            r_cta.text = "▶ " + data["phoneMockup"]["ctaText"]
+            r_cta.font.size = Pt(9.5)
+            r_cta.font.bold = True
+            r_cta.font.color.rgb = COLOR_MYNTRA_PINK
 
     # 4. Bottom Synthesis Banner
     synth_top = Inches(6.05)
@@ -391,5 +394,10 @@ for data in SLIDES_DATA:
 
 # Save Presentation
 output_path = "Myntra_Wishlist_Studio_10_Slide_Deck.pptx"
-prs.save(output_path)
-print(f"SUCCESS: Generated 16:9 Executive PowerPoint Presentation with Varied Slide Layouts at {output_path}")
+try:
+    prs.save(output_path)
+    print(f"SUCCESS: Generated 16:9 Executive PowerPoint Presentation at {output_path}")
+except PermissionError:
+    output_path = "Myntra_Wishlist_Studio_10_Slide_Deck_Updated.pptx"
+    prs.save(output_path)
+    print(f"SUCCESS: Primary PPTX locked. Saved updated presentation at {output_path}")

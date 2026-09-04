@@ -22,7 +22,7 @@
 
 ### Slide 2: User Segmentation & Jobs-to-be-Done (JTBD)
 * **Message-Driven Title:** *Target Persona & Jobs-to-be-Done: Gen-Z & Millennial Shoppers Treat the Wishlist as an Active Consideration Shortlist*
-* **Core Narrative:** Rahul & Ananya ($18-28$ yrs, $62\%$ of traffic) maintain $38+$ items and need decision confidence, not discounts.
+* **Core Narrative:** Anonymous Survey Cohort (Gen-Z & Young Millennials, $18-28$ yrs, $62\%$ of traffic) maintain $38+$ items and need decision confidence, not discounts.
 * **Key Content:** Functional, Emotional, and Social JTBD breakdowns; verbatim quote anchors.
 
 ### Slide 3: Bottom-Up Opportunity Sizing & Conversion Economics

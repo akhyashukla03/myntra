@@ -3781,7 +3781,7 @@ body {
 }
 
 .category-streak-pill {
-  background: #2D0A4E;
+  background: #FF3F6C;
   color: #FFFFFF;
   font-size: 0.72rem;
   font-weight: 800;
@@ -3789,7 +3789,7 @@ body {
   padding: 0.35rem 1.5rem;
   border-radius: 9999px;
   text-transform: uppercase;
-  box-shadow: 0 3px 10px rgba(45, 10, 78, 0.3);
+  box-shadow: 0 3px 10px rgba(255, 63, 108, 0.35);
 }
 
 /* 2. Slide Main Header & Brand Section */
@@ -3807,7 +3807,7 @@ body {
 .light-canvas .slide-takeaway-title {
   font-size: 1.15rem;
   font-weight: 900;
-  color: #0F172A;
+  color: #282C3F;
   line-height: 1.35;
   letter-spacing: -0.3px;
 }
@@ -3823,14 +3823,14 @@ body {
 .light-canvas .slide-takeaway-subtitle {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #4F46E5;
+  color: #FF3F6C;
   margin-top: 0.2rem;
 }
 
 .dark-canvas .slide-takeaway-subtitle {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #818CF8;
+  color: #FF527B;
   margin-top: 0.2rem;
 }
 
@@ -3858,14 +3858,14 @@ body {
 
 /* Evidence Cards */
 .light-canvas .slide-evidence-card {
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
+  background: #FFFFFF;
+  border: 1px solid #EAEAEC;
   border-radius: 16px;
   padding: 1.15rem 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .dark-canvas .slide-evidence-card {
@@ -3881,10 +3881,10 @@ body {
 .light-canvas .evidence-card-title {
   font-size: 0.78rem;
   font-weight: 800;
-  color: #1E1B4B;
+  color: #282C3F;
   letter-spacing: 0.4px;
   text-transform: uppercase;
-  border-bottom: 2px solid rgba(79, 70, 229, 0.15);
+  border-bottom: 2px solid #FF3F6C;
   padding-bottom: 0.4rem;
   display: block;
 }
@@ -3892,10 +3892,10 @@ body {
 .dark-canvas .evidence-card-title {
   font-size: 0.78rem;
   font-weight: 800;
-  color: #A5B4FC;
+  color: #FF527B;
   letter-spacing: 0.4px;
   text-transform: uppercase;
-  border-bottom: 2px solid rgba(165, 180, 252, 0.2);
+  border-bottom: 2px solid #FF3F6C;
   padding-bottom: 0.4rem;
   display: block;
 }
@@ -4079,10 +4079,65 @@ body {
   margin: 0.1rem auto 0 auto;
 }
 
+/* Figma Graphic Embedded Assets in Slide Deck */
+.figma-screen-view {
+  padding: 0;
+  overflow: hidden;
+}
+
+.figma-phone-screen-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+}
+
+.figma-embed-container {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #0A0D14;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.figma-showcase-svg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+}
+
+.system-arch-visual-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.desktop-figma-preview-box {
+  background: #0F172A;
+  border: 1px solid #1E293B;
+  border-radius: 10px;
+  padding: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.figma-desktop-workspace-img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+
 /* 4. Bottom Horizontal Thesis/Synthesis Banner */
 .light-canvas .slide-bottom-synthesis-card {
-  background: #EEF2FF;
-  border: 1px solid #C7D2FE;
+  background: #FFF0F4;
+  border: 1px solid #FFC2D1;
   border-radius: 12px;
   padding: 0.75rem 1.25rem;
   display: flex;
@@ -4091,8 +4146,8 @@ body {
 }
 
 .dark-canvas .slide-bottom-synthesis-card {
-  background: #10172A;
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  background: #1C101A;
+  border: 1px solid rgba(255, 63, 108, 0.3);
   border-radius: 12px;
   padding: 0.75rem 1.25rem;
   display: flex;
@@ -4106,7 +4161,7 @@ body {
   gap: 0.4rem;
   font-size: 0.75rem;
   font-weight: 800;
-  color: #4338CA;
+  color: #FF3F6C;
   text-transform: uppercase;
 }
 
@@ -4116,14 +4171,14 @@ body {
   gap: 0.4rem;
   font-size: 0.75rem;
   font-weight: 800;
-  color: #A5B4FC;
+  color: #FF527B;
   text-transform: uppercase;
 }
 
 .light-canvas .synthesis-text-body {
   font-size: 0.82rem;
   font-weight: 700;
-  color: #1E293B;
+  color: #282C3F;
   line-height: 1.4;
 }
 

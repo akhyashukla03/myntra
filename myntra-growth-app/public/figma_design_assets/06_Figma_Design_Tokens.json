@@ -1,0 +1,40 @@
+{
+  "name": "Myntra Wishlist Studio Figma Design System",
+  "version": "2.4.0",
+  "colorTokens": {
+    "brand-myntra-pink": "#FF3F6C",
+    "brand-deep-purple": "#2D0A4E",
+    "neutral-dark-navy": "#0A0D14",
+    "neutral-card-bg": "#FFFFFF",
+    "accent-indigo-glow": "#4F46E5",
+    "status-emerald-green": "#10B981",
+    "status-amber-gold": "#F59E0B"
+  },
+  "frames": [
+    {
+      "name": "01_Figma_Mobile_Spec_Comparison_Matrix.svg",
+      "dimensions": "375x812",
+      "type": "Mobile iOS/Android Frame"
+    },
+    {
+      "name": "02_Figma_Mobile_AI_Outfit_Coordinator.svg",
+      "dimensions": "375x812",
+      "type": "Mobile iOS/Android Frame"
+    },
+    {
+      "name": "03_Figma_Mobile_WhatsApp_Voting_Card.svg",
+      "dimensions": "375x812",
+      "type": "Mobile Micro Card"
+    },
+    {
+      "name": "04_Figma_Mobile_Wishlist_Studio_Home.svg",
+      "dimensions": "375x812",
+      "type": "Mobile Wishlist Home"
+    },
+    {
+      "name": "05_Figma_Desktop_Web_Wishlist_Studio.svg",
+      "dimensions": "1440x900",
+      "type": "Desktop Web Workspace"
+    }
+  ]
+}
