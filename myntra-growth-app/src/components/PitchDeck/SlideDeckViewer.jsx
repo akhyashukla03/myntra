@@ -18,13 +18,16 @@ import {
   ArrowRight,
   Sliders,
   Database,
-  BarChart3
+  BarChart3,
+  Users,
+  Target,
+  FileSpreadsheet
 } from 'lucide-react';
 
 export default function SlideDeckViewer() {
   const [currentSlideIdx, setCurrentSlideIdx] = useState(0);
   const [viewMode, setViewMode] = useState('single'); // 'single' or 'all'
-  const [deckTheme, setDeckTheme] = useState('light'); // 'light' (Original Zepto style) or 'dark'
+  const [deckTheme, setDeckTheme] = useState('light');
   const slide = SLIDE_DECK_DATA[currentSlideIdx];
 
   const handleNext = () => {
@@ -57,37 +60,179 @@ export default function SlideDeckViewer() {
 
   // Render varied visual slide layouts based on slide number
   const renderSlideContent = (s) => {
+    // SLIDE 1: Strategic Brief + 5-Step Unit Economics Waterfall
+    if (s.slideNumber === 1 && s.midCard && s.midCard.bullets) {
+      return (
+        <div className="slide-body-grid">
+          {/* Card 1: Left Strategic Column */}
+          <div className="slide-evidence-card">
+            <div className="evidence-card-header">
+              <span className="evidence-card-title">{s.leftCard.title}</span>
+            </div>
+            <div className="evidence-card-body">
+              <ul className="evidence-bullets">
+                {s.leftCard.bullets.map((bullet, idx) => (
+                  <li key={idx} className="evidence-bullet-item">
+                    <span className="bullet-dot">•</span>
+                    <div className="bullet-text-wrapper">
+                      <strong>{bullet.bold}</strong> {bullet.text}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Card 2: Mid 5-Step Waterfall Column */}
+          <div className="slide-evidence-card financial-waterfall-card">
+            <div className="evidence-card-header">
+              <span className="evidence-card-title">{s.midCard.title}</span>
+            </div>
+            <div className="evidence-card-body">
+              <ul className="evidence-bullets">
+                {s.midCard.bullets.map((bullet, idx) => (
+                  <li key={idx} className="evidence-bullet-item">
+                    <span className="bullet-dot" style={{ color: '#03A685' }}>▶</span>
+                    <div className="bullet-text-wrapper">
+                      <strong style={{ color: '#FF3F6C' }}>{bullet.bold}</strong> {bullet.text}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Card 3: Phone Mockup */}
+          <div className="slide-phone-mockup-wrapper">
+            <div className="smartphone-device-frame">
+              <div className="smartphone-notch">
+                <div className="speaker-earpiece"></div>
+                <div className="camera-dot"></div>
+              </div>
+              <div className="smartphone-screen figma-screen-view">
+                {s.figmaSvg ? (
+                  <img src={s.figmaSvg} alt={s.phoneMockup.screenName} className="figma-phone-screen-svg" />
+                ) : (
+                  <div className="phone-screen-content">
+                    <div className="screen-title-banner">
+                      <Smartphone size={12} className="screen-icon" />
+                      <span>{s.phoneMockup.screenName}</span>
+                    </div>
+                    <div className="phone-metrics-list">
+                      {s.phoneMockup.items.map((item, mIdx) => (
+                        <div key={mIdx} className="phone-metric-row">
+                          <span className="phone-metric-label">{item.label}</span>
+                          <span className="phone-metric-val">{item.val}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // SLIDE 2: Hypothesis + Funnel + Competitor Teardown
+    if (s.slideNumber === 2 && s.competitorTeardown) {
+      return (
+        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: '1rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+            <div className="slide-evidence-card">
+              <div className="evidence-card-header">
+                <span className="evidence-card-title">💡 THE CORE HYPOTHESIS</span>
+              </div>
+              <div className="evidence-card-body" style={{ fontSize: '0.85rem', lineHeight: '1.4' }}>
+                {s.hypothesisBox}
+              </div>
+            </div>
+            <div className="slide-evidence-card">
+              <div className="evidence-card-header">
+                <span className="evidence-card-title">🌐 GLOBAL & DOMESTIC COMPETITOR TEARDOWN</span>
+              </div>
+              <div className="evidence-card-body">
+                <ul className="evidence-bullets">
+                  {s.competitorTeardown.map((comp, cIdx) => (
+                    <li key={cIdx} className="evidence-bullet-item">
+                      <span className="bullet-dot">•</span>
+                      <div className="bullet-text-wrapper">
+                        <strong style={{ color: comp.platform.includes('Myntra') ? '#FF3F6C' : 'inherit' }}>{comp.platform}:</strong> {comp.feature}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+            <div className="slide-evidence-card">
+              <div className="evidence-card-header">
+                <span className="evidence-card-title">🔄 CURRENT DISCOVERY FLOW (THE GRAVEYARD LOOP)</span>
+              </div>
+              <div className="evidence-card-body" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
+                {s.discoveryFunnel.map((step, sIdx) => (
+                  <div key={sIdx} style={{ background: '#FFF0F4', border: '1px solid #FFC2D1', borderRadius: '6px', padding: '0.4rem' }}>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#FF3F6C' }}>{step.step}</div>
+                    <div style={{ fontSize: '0.7rem', color: '#535766' }}>{step.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="slide-evidence-card">
+              <div className="evidence-card-header">
+                <span className="evidence-card-title">⚠️ CORE CUSTOMER FRICTIONS</span>
+              </div>
+              <div className="evidence-card-body">
+                <ul className="evidence-bullets">
+                  {s.frictionCards.map((fric, fIdx) => (
+                    <li key={fIdx} className="evidence-bullet-item">
+                      <span className="bullet-dot">•</span>
+                      <div className="bullet-text-wrapper">
+                        <strong>{fric.title}:</strong> {fric.desc}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     // SLIDE 3: Research & Thinking Evolution Narrative Layout
     if (s.slideNumber === 3) {
       return (
         <div className="slide-varied-layout research-evolution-layout">
-          {/* Thinking Evolution Timeline */}
-          <div className="evolution-section">
-            <h3 className="section-subtitle-pill">🧠 STRATEGIC THINKING EVOLUTION NARRATIVE</h3>
-            <div className="evolution-grid">
-              {s.thinkingEvolution.map((item, idx) => (
-                <div key={idx} className="evolution-step-card">
-                  <div className="step-badge">{item.stage}</div>
-                  <p className="step-desc">{item.desc}</p>
-                </div>
-              ))}
+          {s.evolutionNarrative && (
+            <div className="slide-evidence-card" style={{ marginBottom: '0.8rem', background: '#FFF0F4', borderColor: '#FFC2D1' }}>
+              <div className="evidence-card-header">
+                <span className="evidence-card-title">🔄 STRATEGIC THINKING EVOLUTION PIVOT</span>
+              </div>
+              <div className="evidence-card-body" style={{ fontSize: '0.82rem', lineHeight: '1.4' }}>
+                <div><strong>Initial Hypothesis:</strong> {s.evolutionNarrative.initialHypothesis}</div>
+                <div style={{ marginTop: '0.3rem', color: '#FF3F6C' }}><strong>Discovery Finding:</strong> {s.evolutionNarrative.dataFinding}</div>
+                <div style={{ marginTop: '0.3rem', color: '#03A685' }}><strong>Strategic Pivot:</strong> {s.evolutionNarrative.strategicPivot}</div>
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* AI Discovery Workflow */}
           <div className="discovery-section">
             <div className="section-header-row">
-              <h3 className="section-subtitle-pill">🔬 AI DISCOVERY PIPELINE WORKFLOW</h3>
+              <h3 className="section-subtitle-pill">💬 NLP QUERIES & SYNTHESIS</h3>
               <a href="https://myntra-growth-lab.vercel.app" target="_blank" rel="noreferrer" className="live-discovery-link">
                 <ExternalLink size={12} />
                 <span>Test Live Discovery Engine</span>
               </a>
             </div>
-            <div className="workflow-flow-grid">
-              {s.discoveryWorkflow.map((wf, wIdx) => (
+            <div className="workflow-flow-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+              {s.nlpPrompts && s.nlpPrompts.map((wf, wIdx) => (
                 <div key={wIdx} className="workflow-step-card">
-                  <div className="wf-title">{wf.step}</div>
-                  <div className="wf-detail">{wf.detail}</div>
+                  <div className="wf-title">{wf.q}</div>
+                  <div className="wf-detail">{wf.ans}</div>
                 </div>
               ))}
             </div>
@@ -96,102 +241,51 @@ export default function SlideDeckViewer() {
       );
     }
 
-    // SLIDE 5: Financial Waterfall & Sensitivity Stress-Testing Layout
-    if (s.slideNumber === 5) {
+    // SLIDE 4: 4-Quadrant Target Canvas
+    if (s.slideNumber === 4 && s.quadrants) {
       return (
-        <div className="slide-varied-layout financial-sensitivity-layout">
-          <div className="financial-grid-wrapper">
-            {/* Financial Ledger Breakdown */}
-            <div className="ledger-card-wrapper">
-              <h3 className="section-subtitle-pill">📊 BOTTOM-UP FINANCIAL WATERFALL</h3>
-              <div className="waterfall-list">
-                {s.financialWaterfall.map((item, fIdx) => (
-                  <div key={fIdx} className="waterfall-row">
-                    <div className="wf-metric-info">
-                      <span className="wf-metric-name">{item.metric}</span>
-                      <span className="wf-metric-detail">{item.detail}</span>
-                    </div>
-                    <span className="wf-metric-val">{item.val}</span>
-                  </div>
-                ))}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.8rem' }}>
+          {s.quadrants.map((q, qIdx) => (
+            <div key={qIdx} className="slide-evidence-card">
+              <div className="evidence-card-header">
+                <span className="evidence-card-title">{q.icon} {q.title}</span>
               </div>
-            </div>
-
-            {/* Sensitivity Stress-Testing Scenarios */}
-            <div className="sensitivity-card-wrapper">
-              <h3 className="section-subtitle-pill">🛡️ SENSITIVITY STRESS-TESTING SCENARIOS</h3>
-              <div className="sensitivity-table">
-                <div className="sens-table-header">
-                  <span>Scenario</span>
-                  <span>Lift</span>
-                  <span>Profit/Mo</span>
-                  <span>ROI</span>
-                  <span>Payback</span>
-                </div>
-                {s.sensitivityTable.map((sens, sIdx) => (
-                  <div key={sIdx} className={`sens-table-row ${sIdx === 0 ? 'base-case' : sIdx === 2 ? 'stress-case' : ''}`}>
-                    <span className="sens-scen-name">{sens.scenario}</span>
-                    <span>{sens.convLift}</span>
-                    <span>{sens.monthlyProfit}</span>
-                    <span className="sens-roi-val">{sens.featureRoi}</span>
-                    <span>{sens.payback}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="sensitivity-note-box">
-                <strong>Stress-Test Proof:</strong> Even under a 50% target drop (+150 bps lift), annual value exceeds ₹117 Cr at a 110x ROI with payback under 8 days.
-              </div>
-            </div>
-          </div>
-        </div>
-    // SLIDE 7: MVP Showcase (Wireframe Cards & Deployed Product Visuals)
-    if (s.slideNumber === 7) {
-      return (
-        <div className="slide-varied-layout mvp-showcase-layout">
-          <div className="showcase-header-tag">
-            <span>🚀 LIVE DEPLOYED PRODUCT SHOWCASE & FIGMA CANVAS</span>
-            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-              <a href="https://myntra-growth-lab.vercel.app" target="_blank" rel="noreferrer" className="mvp-live-btn">
-                <ExternalLink size={13} />
-                <span>Live Prototype</span>
-              </a>
-              <a href="https://www.figma.com/design/EtSP7uuOBjzS2b5uA8qaml/Myntra-MVP-NL?node-id=1-2&t=ljtykPy7ulKHE6Kr-1" target="_blank" rel="noreferrer" className="mvp-live-btn figma-live-btn">
-                <ExternalLink size={13} />
-                <span>Open Figma Canvas</span>
-              </a>
-            </div>
-          </div>
-
-          <div className="mvp-wireframes-grid">
-            {s.mvpWireframes.map((wf, mIdx) => (
-              <div key={mIdx} className="wireframe-card">
-                <div className="wf-card-top">
-                  <span className="wf-feature-title">{wf.feature}</span>
-                  <span className="wf-badge">{wf.badge}</span>
-                </div>
-                
-                {/* Embedded High-Fidelity Figma SVG Screen */}
-                <div className="wireframe-mock-ui figma-embed-container">
-                  {wf.figmaSvg ? (
-                    <img 
-                      src={wf.figmaSvg} 
-                      alt={wf.feature} 
-                      className="figma-showcase-svg-img" 
-                    />
-                  ) : (
-                    <>
-                      <div className="ui-header-strip">{wf.uiBox.header}</div>
-                      <div className="ui-columns">
-                        <div className="ui-col col-primary">{wf.uiBox.col1}</div>
-                        <div className="ui-col col-secondary">{wf.uiBox.col2}</div>
+              <div className="evidence-card-body">
+                <ul className="evidence-bullets">
+                  {q.bullets.map((b, bIdx) => (
+                    <li key={bIdx} className="evidence-bullet-item">
+                      <span className="bullet-dot">•</span>
+                      <div className="bullet-text-wrapper">
+                        <strong>{b.bold}</strong> {b.text}
                       </div>
-                    </>
-                  )}
-                </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
 
-                <div className="wf-impact-value">
-                  <Zap size={14} className="text-pink" />
-                  <span>{wf.value}</span>
+    // SLIDE 5: 2x3 Qualitative User Research Grid
+    if (s.slideNumber === 5 && s.userCards) {
+      return (
+        <div>
+          <div style={{ background: '#FFF0F4', border: '1px solid #FFC2D1', borderRadius: '6px', padding: '0.4rem 0.8rem', marginBottom: '0.6rem', fontSize: '0.8rem', fontWeight: 600, color: '#FF3F6C' }}>
+            📋 {s.researchMethodology}
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.6rem' }}>
+            {s.userCards.map((user, uIdx) => (
+              <div key={uIdx} className="slide-evidence-card" style={{ padding: '0.6rem' }}>
+                <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#FF3F6C', marginBottom: '0.2rem' }}>
+                  👤 {user.id} ({user.demographics})
+                </div>
+                <div style={{ fontSize: '0.78rem', fontStyle: 'italic', color: '#282C3F', margin: '0.3rem 0', padding: '0.3rem', background: '#F8F9FA', borderRadius: '4px', borderLeft: '3px solid #FF3F6C' }}>
+                  "{user.quote}"
+                </div>
+                <div style={{ fontSize: '0.76rem', fontWeight: 600, color: '#03A685' }}>
+                  {user.insight}
                 </div>
               </div>
             ))}
@@ -200,83 +294,177 @@ export default function SlideDeckViewer() {
       );
     }
 
-    // SLIDE 8: User Emotion Journey & System Architecture Layout
-    if (s.slideNumber === 8) {
+    // SLIDE 6: 5 PM Questions
+    if (s.slideNumber === 6 && s.pmQuestions) {
       return (
-        <div className="slide-varied-layout architecture-journey-layout">
-          {/* User Emotion State Transition Flow */}
-          <div className="journey-flow-wrapper">
-            <h3 className="section-subtitle-pill">📱 USER EMOTIONAL STATE TRANSITION MAP (4 STAGES)</h3>
-            <div className="emotion-stages-grid">
-              {s.userEmotionJourney.map((stg, eIdx) => (
-                <div key={eIdx} className="emotion-stage-card">
-                  <div className="stage-header-title">{stg.stage}</div>
-                  <div className="stage-emotion-badge">{stg.emotion}</div>
-                  <div className="stage-trigger">{stg.trigger}</div>
-                  <div className="stage-tech-resolver">{stg.techResolver}</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.6rem' }}>
+          {s.pmQuestions.map((pm, pIdx) => (
+            <div key={pIdx} className="slide-evidence-card" style={{ gridColumn: pIdx >= 3 ? 'span 1' : 'span 1' }}>
+              <div className="evidence-card-header">
+                <span className="evidence-card-title">{pm.qNum}: {pm.q}</span>
+              </div>
+              <div className="evidence-card-body" style={{ fontSize: '0.78rem', lineHeight: '1.35' }}>
+                {pm.ans && <div>{pm.ans}</div>}
+                {pm.customerValue && (
+                  <div>
+                    <div style={{ marginBottom: '0.2rem' }}><strong>Customer Value:</strong> {pm.customerValue}</div>
+                    <div style={{ color: '#03A685' }}><strong>Business Value:</strong> {pm.businessValue}</div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    // SLIDE 7: Principles & RICE Matrix Table
+    if (s.slideNumber === 7 && s.riceTable) {
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+          <div className="slide-evidence-card" style={{ background: '#FFF0F4', borderColor: '#FFC2D1' }}>
+            <div className="evidence-card-header">
+              <span className="evidence-card-title">✨ 3 CORE PRODUCT DESIGN PRINCIPLES</span>
+            </div>
+            <div className="evidence-card-body" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.6rem' }}>
+              {s.principles.map((pr, prIdx) => (
+                <div key={prIdx}>
+                  <strong style={{ color: '#FF3F6C' }}>{pr.title}:</strong>
+                  <p style={{ fontSize: '0.78rem', margin: 0, color: '#282C3F' }}>{pr.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* 4-Layer System Stack Table & Desktop Workspace */}
-          <div className="system-stack-wrapper">
-            <h3 className="section-subtitle-pill">⚙️ 4-LAYER TECHNICAL SYSTEM STACK & DESKTOP WORKSPACE</h3>
-            <div className="system-arch-visual-split">
-              <div className="system-stack-grid">
-                {s.systemArchitectureLayers.map((layer, lIdx) => (
-                  <div key={lIdx} className="stack-layer-card">
-                    <div className="layer-name">{layer.layer}</div>
-                    <div className="layer-tech">{layer.tech}</div>
-                    <div className="layer-sla">{layer.latency}</div>
+          <div className="slide-evidence-card">
+            <div className="evidence-card-header">
+              <span className="evidence-card-title">📊 QUANTITATIVE RICE PRIORITIZATION MATRIX</span>
+            </div>
+            <div className="evidence-card-body">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                {s.riceTable.map((row, rIdx) => (
+                  <div key={rIdx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5rem', background: row.verdict.includes('Winner') ? '#FFF0F4' : '#F8F9FA', borderRadius: '6px', border: row.verdict.includes('Winner') ? '1px solid #FFC2D1' : '1px solid #EAEAEC' }}>
+                    <div>
+                      <strong style={{ color: row.verdict.includes('Winner') ? '#FF3F6C' : 'inherit' }}>{row.solution}:</strong> {row.desc}
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.8rem', alignItems: 'center', fontSize: '0.8rem' }}>
+                      <span style={{ color: '#535766' }}>Reach: {row.reach} | Impact: {row.impact} | Conf: {row.confidence} | Effort: {row.effort}</span>
+                      <strong style={{ color: '#FF3F6C' }}>Score: {row.score}</strong>
+                      <span style={{ fontWeight: 600, color: row.verdict.includes('Winner') ? '#03A685' : '#888' }}>[{row.verdict}]</span>
+                    </div>
                   </div>
                 ))}
               </div>
-              {s.figmaSvg && (
-                <div className="desktop-figma-preview-box">
-                  <img 
-                    src={s.figmaSvg} 
-                    alt="Desktop Web Workspace" 
-                    className="figma-desktop-workspace-img"
-                  />
-                </div>
-              )}
             </div>
           </div>
         </div>
       );
     }
 
-    // SLIDE 9: Visual Metric Tree & A/B Experiment Design Layout
-    if (s.slideNumber === 9) {
+    // SLIDE 8: Architecture & Live MVP Showcase
+    if (s.slideNumber === 8 && s.pipeline) {
       return (
-        <div className="slide-varied-layout metrics-experiment-layout">
-          {/* Visual Metric Tree */}
-          <div className="metric-tree-wrapper">
-            <h3 className="section-subtitle-pill">🌳 VISUAL METRIC HIERARCHY TREE</h3>
-            <div className="tree-nodes-list">
-              {s.metricTree.map((node, nIdx) => (
-                <div key={nIdx} className={`tree-node-card level-${nIdx}`}>
-                  <div className="node-level-tag">{node.level}</div>
-                  <div className="node-metric-name">{node.name}</div>
-                  <div className="node-values-row">
-                    <span className="base-val">{node.baseline}</span>
-                    <ArrowRight size={12} />
-                    <span className="target-val">{node.target}</span>
-                  </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+          <div className="slide-evidence-card">
+            <div className="evidence-card-header">
+              <span className="evidence-card-title">🏗️ 4-STEP TECHNICAL ARCHITECTURE PIPELINE (LATENCY &lt;180ms)</span>
+            </div>
+            <div className="evidence-card-body" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem' }}>
+              {s.pipeline.map((pip, pIdx) => (
+                <div key={pIdx} style={{ background: '#F8F9FA', border: '1px solid #EAEAEC', borderRadius: '6px', padding: '0.5rem' }}>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#FF3F6C' }}>{pip.step}</div>
+                  <div style={{ fontSize: '0.74rem', color: '#535766' }}>{pip.desc}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* A/B Experimentation Setup */}
-          <div className="ab-setup-wrapper">
-            <h3 className="section-subtitle-pill">🧪 200,000-USER RANDOMIZED CONTROLLED TRIAL (RCT)</h3>
-            <div className="ab-params-grid">
-              {s.abExperimentation.map((ab, aIdx) => (
-                <div key={aIdx} className="ab-param-card">
-                  <span className="ab-param-label">{ab.param}</span>
-                  <span className="ab-param-val">{ab.val}</span>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.6rem' }}>
+            {s.mvpFeatures.map((mvp, mIdx) => (
+              <div key={mIdx} className="slide-evidence-card">
+                <div className="evidence-card-header">
+                  <span className="evidence-card-title">📱 {mvp.title}</span>
+                </div>
+                <div className="evidence-card-body" style={{ fontSize: '0.78rem' }}>
+                  {mvp.desc}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // SLIDE 9: Success Metrics Hierarchy & RCT Experiment
+    if (s.slideNumber === 9 && s.metricsTable) {
+      return (
+        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '0.8rem' }}>
+          <div className="slide-evidence-card">
+            <div className="evidence-card-header">
+              <span className="evidence-card-title">🎯 SUCCESS METRICS HIERARCHY (WITH SOURCED BASELINES)</span>
+            </div>
+            <div className="evidence-card-body" style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              {s.metricsTable.map((row, rIdx) => (
+                <div key={rIdx} style={{ padding: '0.4rem 0.6rem', background: '#F8F9FA', borderRadius: '6px', borderLeft: '3px solid #FF3F6C' }}>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#FF3F6C' }}>[{row.type}] {row.kpi}</div>
+                  <div style={{ fontSize: '0.76rem', color: '#03A685', fontWeight: 600 }}>{row.target}</div>
+                  <div style={{ fontSize: '0.72rem', color: '#535766' }}>Goal: {row.goal}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="slide-evidence-card" style={{ background: '#FFF0F4', borderColor: '#FFC2D1' }}>
+            <div className="evidence-card-header">
+              <span className="evidence-card-title">🧪 200,000-USER RCT A/B TESTING DESIGN</span>
+            </div>
+            <div className="evidence-card-body">
+              <ul className="evidence-bullets">
+                {s.experimentDesign.map((item, eIdx) => (
+                  <li key={eIdx} className="evidence-bullet-item">
+                    <span className="bullet-dot">•</span>
+                    <div className="bullet-text-wrapper">
+                      <strong>{item.bold}</strong> {item.text}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // SLIDE 10: Risk Mitigations & 3-Phase GTM Rollout
+    if (s.slideNumber === 10 && s.pitfalls) {
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+          <div className="slide-evidence-card">
+            <div className="evidence-card-header">
+              <span className="evidence-card-title">⚠️ PITFALLS & RISK MITIGATION MATRIX</span>
+            </div>
+            <div className="evidence-card-body" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.6rem' }}>
+              {s.pitfalls.map((pit, pIdx) => (
+                <div key={pIdx} style={{ background: '#F8F9FA', borderRadius: '6px', padding: '0.5rem', border: '1px solid #EAEAEC' }}>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#FF3F6C' }}>{pit.title}</div>
+                  <div style={{ fontSize: '0.76rem', color: '#535766', margin: '0.2rem 0' }}><strong>Risk:</strong> {pit.pitfall}</div>
+                  <div style={{ fontSize: '0.76rem', color: '#03A685' }}><strong>Mitigation:</strong> {pit.mitigation}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="slide-evidence-card" style={{ background: '#FFF0F4', borderColor: '#FFC2D1' }}>
+            <div className="evidence-card-header">
+              <span className="evidence-card-title">🚀 3-PHASE ROLLOUT ROADMAP & GATES</span>
+            </div>
+            <div className="evidence-card-body" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.6rem' }}>
+              {s.rolloutPhases.map((ph, phIdx) => (
+                <div key={phIdx} style={{ background: '#FFFFFF', borderRadius: '6px', padding: '0.5rem', border: '1px solid #FFC2D1' }}>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#FF3F6C' }}>{ph.phase}</div>
+                  <div style={{ fontSize: '0.74rem', color: '#535766' }}><strong>Target:</strong> {ph.target}</div>
+                  <div style={{ fontSize: '0.74rem', color: '#535766' }}><strong>Scope:</strong> {ph.scope}</div>
+                  <div style={{ fontSize: '0.74rem', color: '#03A685', fontWeight: 600 }}><strong>Gate:</strong> {ph.gate}</div>
                 </div>
               ))}
             </div>
@@ -285,92 +473,8 @@ export default function SlideDeckViewer() {
       );
     }
 
-    // Standard 3-Column Layout for Slides 1, 2, 4, 6, 10
-    return (
-      <div className="slide-body-grid">
-        {/* Card 1: Left Strategic Column */}
-        <div className="slide-evidence-card">
-          <div className="evidence-card-header">
-            <span className="evidence-card-title">{s.leftCard.title}</span>
-          </div>
-          <div className="evidence-card-body">
-            <ul className="evidence-bullets">
-              {s.leftCard.bullets.map((bullet, idx) => (
-                <li key={idx} className="evidence-bullet-item">
-                  <span className="bullet-dot">•</span>
-                  <div className="bullet-text-wrapper">
-                    <strong>{bullet.bold}</strong> {bullet.text}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Card 2: Mid Analytical Column */}
-        <div className="slide-evidence-card">
-          <div className="evidence-card-header">
-            <span className="evidence-card-title">{s.midCard.title}</span>
-          </div>
-          <div className="evidence-card-body">
-            <ul className="evidence-bullets">
-              {s.midCard.bullets.map((bullet, idx) => (
-                <li key={idx} className="evidence-bullet-item">
-                  <span className="bullet-dot">•</span>
-                  <div className="bullet-text-wrapper">
-                    <strong>{bullet.bold}</strong> {bullet.text}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Card 3: Right Smartphone Device Mockup with Figma Embed */}
-        <div className="slide-phone-mockup-wrapper">
-          <div className="smartphone-device-frame">
-            <div className="smartphone-notch">
-              <div className="speaker-earpiece"></div>
-              <div className="camera-dot"></div>
-            </div>
-
-            <div className="smartphone-screen figma-screen-view">
-              {s.figmaSvg ? (
-                <img 
-                  src={s.figmaSvg} 
-                  alt={s.phoneMockup.screenName} 
-                  className="figma-phone-screen-svg" 
-                />
-              ) : (
-                <div className="phone-screen-content">
-                  <div className="screen-title-banner">
-                    <Smartphone size={12} className="screen-icon" />
-                    <span>{s.phoneMockup.screenName}</span>
-                  </div>
-
-                  <div className="phone-metrics-list">
-                    {s.phoneMockup.items.map((item, mIdx) => (
-                      <div key={mIdx} className="phone-metric-row">
-                        <span className="phone-metric-label">{item.label}</span>
-                        <span className="phone-metric-val">{item.val}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="phone-action-box">
-                    <button className="phone-cta-btn">
-                      <span>{s.phoneMockup.ctaText}</span>
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              <div className="smartphone-bottom-indicator"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    // Default Fallback
+    return null;
   };
 
   // Render individual slide canvas
@@ -402,15 +506,17 @@ export default function SlideDeckViewer() {
         {renderSlideContent(s)}
 
         {/* 4. Bottom Horizontal Synthesis Banner */}
-        <div className="slide-bottom-synthesis-card">
-          <div className="synthesis-header-label">
-            <Sparkles size={13} className="text-pink" />
-            <span>{s.bottomBanner.title}</span>
+        {s.bottomBanner && (
+          <div className="slide-bottom-synthesis-card">
+            <div className="synthesis-header-label">
+              <Sparkles size={13} className="text-pink" />
+              <span>{s.bottomBanner.title}</span>
+            </div>
+            <div className="synthesis-text-body">
+              {s.bottomBanner.text}
+            </div>
           </div>
-          <div className="synthesis-text-body">
-            {s.bottomBanner.text}
-          </div>
-        </div>
+        )}
       </div>
     );
   };
