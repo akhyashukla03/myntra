@@ -25,7 +25,9 @@ env/
 .env.production
 *.local
 
-# System & IDE files
+# System & IDE files# Excel temp lock files
+~$*.xlsx
+~$*.xls
 .DS_Store
 Thumbs.db
 ~$*.pptx

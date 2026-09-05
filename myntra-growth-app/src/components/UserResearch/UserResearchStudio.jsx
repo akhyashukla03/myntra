@@ -42,9 +42,9 @@ export default function UserResearchStudio() {
             <Users size={14} className="text-pink" />
             <span>Primary User Research & Discovery Suite</span>
           </div>
-          <h1 className="hero-title">Live Survey Data (N=9, 88.9% PMF) & 6 Deep-Dive Interviews</h1>
+          <h1 className="hero-title">Live Survey Data (N=25 Responses) & 6 Deep-Dive Interviews</h1>
           <p className="hero-subtitle">
-            Triangulating live quantitative survey findings with 6 in-depth qualitative user interviews and 24,850+ scraped review touchpoints.
+            Triangulating live quantitative survey findings (N=25) with 6 in-depth qualitative user interviews and 24,850+ scraped review touchpoints.
           </p>
         </div>
 
@@ -55,7 +55,7 @@ export default function UserResearchStudio() {
             onClick={() => setActiveTab('LIVE_SURVEY')}
           >
             <BarChart3 size={16} />
-            <span>1. Survey Data & Breakdown (9 Responses)</span>
+            <span>1. Survey Data & Breakdown (25 Responses)</span>
           </button>
           <button
             className={`hero-tab-btn ${activeTab === 'INTERVIEWS' ? 'active' : ''}`}
@@ -102,7 +102,7 @@ export default function UserResearchStudio() {
                 <div className="sim-title-row">
                   <Sparkles size={22} className="text-pink" />
                   <div>
-                    <h2 className="sim-title">Detailed Survey Question Distributions (N = 9)</h2>
+                    <h2 className="sim-title">Detailed Survey Question Distributions (N = 25)</h2>
                     <p className="sim-sub">Aggregated responses proving that non-monetary cognitive friction (comparison & styling) drives wishlist drop-offs.</p>
                   </div>
                 </div>
