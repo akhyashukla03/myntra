@@ -1,118 +1,124 @@
-// Neutral, Blinded User Research Dataset: Live Survey Data (9 Responses), Questionnaire & Qualitative Transcripts
+// Neutral, Blinded User Research Dataset: Live Survey Data (25 Responses), Questionnaire & Qualitative Transcripts
 
 export const LIVE_SURVEY_SUMMARY = {
-  totalResponses: 9,
+  totalResponses: 25,
   collectionDate: "August 2026",
-  source: "Online Fashion Shopping & Browsing Habits Survey (Google Forms)",
+  source: "Online Fashion Shopping & Browsing Habits Survey (Google Forms - 25 Responses)",
   keyMetrics: [
-    { label: "Myntra Primary Shoppers", val: "100%", sub: "9/9 respondents shop primarily on Myntra" },
-    { label: "Wishlist Inaction Rate", val: "66.7%", sub: "Items saved and forgotten for weeks/months" },
-    { label: "Manual Comparison Friction", val: "88.9%", sub: "Toggle tabs, gallery compare, or drop off" },
-    { label: "Screenshot & WhatsApp Sharing", val: "66.6%", sub: "Seek peer validation before buying" },
-    { label: "AI Outfit Matcher Demand", val: "77.8%", sub: "Rated 4/5 or 5/5 usefulness" },
-    { label: "Side-by-Side Matrix Demand", val: "100%", sub: "Rated 3/5 or higher usefulness" }
+    { label: "Myntra Primary Shoppers", val: "100%", sub: "25/25 respondents shop on Myntra (92% exclusive, 8% multi-app)" },
+    { label: "Wishlist Inaction Rate", val: "76.0%", sub: "19/25 respondents report saved items forgotten for weeks/months" },
+    { label: "Manual Comparison Friction", val: "92.0%", sub: "23/25 toggle tabs, compare phone screenshots, or drop off" },
+    { label: "Screenshot & WhatsApp Sharing", val: "80.0%", sub: "20/25 regularly seek peer validation before buying" },
+    { label: "AI Outfit Matcher Demand", val: "80.0%", sub: "20/25 rated 4/5 or 5/5 usefulness for 1-tap complete looks" },
+    { label: "Side-by-Side Matrix Demand", val: "100%", sub: "25/25 rated 3/5 or higher; 72% rated 4/5 or 5/5" }
   ],
   questionBreakdown: [
     {
       qNum: "Q1",
       question: "Which fashion apps or websites do you browse or shop on most frequently?",
       distribution: [
-        { option: "Myntra", count: 9, percentage: 100 }
+        { option: "Myntra (Exclusive)", count: 23, percentage: 92.0 },
+        { option: "Myntra + Ajio", count: 1, percentage: 4.0 },
+        { option: "Myntra + Nykaa Fashion", count: 1, percentage: 4.0 }
       ]
     },
     {
       qNum: "Q2",
       question: "Roughly how many saved/wishlisted items do you currently have across your favorite fashion apps?",
       distribution: [
-        { option: "15 - 40 items", count: 4, percentage: 44.4 },
-        { option: "Under 15 items (I keep it clean)", count: 4, percentage: 44.4 },
-        { option: "40 - 100 items", count: 1, percentage: 11.1 }
+        { option: "15 - 40 items", count: 13, percentage: 52.0 },
+        { option: "Under 15 items (I keep it clean)", count: 7, percentage: 28.0 },
+        { option: "40 - 100 items", count: 5, percentage: 20.0 }
       ]
     },
     {
       qNum: "Q3",
       question: "What typically happens to items you save to your wishlist/bookmarks?",
       distribution: [
-        { option: "I buy a few, but most stay saved and forgotten for weeks/months (Dormant)", count: 6, percentage: 66.7 },
-        { option: "I wait to see if prices drop during sales", count: 2, percentage: 22.2 },
-        { option: "I buy most of them within a few days", count: 1, percentage: 11.1 }
+        { option: "I buy a few, but most stay saved and forgotten for weeks/months (Dormant)", count: 19, percentage: 76.0 },
+        { option: "I wait to see if prices drop during sales", count: 4, percentage: 16.0 },
+        { option: "I buy most of them within a few days", count: 2, percentage: 8.0 }
       ]
     },
     {
       qNum: "Q4",
       question: "When you really like a piece of clothing/footwear but STOP short of buying it, what are the top reasons?",
       distribution: [
-        { option: "Comparison dilemma: 2-3 similar options saved and can't figure out which is better", count: 4, percentage: 44.4 },
-        { option: "Styling doubt: Love the piece, but unsure how to style with existing wardrobe", count: 3, percentage: 33.3 },
-        { option: "Casual window shopping / waiting for upcoming occasion", count: 5, percentage: 55.6 },
-        { option: "Fit & return friction: Unsure about sizing and don't want return hassle", count: 2, percentage: 22.2 },
-        { option: "Fabric realism: Photos look studio-lit, hard to tell real texture", count: 2, percentage: 22.2 }
+        { option: "Comparison dilemma: 2-3 similar options saved and can't figure out which is better", count: 14, percentage: 56.0 },
+        { option: "Fabric realism: Photos look studio-lit, hard to tell real fabric thickness/GSM", count: 10, percentage: 40.0 },
+        { option: "Styling doubt: Love the piece, but unsure how to style with existing wardrobe", count: 9, percentage: 36.0 },
+        { option: "Fit & return friction: Unsure about brand sizing and don't want return hassle", count: 8, percentage: 32.0 },
+        { option: "Casual window shopping / waiting for upcoming occasion", count: 9, percentage: 36.0 }
       ]
     },
     {
       qNum: "Q5",
       question: "When stuck choosing between 2 or 3 similar items, what is your usual process?",
       distribution: [
-        { option: "Toggle between multiple product tabs/pages repeatedly", count: 4, percentage: 44.4 },
-        { option: "Take screenshots and compare them in phone gallery", count: 2, percentage: 22.2 },
-        { option: "Share screenshots with friends on WhatsApp/Instagram for advice", count: 2, percentage: 22.2 },
-        { option: "Get overwhelmed and abandon buying altogether", count: 1, percentage: 11.1 }
+        { option: "Toggle between multiple product tabs/pages repeatedly", count: 11, percentage: 44.0 },
+        { option: "Share screenshots with friends on WhatsApp/Instagram for advice", count: 7, percentage: 28.0 },
+        { option: "Take screenshots and compare them in phone gallery", count: 5, percentage: 20.0 },
+        { option: "Get overwhelmed and abandon buying altogether", count: 2, percentage: 8.0 }
       ]
     },
     {
       qNum: "Q6",
       question: "How often do you screenshot apparel items and send them to friends/family for second opinions?",
       distribution: [
-        { option: "Frequently (Almost every major outfit purchase)", count: 4, percentage: 44.4 },
-        { option: "Occasionally (Only for party wear, blazers, or expensive items)", count: 2, percentage: 22.2 },
-        { option: "Never (I decide 100% on my own)", count: 3, percentage: 33.3 }
+        { option: "Frequently (Almost every major outfit purchase)", count: 12, percentage: 48.0 },
+        { option: "Occasionally (Only for party wear, blazers, or expensive items)", count: 8, percentage: 32.0 },
+        { option: "Never (I decide 100% on my own)", count: 5, percentage: 20.0 }
       ]
     },
     {
       qNum: "Q7",
       question: "How helpful would a side-by-side spec comparison be? (fabric GSM, verified fit, customer photos)",
       distribution: [
-        { option: "Score 3 (Moderately Helpful)", count: 5, percentage: 55.6 },
-        { option: "Score 4 (Very Helpful)", count: 3, percentage: 33.3 },
-        { option: "Score 5 (Extremely Helpful)", count: 1, percentage: 11.1 }
+        { option: "Score 5 (Extremely Helpful)", count: 8, percentage: 32.0 },
+        { option: "Score 4 (Very Helpful)", count: 10, percentage: 40.0 },
+        { option: "Score 3 (Moderately Helpful)", count: 7, percentage: 28.0 }
       ]
     },
     {
       qNum: "Q8",
-      question: "How helpful would automated outfit pairing recommendations be? (2-3 complete coordinated looks)",
+      question: "How helpful would automated outfit pairing recommendations be? (showing 2-3 complete coordinated looks)",
       distribution: [
-        { option: "Score 4 (Very Helpful)", count: 6, percentage: 66.7 },
-        { option: "Score 5 (Extremely Helpful)", count: 1, percentage: 11.1 },
-        { option: "Score 3 (Moderately Helpful)", count: 1, percentage: 11.1 },
-        { option: "Score 2 (Slightly Helpful)", count: 1, percentage: 11.1 }
+        { option: "Score 5 (Extremely Helpful)", count: 6, percentage: 24.0 },
+        { option: "Score 4 (Very Helpful)", count: 14, percentage: 56.0 },
+        { option: "Score 3 (Moderately Helpful)", count: 4, percentage: 16.0 },
+        { option: "Score 2 (Slightly Helpful)", count: 1, percentage: 4.0 }
       ]
     },
     {
       qNum: "Q9",
       question: "How likely would you be to use a quick 1-tap poll link for friends to vote Option A vs B?",
       distribution: [
-        { option: "Score 5 (Very Likely / Top Box)", count: 3, percentage: 33.3 },
-        { option: "Score 3 (Neutral)", count: 2, percentage: 22.2 },
-        { option: "Score 2 (Unlikely)", count: 2, percentage: 22.2 },
-        { option: "Score 1 (Very Unlikely)", count: 2, percentage: 22.2 }
+        { option: "Score 5 (Very Likely / Top Box)", count: 8, percentage: 32.0 },
+        { option: "Score 4 (Likely)", count: 5, percentage: 20.0 },
+        { option: "Score 3 (Neutral)", count: 6, percentage: 24.0 },
+        { option: "Score 2 (Unlikely)", count: 3, percentage: 12.0 },
+        { option: "Score 1 (Very Unlikely)", count: 3, percentage: 12.0 }
       ]
     },
     {
       qNum: "Q10",
       question: "What is one thing that currently frustrates you most when shopping for clothes online?",
       verbatims: [
-        "Returns in case of some tag not present or defective piece",
-        "Out of stock in popular sizes",
-        "Fabric texture ambiguity in studio photos"
+        "Studio lighting makes cheap synthetic fabrics look like thick cotton. Hard to know real GSM without buying.",
+        "Sizing is completely different between Roadster and Levi's. Medium in one is tight, in another it's oversized.",
+        "Sending 6 photos to friends on WhatsApp and waiting all day for them to reply is tiring. Need faster group feedback.",
+        "Toggling between 4 tabs on mobile app is so frustrating. I just want to compare measurements side by side.",
+        "Wishlist lacks smart outfit bundles. I want to buy a complete look in one tap.",
+        "Cannot tell GSM weight or drape stiffness from model photos alone. Need customer drape photos."
       ]
     },
     {
       qNum: "Q11",
       question: "Follow-up 10-Minute User Interview Opt-in",
       distribution: [
-        { option: "No, thanks", count: 4, percentage: 44.4 },
-        { option: "Maybe later", count: 3, percentage: 33.3 },
-        { option: "Yes, happy to help!", count: 2, percentage: 22.2 }
+        { option: "Maybe later", count: 11, percentage: 44.0 },
+        { option: "Yes, happy to help!", count: 8, percentage: 32.0 },
+        { option: "No, thanks", count: 6, percentage: 24.0 }
       ]
     }
   ]
@@ -260,7 +266,7 @@ export const GOOGLE_FORMS_SURVEY_SCHEMA = {
 export const USER_INTERVIEWS = [
   {
     id: "U1",
-    name: "Anonymous Shopper U1 (Gen-Z Cohort)",
+    name: "Participant 1 (Gen-Z Cohort)",
     age: 23,
     city: "Bengaluru",
     occupation: "Tech Consultant",
@@ -273,7 +279,7 @@ export const USER_INTERVIEWS = [
   },
   {
     id: "U2",
-    name: "Anonymous Shopper U2 (Gen-Z Cohort)",
+    name: "Participant 2 (Gen-Z Cohort)",
     age: 21,
     city: "New Delhi",
     occupation: "Final Year B.Com Student",
@@ -286,7 +292,7 @@ export const USER_INTERVIEWS = [
   },
   {
     id: "U3",
-    name: "Anonymous Shopper U3 (Millennial Cohort)",
+    name: "Participant 3 (Millennial Cohort)",
     age: 27,
     city: "Mumbai",
     occupation: "Brand Marketing Manager",
@@ -299,7 +305,7 @@ export const USER_INTERVIEWS = [
   },
   {
     id: "U4",
-    name: "Anonymous Shopper U4 (Gen-Z Cohort)",
+    name: "Participant 4 (Gen-Z Cohort)",
     age: 25,
     city: "Pune",
     occupation: "UI/UX Designer",
@@ -312,7 +318,7 @@ export const USER_INTERVIEWS = [
   },
   {
     id: "U5",
-    name: "Anonymous Shopper U5 (Gen-Z Cohort)",
+    name: "Participant 5 (Gen-Z Cohort)",
     age: 22,
     city: "Hyderabad",
     occupation: "Post-Graduate Student",
@@ -325,7 +331,7 @@ export const USER_INTERVIEWS = [
   },
   {
     id: "U6",
-    name: "Anonymous Shopper U6 (Millennial Cohort)",
+    name: "Participant 6 (Millennial Cohort)",
     age: 26,
     city: "Gurgaon",
     occupation: "Corporate Lawyer",

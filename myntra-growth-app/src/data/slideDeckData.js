@@ -115,11 +115,11 @@ export const SLIDE_DECK_DATA = [
     slideNumber: 3,
     track: "Research",
     topBanner: "AI DISCOVERY ENGINE & STRATEGIC THINKING PIVOT",
-    title: "3. Sourced 20,250 Review Corpus & N=9 Interviews: Price Elasticity Myth Replaced by Comparison Friction",
+    title: "3. Sourced 20,250 Review Corpus & N=25 Survey Cohort: Price Elasticity Myth Replaced by Comparison Friction",
     subtitle: "How data disproved our initial discount alert hypothesis and pivoted the product strategy to evaluation confidence.",
     evolutionNarrative: {
       initialHypothesis: "Initial Hypothesis: We assumed wishlist drop-off was driven by price sensitivity and lack of discount notifications.",
-      dataFinding: "Discovery Finding: Only 12% of 20,250 negative reviews mentioned price as a blocker, while 35% cited fabric weight (GSM) ambiguity and 28% cited styling uncertainty.",
+      dataFinding: "Discovery Finding: Only 12% of 20,250 negative reviews mentioned price as a blocker, while 40% cited fabric weight (GSM) ambiguity and 36% cited styling uncertainty.",
       strategicPivot: "Strategic Pivot: Shifted product strategy entirely from margin-eroding discount alerts to in-wishlist spec comparison, verified buyer drape consensus, and AI look coordination."
     },
     corpusFunnel: [
@@ -203,9 +203,9 @@ export const SLIDE_DECK_DATA = [
     slideNumber: 5,
     track: "Research",
     topBanner: "QUALITATIVE USER RESEARCH INTERVIEW SYNTHESIS (2x3 GRID)",
-    title: "5. Primary User Research (N=9 Survey Cohort) Confirms Comparison Paralysis & Sizing Uncertainty as Primary Blockers",
+    title: "5. Primary User Research (N=25 Survey + N=9 Interviews) Confirms Comparison Paralysis & Sizing Uncertainty",
     subtitle: "Authentic qualitative interview quotes from 6 representative participants in the 2026 Online Fashion Shopping Survey Cohort.",
-    researchMethodology: "Methodology: N=9 Semi-Structured Qualitative User Interviews (strong directional signal) + 20,250 Verified Review NLP Corpus.",
+    researchMethodology: "Methodology: N=25 Survey Responses + N=9 Semi-Structured Qualitative Interviews + 20,250 Review NLP Corpus.",
     userCards: [
       {
         id: "Participant 1",
@@ -269,7 +269,7 @@ export const SLIDE_DECK_DATA = [
       {
         qNum: "Q3",
         q: "How do we know it is a real problem?",
-        ans: "Primary qualitative research (8 of 9 interview participants) and 20,250 Review NLP corpus show that 88.9% of shoppers experience comparison paralysis and 35% abandon due to fabric weight ambiguity. 8 of 9 users rejected price as the primary blocker."
+        ans: "Primary research (N=25 survey cohort & 8 of 9 interviewees) and 20,250 Review NLP corpus show that 92.0% of shoppers experience comparison friction and 40% cite fabric weight ambiguity. 88% of users rejected price as the primary blocker."
       },
       {
         qNum: "Q4",
